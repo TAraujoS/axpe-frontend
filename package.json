@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "next build && NODE_ENV=production node server.js",
+    "start": "next start",
     "api": "node api/index.js",
     "lint-staged": "lint-staged"
   },
