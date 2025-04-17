@@ -104,5 +104,8 @@
     "prettier": "^1.18.2",
     "redux-logger": "^3.0.6",
     "url-loader": "^2.2.0"
+  },
+  "engines": {
+    "node": "16.20.0"
   }
 }
