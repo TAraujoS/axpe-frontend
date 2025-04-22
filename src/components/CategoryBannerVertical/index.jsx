@@ -98,6 +98,7 @@ const SliderVertical = forwardRef(({
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 800,
+    stopOnHover: false,
   },
 }, ref) => {
   const localRef = useRef(null);
