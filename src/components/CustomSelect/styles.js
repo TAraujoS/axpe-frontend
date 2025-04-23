@@ -5,38 +5,42 @@ import ArrowIconSVG from 'assets/icons/arrow';
 export const SelectContainer = styled.div`
   position: relative;
   display: inline-block;
-  width: 30%;
+  width: ${props => props.searchFilter ? '100%' : '30%'};
   
-  ${media.greaterThan('medium')`
-    display: none;
-  `}
+  ${props =>
+    !props.searchFilter &&
+    media.greaterThan('medium')`
+      display: none;
+    `}
 `;
 
 export const SelectButton = styled.button`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: ${props => props.searchFilter ? 'space-between' : 'space-evenly'};
   width: 100%;
   height: 38px;
-  line-height: 50px;
-  font: 14px 'Raleway';
+  font: ${props => props.searchFilter ? '12px' : '14px'} 'Raleway';
   font-weight: ${({ theme }) => theme.fontsWeight.bold};
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ searchFilter, theme }) => searchFilter ? theme.colors.orange : theme.colors.green};
   text-align: left;
   border-bottom: 1px solid ${({ theme }) => theme.colors.green};
-  background: transparent;
+  background: ${({ searchFilter, theme }) => searchFilter ? theme.colors.white : 'transparent'};
   cursor: pointer;
   padding: 10px 24px;
-  
+  border-radius: 4px;
+  text-transform: ${props => props.searchFilter ? 'uppercase' : 'capitalize'};
+
   &:after {
     content: '';
     display: block;
     width: 13px;
     height: 13px;
     margin-left: 10px;
-    background: url(${ArrowIconSVG}) no-repeat;
-    background-size: contain;
-    transform: rotate(90deg);
+    mask: url(${ArrowIconSVG}) no-repeat center;
+    mask-size: contain;
+    background-color: ${({ searchFilter, theme }) => searchFilter ? theme.colors.orange : theme.colors.green};
+    transform: ${({ open }) => open ? 'rotate(270deg)' : 'rotate(90deg)'};
     transition: all 300ms ease;
   }
 `;
@@ -57,7 +61,7 @@ export const OptionsList = styled.ul`
 
 export const OptionItem = styled.li`
   padding: 10px 16px;
-  font-size: 14px;
+  font: ${props => props.searchFilter ? '12px' : '14px'} 'Raleway';
   font-weight: 700;
   color: ${({ theme }) => theme.colors.green};
   cursor: pointer;

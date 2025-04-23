@@ -27,8 +27,8 @@ const CategorySection = ({ items }) => {
         arrowsColor="white"
       >
         {items.map((item, index) => (
-          <Slide key={index} >
-            <InfoGroup key={index}>
+          <Slide key={`slide-${item.building.reference}-${index}`}>
+            <InfoGroup>
               <h4>{item.titleGreen}</h4>
               <hr />
               <p>{item.titleWhite}</p>
@@ -42,7 +42,7 @@ const CategorySection = ({ items }) => {
               </Button>
             </InfoGroup>
            
-            <CardWrapper>
+            <CardWrapper key={`card-wrapper-${item.building.reference}-${index}`}>
               <BuildingCard
                 key={`building-categoryitem-${item.building.reference}-${index}`}
                 item={item}
