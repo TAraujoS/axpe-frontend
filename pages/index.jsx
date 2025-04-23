@@ -119,8 +119,8 @@ function Home({ hero, components }) {
             </SliderNew>
           </Hero>
         );
-        // case 'buildingsSquare':
-        case 'buildingsGrid':
+        case 'buildingsSquare':
+        // case 'buildingsGrid':
          return (
            <CategorySection items={component.items} />
          );

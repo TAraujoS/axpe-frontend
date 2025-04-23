@@ -155,7 +155,7 @@ export const GroupNeigRef = styled.div`
   `}
 `;
 
-export const Neighborhood = styled.p`
+export const Neighborhood = styled.h1`
   font-size: 28px;
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
   text-transform: capitalize;
