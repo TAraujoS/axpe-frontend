@@ -17,6 +17,7 @@ const CategorySection = ({ items }) => {
     slidesToScroll: 1,
     autoplay: true,
   }
+
   return (
     <SectionContainer>
       <Container
@@ -28,9 +29,9 @@ const CategorySection = ({ items }) => {
         {items.map((item, index) => (
           <Slide key={index} >
             <InfoGroup key={index}>
-              <h4>{item.titleWhite}</h4>
+              <h4>{item.titleGreen}</h4>
               <hr />
-              <p>{item.building.content}</p>
+              <p>{item.titleWhite}</p>
               <Button
                 route={`/${item.building.slug}`}
                 className="holos-home-product"
