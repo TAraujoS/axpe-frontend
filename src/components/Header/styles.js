@@ -227,7 +227,7 @@ export const Box = styled.div`
   left: 0;
   width: 100%;
   padding: 50px 30px 50px;
-  height: calc(100vh - 70px);
+  height: 100vh;
   overflow: hidden;
   overflow-y: auto;
   background: ${({ theme }) => theme.colors.white};
@@ -399,6 +399,7 @@ export const NavBottomContainer = styled.div`
   width: 140px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 export const NavSecondary = styled.nav`
