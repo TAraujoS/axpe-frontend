@@ -27,7 +27,7 @@ export const SelectButton = styled.button`
   border-bottom: 1px solid ${({ theme }) => theme.colors.green};
   background: ${({ searchFilter, theme }) => searchFilter ? theme.colors.white : 'transparent'};
   cursor: pointer;
-  padding: 10px 24px;
+  padding: 10px;
   border-radius: 4px;
   text-transform: ${props => props.searchFilter ? 'uppercase' : 'capitalize'};
 
