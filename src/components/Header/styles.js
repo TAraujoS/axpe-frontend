@@ -161,7 +161,7 @@ export const LogoLink = styled.a`
 export const ButtonSearch = styled.button`
   display: block;
   width: 19px;
-  height: 23px;
+  height: 19px;
   margin: 0 0 0 auto;
   margin-left: auto;
   font-size: 0;
@@ -176,7 +176,7 @@ export const ButtonToggle = styled.button`
   display: block;
   position: relative;
   width: 20px;
-  height: 17px;
+  height: 19px;
   margin: 0 0 0 20px;
 
   ${media.greaterThan('large')`

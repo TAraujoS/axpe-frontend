@@ -223,7 +223,7 @@ export const CaracteristicsGroup = styled.div`
   flex-wrap: wrap;
 
   div {
-    margin-top: 15px !important;
+    margin-top: 7px !important;
     height: 35px;
     flex: 0 50%;
 

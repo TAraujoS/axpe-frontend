@@ -236,14 +236,14 @@ export const ModalScheduleSelect = styled.select`
 export const ModalFormGroupCheckbox = styled.div`
   width: 100%;
   margin: 10px 0 35px 0;
+  display: flex;
+  gap: 10px;
 
   input {
     -webkit-appearance: checkbox;
     accent-color: #3F5A5E;
-  }
-
-  label {
-    padding: 0 0 0 10px;
+    height: 20px;
+    width: 30px;
   }
 `
 

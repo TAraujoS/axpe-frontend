@@ -256,6 +256,7 @@ export const ButtonBack = styled.button`
     background: ${({ theme }) => theme.colors.green};
     font-size: 0;
     z-index: 2;
+    padding: 0px;
 
     svg {
       display: block;
@@ -444,7 +445,7 @@ export const Infos = styled.div`
 export const ImageContainer = styled.div`
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: 1px;
   width: 100%;
   height: 100%;
 

@@ -121,7 +121,6 @@ export const GroupInfo = styled.div`
 export const InfoContent = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
 `;
 
 export const Type = styled.p`
@@ -189,6 +188,7 @@ export const Ref = styled.p`
 `;
 
 export const GroupTags = styled.div`
+  margin-right: 12px;
   div + div {
     margin-top: 10px;
   }
