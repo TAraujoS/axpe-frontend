@@ -169,7 +169,7 @@ function RangeSlider({
                     value={visualLast}
                     onChange={(e) => {
                       const masked = formatNumberOnlyDigits(e.target.value);
-                      setVisualFirst(masked);
+                      setVisualLast(masked);
                     }}
                     onBlur={() => handleBlur(1)}
                     type="text"

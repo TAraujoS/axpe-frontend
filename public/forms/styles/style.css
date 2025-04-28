@@ -276,7 +276,7 @@
 
 .form-group__control:focus,
 .form-group input:not([type="checkbox"]):not([type="radio"]).filled {
-  padding-top: 15px!important;
+  padding-top: 24px;
 }
 
 .form-group textarea {
