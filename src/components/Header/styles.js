@@ -79,7 +79,7 @@ export const Wrapper = styled.div`
 
   ${media.greaterThan('large')`
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
     align-items: flex-start;
     height: auto;
     padding: 10vh 30px 0;
@@ -98,7 +98,7 @@ export const AxpeLogo = styled.div`
   margin-right: 20px;
 
   ${media.greaterThan('large')`
-    width: 110px;
+    width: 134px;
     margin: 0 0 40px 0;
   `}
 
