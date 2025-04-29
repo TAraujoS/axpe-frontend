@@ -339,7 +339,6 @@ export const Delivery = styled.div`
     p {
       width: 100%;
       max-width: 349px;
-      margin-top: -35px;
     }
   `}
 `;

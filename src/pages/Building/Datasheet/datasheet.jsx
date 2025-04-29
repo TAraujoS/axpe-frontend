@@ -201,7 +201,7 @@ export default function Datasheet({ property }) {
                         </BlockTwo>
                     )}
 
-                    {vista && (
+                    {vista.length > 0 && (
                         <BlockTwo>
                             <CharacteristicsGrid>
                                 {Object.entries(vista?.Caracteristicas || vista?.InfraEstrutura || {})
@@ -262,6 +262,7 @@ export default function Datasheet({ property }) {
                 </PriceGroupDesktop>
 
             </MainContainer>
+
             {type === 'lancamento' && infos.releaseDelivery && (
                 <Delivery>
                     <p>

@@ -456,3 +456,7 @@
 .contact .form {
   padding: 0;
 }
+
+.zf-backgroundBg {
+  z-index: 999 !important;
+}
