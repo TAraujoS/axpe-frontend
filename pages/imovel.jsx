@@ -10,6 +10,7 @@ import BlockHighlighted from 'components/BlockHighlighted';
 import NewsletterFooter from 'components/NewsletterFooter';
 import BuildingList from 'components/Building/List';
 import DataSheet from 'pages/Building/Datasheet';
+import HowWeLove from 'pages/Building/HowWeLove';
 
 // helpers
 import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
@@ -133,7 +134,9 @@ function Building({ property, meta }) {
           </p>
         </Alert>
 
-        {/* {Object.keys(data.components).length > 0 && <Modules property={data} />} */}
+        {data.components.find(c => c.module?.slug === 'porque-adoramos') && (
+          <HowWeLove reasons={data.components.find(c => c.module?.slug === 'porque-adoramos').data} />
+        )}
 
         {similarBuildings && similarBuildings.length > 0 && (
           <SimilarBuildings>

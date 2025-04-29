@@ -6,7 +6,6 @@ import AxpeSpecialLogoSVG from 'assets/axpe-special.svg';
 import AxpeFullLogoSVG from 'assets/axpe-full-logo.svg';
 import ChristiesLogoSVG from 'assets/christies-logo.svg';
 import Axpe20YearsLogoSVG from 'assets/axpe-20-anos.svg';
-import SearchIconSVG from 'assets/icons/search.svg';
 
 export const Container = styled.header`
   position: fixed;
@@ -159,17 +158,28 @@ export const LogoLink = styled.a`
 `;
 
 export const ButtonSearch = styled.button`
-  display: block;
-  width: 19px;
-  height: 19px;
+  display: flex;
+  width: 145px;
+  height: 34px;
   margin: 0 0 0 auto;
   margin-left: auto;
-  font-size: 0;
-  background: url(${SearchIconSVG}) no-repeat;
-
+  font: 12px 'Raleway';
+  font-weight: ${({ theme }) => theme.fontsWeight.bold};
+  color: ${({ theme }) => theme.colors.green};
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  
   ${media.greaterThan('large')`
     display: none;
   `}
+
+  img {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 4px
+  }
 `;
 
 export const ButtonToggle = styled.button`

@@ -5,10 +5,10 @@ import ArrowIconSVG from 'assets/icons/arrow';
 export const SelectContainer = styled.div`
   position: relative;
   display: inline-block;
-  width: ${props => props.searchFilter ? '100%' : '30%'};
+  width: ${props => props.searchTab ? '100%' : '50%'};
   
   ${props =>
-    !props.searchFilter &&
+    !props.searchTab &&
     media.greaterThan('medium')`
       display: none;
     `}
@@ -17,32 +17,43 @@ export const SelectContainer = styled.div`
 export const SelectButton = styled.button`
   display: flex;
   align-items: center;
-  justify-content: ${props => props.searchFilter ? 'space-between' : 'space-evenly'};
+  justify-content: ${props => props.searchTab ? 'space-between' : 'space-evenly'};
   width: 100%;
   height: 38px;
-  font: ${props => props.searchFilter ? '12px' : '14px'} 'Raleway';
+  font: ${props => props.searchTab || props.searchFilter ? '12px' : '14px'} 'Raleway';
   font-weight: ${({ theme }) => theme.fontsWeight.bold};
-  color: ${({ searchFilter, theme }) => searchFilter ? theme.colors.orange : theme.colors.green};
+  color: ${({ searchTab, theme }) => searchTab ? theme.colors.orange : theme.colors.green};
   text-align: left;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.green};
-  background: ${({ searchFilter, theme }) => searchFilter ? theme.colors.white : 'transparent'};
+  background: ${({ searchTab, theme }) => searchTab ? theme.colors.white : 'transparent'};
   cursor: pointer;
   padding: 10px;
-  border-radius: 4px;
-  text-transform: ${props => props.searchFilter ? 'uppercase' : 'capitalize'};
+  border-radius: ${props => props.searchTab ? '4px' : props.searchFilter ? '4px' : '0px'}; ;
+  text-transform: ${props => props.searchTab || props.searchFilter ? 'uppercase' : 'capitalize'};
 
-  &:after {
-    content: '';
-    display: block;
-    width: 13px;
-    height: 13px;
-    margin-left: 10px;
-    mask: url(${ArrowIconSVG}) no-repeat center;
-    mask-size: contain;
-    background-color: ${({ searchFilter, theme }) => searchFilter ? theme.colors.orange : theme.colors.green};
-    transform: ${({ open }) => open ? 'rotate(270deg)' : 'rotate(90deg)'};
-    transition: all 300ms ease;
-  }
+  border: ${({ searchFilter, theme }) =>
+    searchFilter
+      ? `1px solid ${theme.colors.green}`
+      : `none`};
+
+  border-bottom: ${({ searchFilter, theme }) =>
+    searchFilter ? `1px solid ${theme.colors.green}` : `1px solid ${theme.colors.green}`};
+
+  ${({ searchFilter, theme, searchTab, open }) =>
+    !searchFilter &&
+    `
+    &:after {
+      content: '';
+      display: block;
+      width: 13px;
+      height: 13px;
+      margin-left: 10px;
+      mask: url(${ArrowIconSVG}) no-repeat center;
+      mask-size: contain;
+      background-color: ${searchTab ? theme.colors.orange : theme.colors.green};
+      transform: ${open ? 'rotate(270deg)' : 'rotate(90deg)'};
+      transition: all 300ms ease;
+    }
+  `}
 `;
 
 export const OptionsList = styled.ul`
@@ -61,7 +72,7 @@ export const OptionsList = styled.ul`
 
 export const OptionItem = styled.li`
   padding: 10px 16px;
-  font: ${props => props.searchFilter ? '12px' : '14px'} 'Raleway';
+  font: ${props => props.searchTab ? '12px' : '14px'} 'Raleway';
   font-weight: 700;
   color: ${({ theme }) => theme.colors.green};
   cursor: pointer;

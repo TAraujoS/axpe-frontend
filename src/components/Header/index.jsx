@@ -13,6 +13,7 @@ import useScrollPosition from 'helpers/scrollPosition';
 // assets
 import InstagramIconSVG from 'assets/icons/instagram';
 import WhatsappIconSVG from 'assets/icons/whatsapp';
+import SearchIconSVG from 'assets/icons/search.svg';
 
 // styles
 import {
@@ -119,7 +120,8 @@ function Header() {
             type="button"
             onClick={toggleSearch}
           >
-            Buscar
+            Buscar Imóvel
+            <img src={SearchIconSVG} alt='Ícone de lupa'/>
           </ButtonSearch>
           <ButtonToggle
             type="button"

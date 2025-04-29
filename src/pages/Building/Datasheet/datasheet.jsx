@@ -72,7 +72,7 @@ export default function Datasheet({ property }) {
 
                         <GroupInfo>
                             <InfoContent>
-                                {label && (
+                                {Object.values(label).some(value => value === true) && (
                                     <GroupTags>
                                         {label && label.isNew && (
                                             <Tag label={'Novidade'} icon="star" color="blueLight" />
@@ -204,7 +204,7 @@ export default function Datasheet({ property }) {
                     {vista && (
                         <BlockTwo>
                             <CharacteristicsGrid>
-                                {Object.entries(vista?.Caracteristicas || {})
+                                {Object.entries(vista?.Caracteristicas || vista?.InfraEstrutura || {})
                                 .filter(([ _, value ]) => value === 'Sim')
                                 .map(([ label ]) => (
                                     <CharacteristicItem key={label}>
