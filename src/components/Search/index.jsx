@@ -476,7 +476,7 @@ function Search() {
                     setSource(selectedSource);
                   }}
                   ariaLabel="Selecione a fonte"
-                  searchFilter={true}
+                  searchTab={true}
                   onClick={(event) => event.stopPropagation()}
                 />
               </FormGroup>
