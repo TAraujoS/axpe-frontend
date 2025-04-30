@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 import media from 'styled-media-query';
 
 // import AxpeLogoSVG from 'assets/axpe-logo.svg';
@@ -682,4 +682,10 @@ export const Creci = styled.p`
   ${media.greaterThan('large')`
     font-size: 11px;
   `}
+`;
+
+export const ZohoFixWhatsModal = createGlobalStyle`
+  .zf-backgroundBg {
+    z-index: 999 !important;
+  }
 `;

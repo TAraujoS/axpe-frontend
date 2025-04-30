@@ -35,6 +35,7 @@ import {
   Newsletter,
   NewsletterButton,
   NavBottomContainer,
+  ZohoFixWhatsModal,
 } from './styles';
 
 function Header() {
@@ -101,6 +102,7 @@ function Header() {
 
   return (
     <Container ref={refHeader}>
+      <ZohoFixWhatsModal />
       <SimpleBar style={{ maxHeight: '100%' }} ref={scrollBarRef}>
         <Wrapper>
           <AxpeLogo type="axpe">
