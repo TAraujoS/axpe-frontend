@@ -245,6 +245,10 @@ export const ModalFormGroupCheckbox = styled.div`
     height: 20px;
     width: 30px;
   }
+
+  label {
+    text-align: center;
+  }
 `
 
 export const ModalFormSubmit = styled.div`
