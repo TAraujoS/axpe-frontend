@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IStar from 'assets/icons/star-blue.svg';
-import ICheck from 'assets/icons/check.svg';
-import ISofa from 'assets/icons/sofa.svg';
-
 const ICONS = {
-  star: IStar,
-  check: ICheck,
-  sofa: ISofa
+  star: '/assets/icons/star-blue.svg',
+  check: '/assets/icons/check.svg',
+  sofa: '/assets/icons/sofa.svg'
 };
 
 import { Container } from './styles';

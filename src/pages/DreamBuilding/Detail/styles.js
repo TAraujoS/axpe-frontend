@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
-// assets
-import ArrowIconSVG from 'assets/icons/arrow';
-
 // styles
 import { FormGroup } from 'components/FormElements/styles';
 
@@ -192,7 +189,7 @@ export const ButtonLocals = styled.button`
     position: absolute;
     top: 50%;
     right: 0;
-    background: url(${ArrowIconSVG}) no-repeat;
+    background: url('/assets/icons/arrow.svg') no-repeat;
     background-size: contain;
     transform: translateY(-50%);
   }

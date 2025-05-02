@@ -23,13 +23,6 @@ import CustomSelect from 'components/CustomSelect';
 import { getParamsFromObject } from 'helpers/utils';
 import SeoData from 'helpers/seo';
 
-// assets
-import ArrowIconSVG from 'assets/icons/arrow';
-import IOrderBlockOn from 'assets/icons/order-block-active';
-import IOrderRowOn from 'assets/icons/order-row-active';
-import IOrderBlockOff from 'assets/icons/order-block-off';
-import IOrderRowOff from 'assets/icons/order-row-off';
-
 // styles
 import {
   Container,
@@ -409,10 +402,10 @@ function Search({ total, totalPages, data, banner, locals }) {
                   >
                     <DisplayOrder>
                       <button onClick={() => setIsOrderListActive(!isOrderListActive)}>
-                        <img src={isOrderListActive ? IOrderRowOn : IOrderRowOff} alt="Botão de ordenar lista" />
+                        <Image src={isOrderListActive ? '/assets/icons/order-row-active.svg' : '/assets/icons/order-row-off.svg'} alt="Botão de ordenar lista" />
                       </button>
                       <button onClick={() => setIsOrderListActive(!isOrderListActive)}>
-                        <img src={isOrderListActive ? IOrderBlockOff : IOrderBlockOn} alt="Botão de ordenar bloco"/>
+                        <Image src={isOrderListActive ? '/assets/icons/order-block-off.svg' : '/assets/icons/order-block-active.svg'} alt="Botão de ordenar bloco"/>
                       </button>
                     </DisplayOrder>
 
@@ -485,7 +478,7 @@ function Search({ total, totalPages, data, banner, locals }) {
 
               {total ? (
                 <ButtonBack type="button" onClick={toggleSearch}>
-                  <SVG src={ArrowIconSVG} uniquifyIDs={true} />
+                  <SVG src='assets/icons/arrow.svg' uniquifyIDs={true} />
                 </ButtonBack>
               ) : null}
 

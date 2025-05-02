@@ -3,10 +3,6 @@ import GoogleMapReact from 'google-map-react';
 import mapOptions from './mapOptions';
 import { getBoundsFromLatLng } from '../../../helpers/maps';
 
-// assets
-import PinDesktopIconSVG from 'assets/icons/pin-desktop';
-import PinWhiteIconSVG from 'assets/icons/pin-white';
-
 // styles
 import { Container, Mapa, Pin, Text } from './styles';
 
@@ -85,8 +81,8 @@ function Around({ local, cep, text, latitude, longitude }) {
         ></GoogleMapReact>
       </Mapa>
 
-      <Pin src={PinDesktopIconSVG} mq="desktop" alt="" />
-      <Pin src={PinWhiteIconSVG} mq="mobile" alt="" />
+      <Pin src='/assets/icons/pin-desktop.svg' mq="desktop" alt="Icone de pin" />
+      <Pin src='/assets/icons/pin-white.svg' mq="mobile" alt="Icone de pin" />
 
       <Text item={{ title: 'O que há por perto', text }} />
     </Container>

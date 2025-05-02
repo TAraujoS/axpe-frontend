@@ -13,10 +13,6 @@ import { setMain } from 'store/modules/main/actions';
 // helpers
 import { getParamsFromObject } from 'helpers/utils';
 
-// assets
-import ChatIconSVG from 'assets/icons/chat';
-import WhatsappWhiteIconSVG from 'assets/icons/whatsapp-white-icon'
-
 // styles
 import {
   Container,
@@ -358,7 +354,7 @@ function ContactBar() {
         className='holos-contact-float moreinfo-btn--whatsapp hidden'
         href={!isBuilding ? `https://wa.me/551130743600` : `https://wa.me/551130743600?text=${message}`}
         target='_blank'>
-        <SVG src={WhatsappWhiteIconSVG} />
+        <SVG src='/assets/icons/whatsapp-white-icon' />
         {isBuilding ? (
           <div>
             <span>Quer saber mais?</span>
@@ -375,7 +371,7 @@ function ContactBar() {
         type='button'
         onClick={toggleShow}
       >
-        <SVG src={WhatsappWhiteIconSVG} />
+        <SVG src='/assets/icons/whatsapp-white-icon' />
         {isBuilding ? (
           <div>
             <span>Quer saber mais?</span>
@@ -392,7 +388,7 @@ function ContactBar() {
         type='button'
         onClick={toggleShow}
       >
-        <SVG src={ChatIconSVG} />
+        <SVG src='/assets/icons/chat' />
         {isBuilding ? (
           <div>
             <span>Quer saber mais?</span>

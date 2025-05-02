@@ -1,12 +1,6 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
 import media from 'styled-media-query';
 
-// import AxpeLogoSVG from 'assets/axpe-logo.svg';
-import AxpeSpecialLogoSVG from 'assets/axpe-special.svg';
-import AxpeFullLogoSVG from 'assets/axpe-full-logo.svg';
-import ChristiesLogoSVG from 'assets/christies-logo.svg';
-import Axpe20YearsLogoSVG from 'assets/axpe-20-anos.svg';
-
 export const Container = styled.header`
   position: fixed;
   top: 0;
@@ -104,12 +98,12 @@ export const AxpeLogo = styled.div`
 
   a {
     height: 70px;
-    background: url(${AxpeSpecialLogoSVG}) no-repeat center;
+    background: url('/assets/axpe-special.svg') no-repeat center;
     background-size: 130px 130px;
 
     ${media.greaterThan('large')`
       height: 53px;
-      background-image: url(${AxpeFullLogoSVG});
+      background-image: url('/assets/axpe-full-logo.svg');
       background-size: contain;
     `}
   }
@@ -125,7 +119,7 @@ export const ChristiesLogo = styled.div`
   `}
 
   a {
-    background: url(${ChristiesLogoSVG}) no-repeat;
+    background: url('/assets/christies-logo.svg') no-repeat;
     background-size: contain;
   }
 `;
@@ -143,7 +137,7 @@ export const Axpe20Years = styled.div`
   a {
     height: 66px;
     margin: 0 auto;
-    background: url(${Axpe20YearsLogoSVG}) no-repeat;
+    background: url('/assets/axpe-20-anos.svg') no-repeat;
     background-size: contain;
   }
 `;

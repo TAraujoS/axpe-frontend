@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 import Tag from 'components/Tag';
 import * as Caracteristics from 'pages/Building/Datasheet/caracteristics';
 
@@ -53,9 +54,6 @@ import {
     ModalFormSubmit,
     ModalFormBtnSubmit
 } from './styles';
-
-import ILocation from 'assets/icons/location.svg';
-import CloseIcon from 'assets/icons/axpe-modal-close-icon.svg';
 
 // Componentns
 import VisitModal from './VisitModal';
@@ -153,13 +151,13 @@ export default function Datasheet({ property }) {
                                     onClick={closeVisitModal}
                                 >
                                     <ModalHeaderBtnCloseImage>
-                                        <img src={CloseIcon} alt=''/>
+                                        <Image src='/assets/icons/axpe-modal-close-icon.svg' alt='Icone de fechar' loading='lazy' layout='fill'/>
                                     </ModalHeaderBtnCloseImage>
                                 </ModalHeaderBtnClose>
                             </ModalHeader>
                             <ModalLocal>
                                 <ModalLocalImage>
-                                    <img src={(property.gallery && property.gallery[0].src) || ''} alt='' />
+                                    <Image src={(property.gallery && property.gallery[0].src) || ''} alt='Foto da galeria' loading='lazy' layout='fill'/>
                                 </ModalLocalImage>
                                 <ModalLocalDescription>
                                     <ModalLocalTitle>{property.address.local}</ModalLocalTitle>
@@ -279,7 +277,7 @@ export default function Datasheet({ property }) {
                                 </InfoContent>
                                 <Location>
                                     <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
-                                        <img src={ILocation} alt="ícone de localização" />
+                                        <Image src='/assets/icons/location.svg' alt="ícone de localização" loading='lazy' layout='fill' />
                                         <p>Ver localização</p>
                                     </a>
                                 </Location>
