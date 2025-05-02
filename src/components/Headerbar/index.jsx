@@ -13,6 +13,10 @@ import Share from 'components/Share';
 // helpers
 import useScrollPosition from 'helpers/scrollPosition';
 
+// assets
+import ArrowIconSVG from 'assets/icons/arrow';
+import ShareIconSVG from 'assets/icons/share';
+
 // styles
 import {
   Container,
@@ -98,7 +102,7 @@ function Headerbar({ className, type, title, subtitle, building }) {
             onClick={buttonBack}
             className="holos-product-back"
           >
-            <SVG src='/assets/icons/arrow.svg' /> Voltar
+            <SVG src={ArrowIconSVG} /> Voltar
           </ButtonBack>
 
           {title && <h3 dangerouslySetInnerHTML={{ __html: title }} />}
@@ -114,7 +118,7 @@ function Headerbar({ className, type, title, subtitle, building }) {
                 data-showcase="Busca"
                 data-label="Share"
               >
-                <SVG src='/assets/icons/share.svg' uniquifyIDs={true} />
+                <SVG src={ShareIconSVG} uniquifyIDs={true} />
               </ButtonIcon>
             </Column>
           )}
@@ -129,7 +133,7 @@ function Headerbar({ className, type, title, subtitle, building }) {
                 data-showcase="Busca"
                 data-label="Share"
               >
-                <SVG src='/assets/icons/share.svg' uniquifyIDs={true} />
+                <SVG src={ShareIconSVG} uniquifyIDs={true} />
               </ButtonIcon>
             </Column>
           )}

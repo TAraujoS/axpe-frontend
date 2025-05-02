@@ -16,6 +16,9 @@ import { encrypt } from 'helpers/encryption';
 import Button from 'components/Button';
 import FormElements from 'components/FormElements';
 
+// assets
+import ArrowIconSVG from 'assets/icons/arrow';
+
 // styles
 import {
   Container,
@@ -709,7 +712,7 @@ function DreamBuildingSingle({ type }) {
                     onClick={() => setLocalsModal(false)}
                     active={localsModal}
                   >
-                    <SVG src='/assets/icons/arrow.svg' uniquifyIDs={true} />
+                    <SVG src={ArrowIconSVG} uniquifyIDs={true} />
                   </LocalsModalClose>
                   <LocalsModalHeader>
                     <h4>Aonde você deseja?</h4>

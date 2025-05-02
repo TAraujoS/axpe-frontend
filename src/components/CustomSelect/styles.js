@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import ArrowIconSVG from 'assets/icons/arrow';
 
 export const SelectContainer = styled.div`
   position: relative;
@@ -46,7 +47,7 @@ export const SelectButton = styled.button`
       width: 13px;
       height: 13px;
       margin-left: 10px;
-      mask: url('/assets/icons/arrow.svg') no-repeat center;
+      mask: url(${ArrowIconSVG}) no-repeat center;
       mask-size: contain;
       background-color: ${searchTab ? theme.colors.orange : theme.colors.green};
       transform: ${open ? 'rotate(270deg)' : 'rotate(90deg)'};

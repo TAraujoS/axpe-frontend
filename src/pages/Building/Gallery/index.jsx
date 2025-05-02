@@ -7,6 +7,9 @@ import GalleryNav from './GalleryNav';
 import GalleryFull from './GalleryFull';
 import DotsPagination from 'components/DotsPagination';
 
+// assets
+import I360 from 'assets/icons/360';
+import PlayIcon from 'assets/icons/play-button';
 // styles
 import {
   Container,
@@ -43,7 +46,7 @@ function Gallery({
     <Container className={className}>
       {tour360 && (
         <Button360 onClick={() => setShowTour(true)}>
-          <Image src='/assets/icons/360.svg' alt="Tour 360" loading='lazy'/>
+          <img src={I360} alt="Tour 360" />
         </Button360>
       )}
 
@@ -91,10 +94,10 @@ function Gallery({
             >
             
             {item.tipo == 'video' && (
-              <PlayButton class="play-button" src='/assets/icons/play-button.svg' alt="Assistir vídeo" />
+              <PlayButton class="play-button" src={PlayIcon} alt="Assistir vídeo" />
             )}
 
-            <Image src={item.src} alt="Foto do imóvel" loading='lazy' layout='fill'/>
+            <Image src={item.src} alt="" />
           </SliderButton>
             ))}
       </Slider>

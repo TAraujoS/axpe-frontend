@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import Button from 'components/Button';
 import Phone from 'components/Phone';
-import NextImage from 'next/image';
 
 export const Container = styled.div`
   position: fixed;
@@ -86,7 +85,7 @@ export const Reference = styled.span`
   margin-right: 30px;
 `;
 
-export const FavoriteMobile = styled(NextImage)`
+export const FavoriteMobile = styled.img`
   ${media.greaterThan('medium')`display: none;`}
   width: 25px;
 `;

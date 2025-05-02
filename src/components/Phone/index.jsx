@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import WhatsappIconSVG from 'assets/icons/whats-white';
+
 import { Container } from './styles';
 
 const LINKS = {
@@ -15,7 +17,7 @@ const NUMBERS = {
 
 const ICONS = {
   tel: '',
-  whats: '/assets/icons/whats-white.svg'
+  whats: WhatsappIconSVG
 };
 
 function Phone({ flag = 'tel', className, showIcon, ...props }) {
