@@ -71,18 +71,18 @@ function Home({ hero, components }) {
               target={component.link.external ? '_blank' : '_self'}
               mq="mobile"
               className="holos-home-banner"
-              data-label=""
+              data-label="mobile-banner"
             >
-              <img src={component.images.mobile} alt="" />
+              <img src={component.images.mobile} alt="Foto imóvel banner" loading='lazy'/>
             </Banner>
             <Banner
               href={component.link.url}
               target={component.link.external ? '_blank' : '_self'}
               mq="desktop"
               className="holos-home-banner"
-              data-label=""
+              data-label="desktop-banner"
             >
-              <img src={component.images.desktop} alt="" />
+              <img src={component.images.desktop} alt="Foto imóvel banner" loading='lazy'/>
             </Banner>
           </>
         );
@@ -110,10 +110,10 @@ function Home({ hero, components }) {
                         href={item.link.url}
                         target={`_${item.link.target}`}
                       >
-                        {renderHeroItem(item)}
+                        {renderHeroItem(item, itemIndex)}
                       </HeroLink>
                     )}
-                  {!item.link || !item.link.url ? renderHeroItem(item) : null}
+                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
                 </HeroItem>
               ))}
             </SliderNew>
@@ -144,16 +144,16 @@ function Home({ hero, components }) {
     return heroItems;
   });
 
-  const renderHeroItem = useCallback((item) => {
+  const renderHeroItem = (item, itemIndex) => {
     const hasContent = item.title || item.content ? true : false;
 
     return (
       <>
         <HeroItemWrapper hasContent={hasContent}>
-          <HeroImage mq="mobile" src={item.images.mobile} alt={item.title} />
-          <HeroImage mq="desktop" src={item.images.desktop} alt={item.title} />
-          {item.title || item.content ? (
-            <HeroItemInfo>
+          <HeroImage className="hero-image" mq="mobile" src={item.images.mobile} alt={item.title} width={375} height={500} loading={itemIndex === 0 ? 'eager' : 'lazy'}  priority={itemIndex === 0}/>
+          <HeroImage className="hero-image" mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height={720} loading={itemIndex === 0 ? 'eager' : 'lazy'}  priority={itemIndex === 0}/>
+          {hasContent && (
+            <HeroItemInfo className="hero-info">
               {item.label && item.label == 'isExclusive' ? (
                 <Tag label={'Exclusividade'} icon="check" color="orange" />
               ) : item.label == 'isNew' ? (
@@ -169,11 +169,11 @@ function Home({ hero, components }) {
               {item.content && <p>{item.content}</p>}
               {item.link.url && <span>Saiba mais</span>}
             </HeroItemInfo>
-          ) : null}
+          )}
         </HeroItemWrapper>
       </>
     );
-  }, []);
+  };
 
   useEffect(() => {
     function checkActionParams() {
@@ -235,10 +235,10 @@ function Home({ hero, components }) {
                       href={item.link.url}
                       target={`_${item.link.target}`}
                     >
-                      {renderHeroItem(item)}
+                      {renderHeroItem(item, itemIndex)}
                     </HeroLink>
                   )}
-                {!item.link || !item.link.url ? renderHeroItem(item) : null}
+                {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
               </HeroItem>
             ))}
           </SliderNew>

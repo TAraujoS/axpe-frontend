@@ -85,8 +85,8 @@ function Around({ local, cep, text, latitude, longitude }) {
         ></GoogleMapReact>
       </Mapa>
 
-      <Pin src={PinDesktopIconSVG} mq="desktop" alt="" />
-      <Pin src={PinWhiteIconSVG} mq="mobile" alt="" />
+      <Pin src={PinDesktopIconSVG} mq="desktop" alt="Ícone de pin" />
+      <Pin src={PinWhiteIconSVG} mq="mobile" alt="Ícone de pin" />
 
       <Text item={{ title: 'O que há por perto', text }} />
     </Container>
