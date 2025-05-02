@@ -1,11 +1,6 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
-import IArrowNext from 'assets/icons/arrow-next-white';
-import IArrowPrev from 'assets/icons/arrow-prev-white';
-import IArrowNextBlack from 'assets/icons/arrow-next-green';
-import IArrowPrevBlack from 'assets/icons/arrow-prev-green';
-
 const backgroundColorWhite = css`
   background-color: rgba(255, 255, 255, 0.5) !important;
   width: 35px;
@@ -242,8 +237,8 @@ const Arrow = styled.button`
 export const ArrowNext = styled(Arrow)`
   background: url(${props =>
     props.color === 'white'
-      ? IArrowNext
-      : IArrowNextBlack}) center center no-repeat;
+      ? '/assets/icons/arrow-next-white'
+      : '/assets/icons/arrow-next-green'}) center center no-repeat;
 
   ${props => props.position === 'center' && positionCenterNext}
   ${props => props.position === 'inside' && positionInsideNext}
@@ -281,8 +276,8 @@ export const ArrowNext = styled(Arrow)`
 export const ArrowPrev = styled(Arrow)`
 background: url(${props =>
   props.color === 'white'
-    ? IArrowPrev
-    : IArrowPrevBlack}) center center no-repeat;
+    ? '/assets/icons/arrow-prev-white'
+    : '/assets/icons/arrow-prev-green'}) center center no-repeat;
 
   ${props => props.position === 'center' && positionCenterPrev}
   ${props => props.position === 'inside' && positionInsidePrev}

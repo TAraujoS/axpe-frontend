@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import SVG from 'react-inlinesvg';
 import ClipboardJS from 'clipboard';
 
-// assets
-import WhatsappRoundedIconSVG from 'assets/icons/whatsapp-rounded';
-import FacebookRoundedIconSVG from 'assets/icons/facebook-rounded';
-import TwitterRoundedIconSVG from 'assets/icons/twitter-rounded';
-import LinkedinRoundedIconSVG from 'assets/icons/linkedin-rounded';
-
 // styles
 import {
   Container,
@@ -61,7 +55,7 @@ function Share({ active, path, title, onClose }) {
             className="holos-account-favorite-share-network"
             data-label="Whatsapp"
           >
-            <SVG src={WhatsappRoundedIconSVG} uniquifyIDs={true} /> Whatsapp
+            <SVG src='/assets/icons/whatsapp-rounded.svg' uniquifyIDs={true} /> Whatsapp
           </SocialsButton>
           <SocialsButton
             href={`https://www.facebook.com/sharer.php?u=${url}`}
@@ -69,7 +63,7 @@ function Share({ active, path, title, onClose }) {
             className="holos-account-favorite-share-network"
             data-label="Facebook"
           >
-            <SVG src={FacebookRoundedIconSVG} uniquifyIDs={true} /> Facebook
+            <SVG src='/assets/icons/facebook-rounded.svg' uniquifyIDs={true} /> Facebook
           </SocialsButton>
           <SocialsButton
             href={`https://twitter.com/share?text=${title}&url=${url}`}
@@ -77,7 +71,7 @@ function Share({ active, path, title, onClose }) {
             className="holos-account-favorite-share-network"
             data-label="Twitter"
           >
-            <SVG src={TwitterRoundedIconSVG} uniquifyIDs={true} /> Twitter
+            <SVG src='/assets/icons/facebook-rounded.svg' uniquifyIDs={true} /> Twitter
           </SocialsButton>
           <SocialsButton
             href={`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`}
@@ -85,7 +79,7 @@ function Share({ active, path, title, onClose }) {
             className="holos-account-favorite-share-network"
             data-label="Linkedin"
           >
-            <SVG src={LinkedinRoundedIconSVG} uniquifyIDs={true} /> Linkedin
+            <SVG src='/assets/icons/linkedin-rounded.svg' uniquifyIDs={true} /> Linkedin
           </SocialsButton>
         </Socials>
 

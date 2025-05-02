@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
-// assests
-import CheckedIconSVG from 'assets/icons/checked.svg';
-import ArrowIconSVG from 'assets/icons/arrow.svg';
-
 export const Container = styled.section`
   position: fixed;
   top: 0;
@@ -570,7 +566,7 @@ export const FormTabListItemTitle = styled.h4`
     width: 24px;
     height: 24px;
     margin-left: auto;
-    background: url(${ArrowIconSVG}) no-repeat;
+    background: url('/assets/icons/arrow.svg') no-repeat;
     background-size: contain;
     transform: rotate(90deg);
     transition: all 300ms ease;
@@ -647,7 +643,7 @@ export const FormTabListItemButton = styled.button`
     right: 0;
     width: 22px;
     height: 22px;
-    background: url(${CheckedIconSVG}) no-repeat;
+    background: url('/assets/icons/checked.svg') no-repeat;
     background-size: contain;
     transform: translateY(-50%);
     transition: all 300ms ease;

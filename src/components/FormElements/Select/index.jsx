@@ -2,8 +2,6 @@ import React from 'react';
 import SVG from 'react-inlinesvg';
 import { InputSelect } from '../styles';
 
-import ArrowIconSVG from 'assets/icons/arrow';
-
 export default function Select(props) {
   return (
     <>
@@ -14,7 +12,7 @@ export default function Select(props) {
             <option key={`option-${i.value}`} value={i.value} dangerouslySetInnerHTML={{ __html: i.label }} />
           ))}
       </InputSelect>
-      <SVG src={ArrowIconSVG} uniquifyIDs={true} />
+      <SVG src='/assets/icons/arrow.svg' uniquifyIDs={true} />
     </>
   );
 }

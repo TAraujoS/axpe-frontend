@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 import Tag from 'components/Tag';
 import * as Caracteristics from 'pages/Building/Datasheet/caracteristics';
 
@@ -25,9 +26,6 @@ import {
     CharacteristicsGrid,
     CharacteristicItem
 } from './styles';
-
-import ILocation from 'assets/icons/location.svg';
-import ICheck from 'assets/icons/checked-grey.svg';
 
 // Componentns
 import VisitModal from './VisitModal';
@@ -95,7 +93,7 @@ export default function Datasheet({ property }) {
                             </InfoContent>
                             <Location>
                                 <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
-                                    <img src={ILocation} alt="ícone de localização" />
+                                    <Image src='/assets/icons/location.svg' alt="ícone de localização" loading='lazy' width={20} height={20}/>
                                     <p>Ver localização</p>
                                 </a>
                             </Location>
@@ -208,7 +206,7 @@ export default function Datasheet({ property }) {
                                 .filter(([ _, value ]) => value === 'Sim')
                                 .map(([ label ]) => (
                                     <CharacteristicItem key={label}>
-                                        <img src={ICheck} alt="ícone de Check" />
+                                        <Image src='/assets/icons/checked-grey.svg' alt="ícone de Check" loading='lazy' layout='fill'/>
                                         <p>{label}</p>
                                     </CharacteristicItem>
                                 ))}

@@ -5,9 +5,6 @@ import SVG from 'react-inlinesvg';
 import { Link } from 'helpers/routes';
 import { formatCurrency } from 'helpers/utils';
 
-// assets
-import EmojiIconSVG from 'assets/icons/emoji';
-
 // styles
 import {
   Container,
@@ -85,7 +82,7 @@ function BuildingCard({
             <Gallery layout={layout}>
               {status === 'inactive' && (
                 <Inactive>
-                  <SVG src={EmojiIconSVG} uniquifyIDs={true} />
+                  <SVG src='/assets/icons/emoji' uniquifyIDs={true} />
                   <p>
                     <strong>Ops!</strong>
                     <br />
