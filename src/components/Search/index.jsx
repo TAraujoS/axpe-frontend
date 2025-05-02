@@ -17,6 +17,10 @@ import Input from 'components/Search/FormElements/Input';
 import RangeSlider from 'components/Search/FormElements/RangeSlider';
 import CustomSelect from '../CustomSelect';
 
+// assets
+import ArrowIconSVG from 'assets/icons/arrow';
+import SearchIconSVG from 'assets/icons/search';
+
 // styles
 import {
   Container,
@@ -107,8 +111,6 @@ function Search() {
       area_end: '',
       bedroom_start: '',
       bedroom_end: '',
-      suite_start: '',
-      suite_end: '',
       parking_start: '',
       parking_end: '',
       reference: '',
@@ -352,7 +354,7 @@ function Search() {
       const params = getFiltersParams();
       const response = await Api.Search.getFilters(params);
       const filtersListToggle = {};
-      const valuesStringToNumber = [ 'prices', 'area', 'bedrooms', 'parking', 'suites' ];
+      const valuesStringToNumber = [ 'prices', 'area', 'bedrooms', 'parking' ];
 
       // make sure that all data are Number
       valuesStringToNumber.forEach((key) => {
@@ -632,7 +634,7 @@ function Search() {
                       {formik.values.types.length ? (
                         <span>{formik.values.types.join(', ')}</span>
                       ) : null}
-                      <SVG src='assets/icons/arrow.svg' uniquifyIDs={true} />
+                      <SVG src={ArrowIconSVG} uniquifyIDs={true} />
                     </FormButtonFilter>
                   ) : null}
 
@@ -650,7 +652,7 @@ function Search() {
                       {formik.values.local.length ? (
                         <span>{formik.values.local.join(', ')}</span>
                       ) : null}
-                      <SVG src='assets/icons/arrow.svg' uniquifyIDs={true} />
+                      <SVG src={ArrowIconSVG} uniquifyIDs={true} />
                     </FormButtonFilter>
                   ) : null}
 
@@ -745,19 +747,19 @@ function Search() {
                         </FormTabSlider>
                       ) : null}
     
-                    {filtersData.suites &&
-                      filtersData.suites.length &&
-                      filtersData.suites[0] != filtersData.suites[1] ? (
+                    {filtersData.bedrooms &&
+                      filtersData.bedrooms.length &&
+                      filtersData.bedrooms[0] != filtersData.bedrooms[1] ? (
                         <FormTabSlider>
                           <FormTabSliderTitle>Suítes</FormTabSliderTitle>
                           <RangeSlider
                             type="others"
-                            data={filtersData.suites}
+                            data={filtersData.bedrooms}
                             sep="a"
                             step={1}
                             onChange={(values) => {
-                              formik.setFieldValue('suite_start', values[0]);
-                              formik.setFieldValue('suite_end', values[1]);
+                              formik.setFieldValue('bedroom_start', values[0]);
+                              formik.setFieldValue('bedroom_end', values[1]);
     
                               GTM.dataLayerPush({
                                 event: 'Custom Field Change',
@@ -816,7 +818,7 @@ function Search() {
                     className="holos-search-field"
                     data-label="Buscar por referência"
                   />
-                  <SVG src='assets/icons/search.svg' uniquifyIDs={true} />
+                  <SVG src={SearchIconSVG} uniquifyIDs={true} />
                 </FormGroup>
                 <FormButtonSubmit
                   type="submit"
@@ -855,7 +857,7 @@ function Search() {
             onClick={(event) => event.stopPropagation()}
           >
             <FormTabButtonBack type="button" onClick={() => setTabActive(null)}>
-              <SVG src='assets/icons/arrow.svg' uniquifyIDs={true} />
+              <SVG src={ArrowIconSVG} uniquifyIDs={true} />
             </FormTabButtonBack>
             <SimpleBar style={{ maxHeight: '100%' }}>
               <FormTabWrapper>
@@ -903,7 +905,7 @@ function Search() {
             onClick={(event) => event.stopPropagation()}
           >
             <FormTabButtonBack type="button" onClick={() => setTabActive(null)}>
-              <SVG src='assets/icons/arrow.svg' uniquifyIDs={true} />
+              <SVG src={ArrowIconSVG} uniquifyIDs={true} />
             </FormTabButtonBack>
             <SimpleBar style={{ maxHeight: '100%' }}>
               <FormTabWrapper>

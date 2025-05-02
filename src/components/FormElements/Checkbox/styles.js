@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
+// assets
+import CheckedIconSVG from 'assets/icons/checked';
+
 const SizeBig = css`
   width: calc(100% - 5px);
   height: 50px;
@@ -38,7 +41,7 @@ const SizeSmall = css`
 
   &:checked {
     border: 1.6px solid ${({ theme }) => theme.colors.orange};
-    background: url('/assets/icons/checked.svg') no-repeat;
+    background: url(${CheckedIconSVG}) no-repeat;
     background-size: contain;
     background-position: 2px;
   }

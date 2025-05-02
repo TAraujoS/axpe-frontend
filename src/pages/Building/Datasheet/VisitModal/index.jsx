@@ -1,4 +1,5 @@
 import React from 'react';
+import CloseIcon from 'assets/icons/axpe-modal-close-icon.svg';
 
 import { useVisitModalContext } from '../context';
 
@@ -53,13 +54,13 @@ export default function VisitModal(property) {
                                 onClick={closeVisitModal}
                             >
                                 <ModalHeaderBtnCloseImage>
-                                    <img src='/assets/icons/axpe-modal-close-icon.svg' alt='Botão fechar' loading='lazy'/>
+                                    <img src={CloseIcon} alt=''/>
                                 </ModalHeaderBtnCloseImage>
                             </ModalHeaderBtnClose>
                         </ModalHeader>
                         <ModalLocal>
                             <ModalLocalImage>
-                                <img src={(gallery && gallery[0].src) || ''} alt='Foto do local' loading='lazy'/>
+                                <img src={(gallery && gallery[0].src) || ''} alt=''/>
                             </ModalLocalImage>
                             <ModalLocalDescription>
                                 <ModalLocalTitle>{address.local}</ModalLocalTitle>

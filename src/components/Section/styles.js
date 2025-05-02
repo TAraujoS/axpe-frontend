@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
+// assets
+import RectangleIconSVG from 'assets/icons/rectangle';
+
 const TypeSlickLargeDesktop = css`
   position: initial;
   padding: 25px 4% 0 4%;
@@ -138,7 +141,7 @@ const TypeDestaqueTexto = css`
   }
 
   ${media.greaterThan('medium')`
-    background: url('/assets/icons/rectangle.svg') center no-repeat;
+    background: url(${RectangleIconSVG}) center no-repeat;
     position: initial;
     max-width: 1000px;
     padding: 0 !important;

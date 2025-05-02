@@ -16,6 +16,9 @@ import {
   Body
 } from './styles';
 
+// image
+import WhatsappIconSVG from 'assets/icons/whats-white';
+
 const LANGUAGE_TEXT = {
   es: {
     title: 'Conozca',
@@ -66,7 +69,7 @@ function OtherLanguages({ language }) {
             <Contact href="https://wa.me/5511990373600">
               <p>Whatsapp:</p>
               <p>
-                <SVG src='/assets/icons/whats-white.svg' uniquifyIDs={true} />
+                <SVG src={WhatsappIconSVG} uniquifyIDs={true} />
                 (11) 99037-3600
               </p>
             </Contact>

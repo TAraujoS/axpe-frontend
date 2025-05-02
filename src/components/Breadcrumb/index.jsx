@@ -1,6 +1,11 @@
 import React from 'react';
 import Router from 'next/router'
-import Image from 'next/image';
+
+// assets
+import IArrowOrange from 'assets/icons/arrow-prev-orange';
+import IArrowBlack from 'assets/icons/arrow-prev-green';
+import IHeartBlack from 'assets/icons/heart-black';
+import IHeartOrange from 'assets/icons/heart-orange';
 
 // styles
 import {
@@ -23,11 +28,11 @@ export default function Breadcrumb({ category, local, reference, className }) {
     <Container className={className}>
       <InfoLeft>
         <BackDesktop onClick={() => Router.back()}>
-          <Image src='/assets/icons/arrow-prev-orange.svg' alt="Voltar" layout='fill' loading='lazy'/>
+          <img src={IArrowOrange} alt="Voltar" />
           <span>Voltar</span>
         </BackDesktop>
         <BackMobile onClick={() => Router.back()}>
-          <Image src='/assets/icons/arrow-prev-green.svg' alt="Voltar" layout='fill' loading='lazy'/>
+          <img src={IArrowBlack} alt="Voltar" />
         </BackMobile>
         <div>
           <Category>{category}</Category>
@@ -38,10 +43,10 @@ export default function Breadcrumb({ category, local, reference, className }) {
       {reference && (
         <InfoRight>
           <Reference>Ref {reference}</Reference>
-          <FavoriteMobile src='/assets/icons/heart-orange.svg' alt="Favoritos" layout='responsive' loading='lazy'/>
+          <FavoriteMobile src={IHeartOrange} alt="Favoritos" />
           <FavoriteDesktop>
             <span>3</span>
-            <Image src='/assets/icons/heart-black.svg' alt="Favoritos"layout='responsive' loading='lazy'/>
+            <img src={IHeartBlack} alt="Favoritos" />
           </FavoriteDesktop>
           <MoreInfo type="button">Mais Informações</MoreInfo>
           <NumberPhone color="orange" />

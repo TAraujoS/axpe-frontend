@@ -77,8 +77,8 @@ function CategoryBannerVertical({ categoryItems }) {
                   target={`_${item.link.target}`}
                 >
                   <CategoryItemWrapper>
-                    <CategoryImage mq="mobile" src={item.images.mobile} alt={item.title} loading='lazy'/>
-                    <CategoryImage mq="desktop" src={item.images.desktop} alt={item.title} loading='lazy'/>
+                    <CategoryImage mq="mobile" src={item.images.mobile} alt={item.title} />
+                    <CategoryImage mq="desktop" src={item.images.desktop} alt={item.title} />
                   </CategoryItemWrapper>
                 </CategoryLink>
               )}

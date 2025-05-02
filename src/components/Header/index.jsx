@@ -10,6 +10,11 @@ import { setMain } from 'store/modules/main/actions';
 import { Link } from 'helpers/routes';
 import useScrollPosition from 'helpers/scrollPosition';
 
+// assets
+import InstagramIconSVG from 'assets/icons/instagram';
+import WhatsappIconSVG from 'assets/icons/whatsapp';
+import SearchIconSVG from 'assets/icons/search.svg';
+
 // styles
 import {
   Container,
@@ -118,7 +123,7 @@ function Header() {
             onClick={toggleSearch}
           >
             Buscar Imóvel
-            <SVG src='/assets/icons/search.svg' alt='Ícone de lupa' loading='lazy'/>
+            <img src={SearchIconSVG} alt='Ícone de lupa'/>
           </ButtonSearch>
           <ButtonToggle
             type="button"
@@ -190,7 +195,7 @@ function Header() {
                   href="https://wa.me/551130743600"
                   target="_blank"
                 >
-                  <SVG src='/assets/icons/whatsapp.svg' uniquifyIDs={true} />
+                  <SVG src={WhatsappIconSVG} uniquifyIDs={true} />
                 </SocialButton>
 
                 <SocialButton
@@ -199,7 +204,7 @@ function Header() {
                   className="holos-footer-social-link"
                   data-label="Instagram"
                 >
-                  <SVG src='/assets/icons/instagram.svg' uniquifyIDs={true} />
+                  <SVG src={InstagramIconSVG} uniquifyIDs={true} />
                 </SocialButton>
               </Socials>
 

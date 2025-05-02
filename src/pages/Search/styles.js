@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
-import NextImage from 'next/image';
+
+// assets
+import ArrowIconSVG from 'assets/icons/arrow';
 
 export const Container = styled.section`
   background: ${({ theme }) => theme.colors.greyLight3};
@@ -151,7 +153,7 @@ export const HeaderOrderButton = styled.button`
     width: 13px;
     height: 13px;
     margin-left: 10px;
-    background: url('/assets/icons/arrow.svg') no-repeat;
+    background: url(${ArrowIconSVG}) no-repeat;
     background-size: contain;
     transform: rotate(90deg);
     transition: all 300ms ease;
@@ -466,7 +468,7 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const Image = styled(NextImage)`
+export const Image = styled.img`
   display: block;
   z-index: 1;
   object-fit: cover;

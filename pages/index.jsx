@@ -33,7 +33,6 @@ import {
   HeroItemInfo,
 } from 'pages/Home/styles';
 import CategorySection from '../src/components/CategorySection';
-import Image from 'next/image';
 
 function Home({ hero, components }) {
   const dispatch = useDispatch();
@@ -72,18 +71,18 @@ function Home({ hero, components }) {
               target={component.link.external ? '_blank' : '_self'}
               mq="mobile"
               className="holos-home-banner"
-              data-label="mobile-banner"
+              data-label=""
             >
-              <Image src={component.images.mobile} alt="Foto de imóvel no banner" lazyLoad/>
+              <img src={component.images.mobile} alt="" />
             </Banner>
             <Banner
               href={component.link.url}
               target={component.link.external ? '_blank' : '_self'}
               mq="desktop"
               className="holos-home-banner"
-              data-label="desktop-banner"
+              data-label=""
             >
-              <Image src={component.images.desktop} alt="Foto de imóvel no banner" lazyLoad/>
+              <img src={component.images.desktop} alt="" />
             </Banner>
           </>
         );
