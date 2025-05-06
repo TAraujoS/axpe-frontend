@@ -905,7 +905,7 @@ function Search() {
             onClick={(event) => event.stopPropagation()}
           >
             <FormTabButtonBack type="button" onClick={() => setTabActive(null)}>
-              <SVG src={ArrowIconSVG} uniquifyIDs={true} />
+              <SVG src={ArrowIconSVG} uniquifyIDs={true} aria-hidden="true"/>
             </FormTabButtonBack>
             <SimpleBar style={{ maxHeight: '100%' }}>
               <FormTabWrapper>

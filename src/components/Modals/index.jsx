@@ -34,8 +34,9 @@ function Modal({
             onClick={onClickButtonBack}
             className="holos-modal-close"
             data-type="Cadastro"
+            aria-label='Fechar'
           >
-            <SVG src={ArrowSVG} uniquifyIDs={true} /> Fechar
+            <SVG src={ArrowSVG} uniquifyIDs={true} aria-hidden="true"/> Fechar
           </ButtonBack>
         )}
         <ButtonClose

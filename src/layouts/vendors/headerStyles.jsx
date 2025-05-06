@@ -2,7 +2,7 @@ import React from 'react';
 import Script from 'react-inline-script';
 
 function HeaderStyles() {
-  const { googleClientId, googleApiKey } = process.env.config;
+  const { googleClientId } = process.env.config;
 
   return (
     <>
@@ -34,7 +34,7 @@ function HeaderStyles() {
 
       <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
       <script>var OneSignal = OneSignal || [];</script>
-      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=geometry`}></script>
+      {/* <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=geometry`}></script> */}
     </>
   )
 }

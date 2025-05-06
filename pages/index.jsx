@@ -148,30 +148,28 @@ function Home({ hero, components }) {
     const hasContent = item.title || item.content ? true : false;
 
     return (
-      <>
-        <HeroItemWrapper hasContent={hasContent}>
-          <HeroImage className="hero-image" mq="mobile" src={item.images.mobile} alt={item.title} width={375} height='auto' loading='eager' priority={itemIndex === 0}/>
-          <HeroImage className="hero-image" mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height='auto' loading='eager' priority={itemIndex === 0}/>
-          {hasContent && (
-            <HeroItemInfo className="hero-info">
-              {item.label && item.label == 'isExclusive' ? (
-                <Tag label={'Exclusividade'} icon="check" color="orange" />
-              ) : item.label == 'isNew' ? (
-                <Tag label={'Novidade'} icon="star" color="blueLight" />
-              ) : item.label == 'isFurnished' ? (
-                <Tag label={'Mobiliado'} icon="sofa" color="greenLight" />
-              ) : null}
-              {item && item.title && (
-                <h2 className={item.title && item.content && 'with-separator'}>
-                  {item.title}
-                </h2>
-              )}
-              {item.content && <p>{item.content}</p>}
-              {item.link.url && <span>Saiba mais</span>}
-            </HeroItemInfo>
-          )}
-        </HeroItemWrapper>
-      </>
+      <HeroItemWrapper hasContent={hasContent}>
+        <HeroImage className="hero-image" mq="mobile" src={item.images.mobile} alt={item.title} width={375} height='auto' loading='eager' priority={itemIndex === 0}/>
+        <HeroImage className="hero-image" mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height='auto' loading='eager' priority={itemIndex === 0}/>
+        {hasContent && (
+          <HeroItemInfo className="hero-info">
+            {item.label && item.label == 'isExclusive' ? (
+              <Tag label={'Exclusividade'} icon="check" color="orange" />
+            ) : item.label == 'isNew' ? (
+              <Tag label={'Novidade'} icon="star" color="blueLight" />
+            ) : item.label == 'isFurnished' ? (
+              <Tag label={'Mobiliado'} icon="sofa" color="greenLight" />
+            ) : null}
+            {item && item.title && (
+              <h2 className={item.title && item.content && 'with-separator'}>
+                {item.title}
+              </h2>
+            )}
+            {item.content && <p>{item.content}</p>}
+            {item.link.url && <span>Saiba mais</span>}
+          </HeroItemInfo>
+        )}
+      </HeroItemWrapper>
     );
   };
 
