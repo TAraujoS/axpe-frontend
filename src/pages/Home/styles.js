@@ -45,6 +45,7 @@ export const Banner = styled.a`
 export const Hero = styled.div`
   margin-bottom: 10px;
   position: relative;
+  height: 100%;
   min-height: 550px;
 
   .slick-slider:before{
@@ -140,20 +141,26 @@ export const Hero = styled.div`
 
     .hero-image {
       transform: scale(1.05);
-      transition-delay: 0s;
       transition-duration: 7s;
+      will-change: transform;
+      contain: paint;
     }
   }
 `;
 
-export const HeroItem = styled.article``;
+export const HeroItem = styled.article`
+  min-height: 550px;
+  height: 100%;
+`;
 
-export const HeroLink = styled.a``;
+export const HeroLink = styled.a`
+  height: 100%;
+`;
 
 export const HeroImage = styled.img`
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   transition: all 100ms 500ms ease;
 
   ${props =>
@@ -165,13 +172,14 @@ export const HeroImage = styled.img`
   ${props =>
     props.mq === 'desktop' &&
     media.lessThan('medium')`
-    display: none !important;
+    display: none !important; 
   `}
 `;
 
 export const HeroItemWrapper = styled.div`
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
 
   ${media.greaterThan('medium')`
