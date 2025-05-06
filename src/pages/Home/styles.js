@@ -45,7 +45,7 @@ export const Banner = styled.a`
 export const Hero = styled.div`
   margin-bottom: 10px;
   position: relative;
-  min-height: 580px;
+  min-height: 550px;
 
   .slick-slider:before{
     content: inherit;
@@ -205,6 +205,7 @@ export const HeroItemInfo = styled.div`
   z-index: 4;
   transform: translateY(-50%);
   color: ${({ theme }) => theme.colors.white};
+  min-height: 300px;
 
   ${media.greaterThan('medium')`
     padding: 0 100px;

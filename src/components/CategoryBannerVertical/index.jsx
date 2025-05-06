@@ -77,8 +77,8 @@ function CategoryBannerVertical({ categoryItems }) {
                   target={`_${item.link.target}`}
                 >
                   <CategoryItemWrapper>
-                    <CategoryImage mq="mobile" src={item.images.mobile} alt={item.title} loading='lazy' width={375} height={500}/>
-                    <CategoryImage mq="desktop" src={item.images.desktop} alt={item.title} loading='lazy' width={1280} height={720}/>
+                    <CategoryImage mq="mobile" src={item.images.mobile} alt={item.title} width={375} height={500} loading='eager' priority={itemIndex === 0}/>
+                    <CategoryImage mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height={720} loading='eager' priority={itemIndex === 0}/>
                   </CategoryItemWrapper>
                 </CategoryLink>
               )}

@@ -149,8 +149,8 @@ function Home({ hero, components }) {
 
     return (
       <HeroItemWrapper hasContent={hasContent}>
-        <HeroImage className="hero-image" mq="mobile" src={item.images.mobile} alt={item.title} width={375} height='auto' loading='eager' priority={itemIndex === 0}/>
-        <HeroImage className="hero-image" mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height='auto' loading='eager' priority={itemIndex === 0}/>
+        <HeroImage className="hero-image" mq="mobile" src={item.images.mobile} alt={item.title} width={375} height={375} loading='eager' priority={itemIndex === 0}/>
+        <HeroImage className="hero-image" mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height={720} loading='eager' priority={itemIndex === 0}/>
         {hasContent && (
           <HeroItemInfo className="hero-info">
             {item.label && item.label == 'isExclusive' ? (

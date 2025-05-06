@@ -46,7 +46,7 @@ export default class MyDocument extends Document {
     const metaImage = metaData && metaData.image ? metaData.image : null;
 
     return (
-      <Html>
+      <Html lang="pt-br" dir="ltr">
         <Head>
           <meta charSet="UTF-8" />
           <meta
