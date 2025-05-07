@@ -117,6 +117,7 @@ export const Hero = styled.div`
   .slick-slide.active {
     .hero-info {
       div, h2, p, span {
+        transition-delay: 200ms;
         transition-duration: 300ms;
         transform: translateX(0);
         ${({ theme }) => theme.show};
@@ -140,6 +141,7 @@ export const Hero = styled.div`
     }
 
     .hero-image {
+      transition-delay: 1.5s;
       transform: scale(1.05);
       transition-duration: 7s;
       will-change: transform;
@@ -149,8 +151,7 @@ export const Hero = styled.div`
 `;
 
 export const HeroItem = styled.article`
-  min-height: 550px;
-  height: 100%;
+  height: 550px;
 `;
 
 export const HeroLink = styled.a`
@@ -158,10 +159,14 @@ export const HeroLink = styled.a`
 `;
 
 export const HeroImage = styled.img`
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: all 100ms 500ms ease;
+  will-change: transform;
+  contain: paint;
 
   ${props =>
     props.mq === 'mobile' &&
@@ -175,11 +180,10 @@ export const HeroImage = styled.img`
     display: none !important; 
   `}
 `;
-
 export const HeroItemWrapper = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
+  position: relative;
   overflow: hidden;
 
   ${media.greaterThan('medium')`
