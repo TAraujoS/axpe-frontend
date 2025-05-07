@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useState, useEffect } from 'react';
+import React, { Fragment, useCallback, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -43,6 +43,8 @@ function Home({ hero, components }) {
   const [ buildingsSeen, setBuildingsSeen ] = useState([]);
   const [ buildingsForYou, setBuildingsForYou ] = useState([]);
   const [ heroItems, setHeroItems ] = useState([]);
+  const [ showSlider, setShowSlider ] = useState(false);
+  const sliderRef = useRef(null);
 
   const heroSettings = {
     dots: true,
@@ -60,6 +62,32 @@ function Home({ hero, components }) {
       </span>
     ),
   };
+
+  useEffect(() => {
+    if (!sliderRef.current) return;
+  
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setShowSlider(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.25
+      }
+    );
+  
+    observer.observe(sliderRef.current);
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const renderComponents = useCallback((type, component) => {
     switch (type) {
@@ -92,31 +120,33 @@ function Home({ hero, components }) {
         );
       case 'exclusivity':
         return (
-          <Hero>
-            <SliderNew
-              type="full"
-              arrowsColor="white"
-              hasVerticalBar={true}
-              arrowsClassName="holos-home-hero-arrow"
-              settings={heroSettings}
-            >
-              {component.items.map((item, itemIndex) => (
-                <HeroItem key={`hero-item-${itemIndex}`}>
-                  {item.link &&
-                    item.link.url &&
-                    (item.link.target === 'blank' ||
-                      item.link.target === 'self') && (
-                      <HeroLink
-                        href={item.link.url}
-                        target={`_${item.link.target}`}
-                      >
-                        {renderHeroItem(item, itemIndex)}
-                      </HeroLink>
-                    )}
-                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-                </HeroItem>
-              ))}
-            </SliderNew>
+          <Hero ref={sliderRef}>
+            {showSlider && (
+              <SliderNew
+                type="full"
+                arrowsColor="white"
+                hasVerticalBar={true}
+                arrowsClassName="holos-home-hero-arrow"
+                settings={heroSettings}
+              >
+                {component.items.map((item, itemIndex) => (
+                  <HeroItem key={`hero-item-${itemIndex}`}>
+                    {item.link &&
+                      item.link.url &&
+                      (item.link.target === 'blank' ||
+                        item.link.target === 'self') && (
+                        <HeroLink
+                          href={item.link.url}
+                          target={`_${item.link.target}`}
+                        >
+                          {renderHeroItem(item, itemIndex)}
+                        </HeroLink>
+                      )}
+                    {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                  </HeroItem>
+                ))}
+              </SliderNew>
+            )}
           </Hero>
         );
         // case 'buildingsSquare':

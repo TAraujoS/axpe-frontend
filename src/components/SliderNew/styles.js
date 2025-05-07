@@ -10,11 +10,8 @@ export const Container = styled.div`
   }
 
   .slick-slide {
-    height: 580px;
-    display: flex !important;
-    align-items: stretch; 
+    height: 550px;
   }
-
 
   .slick-slider {
     width: 100%;

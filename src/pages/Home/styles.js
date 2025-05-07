@@ -42,7 +42,9 @@ export const Banner = styled.a`
   }
 `;
 
-export const Hero = styled.div`
+export const Hero =  styled.div.attrs(() => ({
+  tabIndex: -1,
+}))`
   margin-bottom: 10px;
   position: relative;
   height: 100%;
