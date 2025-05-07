@@ -15,6 +15,7 @@ function BodyScripts() {
       <script
         id="cookieyes"
         type="text/javascript"
+        async
         src="https://cdn-cookieyes.com/client_data/fb20d1dbee876f8832b8baa6/script.js"
       ></script>
     </>
