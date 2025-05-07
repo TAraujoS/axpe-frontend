@@ -120,33 +120,31 @@ function Home({ hero, components }) {
         );
       case 'exclusivity':
         return (
-          <Hero ref={sliderRef}>
-            {showSlider && (
-              <SliderNew
-                type="full"
-                arrowsColor="white"
-                hasVerticalBar={true}
-                arrowsClassName="holos-home-hero-arrow"
-                settings={heroSettings}
-              >
-                {component.items.map((item, itemIndex) => (
-                  <HeroItem key={`hero-item-${itemIndex}`}>
-                    {item.link &&
-                      item.link.url &&
-                      (item.link.target === 'blank' ||
-                        item.link.target === 'self') && (
-                        <HeroLink
-                          href={item.link.url}
-                          target={`_${item.link.target}`}
-                        >
-                          {renderHeroItem(item, itemIndex)}
-                        </HeroLink>
-                      )}
-                    {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-                  </HeroItem>
-                ))}
-              </SliderNew>
-            )}
+          <Hero>
+            <SliderNew
+              type="full"
+              arrowsColor="white"
+              hasVerticalBar={true}
+              arrowsClassName="holos-home-hero-arrow"
+              settings={heroSettings}
+            >
+              {component.items.map((item, itemIndex) => (
+                <HeroItem key={`hero-item-${itemIndex}`}>
+                  {item.link &&
+                    item.link.url &&
+                    (item.link.target === 'blank' ||
+                      item.link.target === 'self') && (
+                      <HeroLink
+                        href={item.link.url}
+                        target={`_${item.link.target}`}
+                      >
+                        {renderHeroItem(item, itemIndex)}
+                      </HeroLink>
+                    )}
+                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                </HeroItem>
+              ))}
+            </SliderNew>
           </Hero>
         );
         // case 'buildingsSquare':
@@ -245,7 +243,8 @@ function Home({ hero, components }) {
         <meta name="description" content={SeoData.description} />
       </Head>
       <Container>
-        <Hero>
+        <Hero ref={sliderRef}>
+        {showSlider && (
           <SliderNew
             type="full"
             arrowsColor="white"
@@ -270,6 +269,7 @@ function Home({ hero, components }) {
               </HeroItem>
             ))}
           </SliderNew>
+        )}
         </Hero>
 
         {components &&

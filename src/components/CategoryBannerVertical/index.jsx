@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import Slider from 'react-slick';
 
 // styles
@@ -39,7 +39,27 @@ const SliderVertical = forwardRef(({
 
 function CategoryBannerVertical({ categoryItems }) {
   const [ currentSlide, setCurrentSlide ] = useState(0);
+  const [ isVisible, setIsVisible ] = useState(false);
+  const containerRef = useRef(null);
   const sliderRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([ entry ]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleAfterChange = useCallback((index) => {
     setCurrentSlide(index);
@@ -57,10 +77,12 @@ function CategoryBannerVertical({ categoryItems }) {
   ];
 
   return (
-    <CategoryBannerContainer>
+    <CategoryBannerContainer ref={containerRef}>
       <h2 className={'with-separator'}>
         Onde você procura um imóvel?
       </h2>
+      {isVisible && (
+
       <SliderVertical
         ref={sliderRef}
         onChange={handleAfterChange}
@@ -85,6 +107,7 @@ function CategoryBannerVertical({ categoryItems }) {
           </CategoryItem>
         ))}
       </SliderVertical>
+      )}
 
       <TitleList>
         {reorderedTitles.map((item, idx) => {
