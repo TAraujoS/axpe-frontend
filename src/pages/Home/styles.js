@@ -280,3 +280,25 @@ export const HeroItemInfo = styled.div`
     ${ButtonStyle}
   }
 `;
+
+export const PLaceholderImageDesk = styled.img`
+  width: 100%;
+  height: 100%;
+  max-height: 720px;
+  object-fit: cover;
+
+  ${media.lessThan('medium')`
+    display: none;
+  `}
+`;
+
+export const PLaceholderImageMob = styled.img`
+  width: 100%;
+  height: 100%;
+  max-height: 375px;
+  object-fit: cover;
+
+  ${media.greaterThan('medium')`
+    display: none;
+  `}
+`;

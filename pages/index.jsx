@@ -33,6 +33,7 @@ import {
   HeroItemInfo,
 } from 'pages/Home/styles';
 import CategorySection from '../src/components/CategorySection';
+import { PLaceholderImageDesk, PLaceholderImageMob } from '../src/pages/Home/styles';
 
 function Home({ hero, components }) {
   const dispatch = useDispatch();
@@ -244,32 +245,51 @@ function Home({ hero, components }) {
       </Head>
       <Container>
         <Hero ref={sliderRef}>
-        {showSlider && (
-          <SliderNew
-            type="full"
-            arrowsColor="white"
-            hasVerticalBar={true}
-            arrowsClassName="holos-home-hero-arrow"
-            settings={heroSettings}
-          >
-            {randomizeHeroItems().map((item, itemIndex) => (
-              <HeroItem key={`hero-item-${itemIndex}`}>
-                {item.link &&
-                  item.link.url &&
-                  (item.link.target === 'blank' ||
-                    item.link.target === 'self') && (
-                    <HeroLink
-                      href={item.link.url}
-                      target={`_${item.link.target}`}
-                    >
-                      {renderHeroItem(item, itemIndex)}
-                    </HeroLink>
-                  )}
-                {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-              </HeroItem>
-            ))}
-          </SliderNew>
-        )}
+          {!showSlider ? (
+            <>
+              <PLaceholderImageDesk
+                src="/homedesk-placeholder.png"
+                alt="Imagem inicial do banner desktop"
+                width={1280}
+                height={720}
+                loading='eager'
+                fetchpriority="high"
+              />
+              <PLaceholderImageMob
+                src="/homemob-placeholder.png"
+                alt="Imagem inicial do banner mobile"
+                width={375}
+                height={375}
+                loading='eager'
+                fetchpriority="high"
+              />
+            </>
+          ) : (
+            <SliderNew
+              type="full"
+              arrowsColor="white"
+              hasVerticalBar={true}
+              arrowsClassName="holos-home-hero-arrow"
+              settings={heroSettings}
+            >
+              {randomizeHeroItems().map((item, itemIndex) => (
+                <HeroItem key={`hero-item-${itemIndex}`}>
+                  {item.link &&
+                    item.link.url &&
+                    (item.link.target === 'blank' ||
+                      item.link.target === 'self') && (
+                      <HeroLink
+                        href={item.link.url}
+                        target={`_${item.link.target}`}
+                      >
+                        {renderHeroItem(item, itemIndex)}
+                      </HeroLink>
+                    )}
+                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                </HeroItem>
+              ))}
+            </SliderNew>
+          )}
         </Hero>
 
         {components &&
