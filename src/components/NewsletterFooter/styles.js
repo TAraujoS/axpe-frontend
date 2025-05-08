@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import BackgroundDesktop from 'assets/bg-newsletter-bottom-desktop.png';
-import BackgroundMobile from 'assets/bg-newsletter-bottom-mobile';
+import BackgroundDesktop from 'public/static/bg-newsletter-bottom-desktop.png';
+import BackgroundMobile from 'public/static/bg-newsletter-bottom-mobile.svg';
 
 export const NewsletterContainer = styled.div`
   display: flex;

@@ -10,7 +10,7 @@ export const Container = styled.div`
   }
 
   .slick-slide {
-    height: 550px;
+    /* height: 550px; */
   }
 
   .slick-slider {

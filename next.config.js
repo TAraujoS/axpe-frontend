@@ -1,17 +1,34 @@
+/** @type {import('next').NextConfig} */
 const { resolve } = require('path');
 const webpack = require('webpack');
 const withPWA = require('next-pwa');
 const withFonts = require('next-fonts');
 const envConfig = require(`./config/${process.env.NODE_ENV}.json`);
-
 const POLYFILL_NOMODULE = resolve(
   __dirname,
   'polyfills',
   'polyfill-nomodule.js'
 );
 
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/static/:all*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, immutable',
+          },
+        ],
+      },
+    ];
+  },
+};
+
 module.exports = withPWA(
   withFonts({
+    ...nextConfig,
     pwa: {
       disable: process.env.NODE_ENV === 'development',
       dest: 'public',
