@@ -1,5 +1,5 @@
 import React from 'react';
-import Script from 'react-inline-script';
+import Script from 'next/script';
 
 function HeaderStyles() {
   const { googleClientId } = process.env.config;
@@ -8,8 +8,7 @@ function HeaderStyles() {
     <>
       <meta name="google-signin-client_id" content={googleClientId} />
       <link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700|Raleway:300,400,500,600,700,800,900&display=swap" rel="stylesheet"></link>
-
-      <Script>
+      <Script id="gtm-init" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -19,7 +18,7 @@ function HeaderStyles() {
         `}
       </Script>
 
-      <Script strategy="afterInteractive">
+      <Script id="hotjar-init" strategy="afterInteractive">
         {`
           (function(h,o,t,j,a,r){
             h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -32,8 +31,13 @@ function HeaderStyles() {
         `}
       </Script>
 
-      <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-      <script>var OneSignal = OneSignal || [];</script>
+      <Script
+        src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+        strategy="afterInteractive"
+      />
+      <Script id="onesignal-init" strategy="afterInteractive">
+        {`window.OneSignal = window.OneSignal || [];`}
+      </Script>
       {/* <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=geometry`}></script> */}
     </>
   )

@@ -2,7 +2,8 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef,
 import Slider from 'react-slick';
 
 // styles
-import { CategoryBannerContainer, Container, CategoryImage, CategoryItem, CategoryItemWrapper, CategoryLink, TitleList, TitleItem } from './styles';
+import { CategoryBannerContainer, Container, CategoryItem, CategoryItemWrapper, CategoryLink, TitleList, TitleItem } from './styles';
+import Image from 'next/image';
 
 const SliderVertical = forwardRef(({
   children,
@@ -99,8 +100,24 @@ function CategoryBannerVertical({ categoryItems }) {
                   target={`_${item.link.target}`}
                 >
                   <CategoryItemWrapper>
-                    <CategoryImage mq="mobile" src={item.images.mobile} alt={item.title} width={375} height={500} loading='eager' priority={itemIndex === 0}/>
-                    <CategoryImage mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height={720} loading='eager' priority={itemIndex === 0}/>
+                    <div className="category-image mobile">
+                      <Image
+                        src={item.images.mobile}
+                        alt={item.title}
+                        layout="fill"
+                        objectFit="cover"
+                        priority={itemIndex === 0}
+                      />
+                    </div>
+                    <div className="category-image desktop">
+                      <Image
+                        src={item.images.desktop}
+                        alt={item.title}
+                        layout="fill"
+                        objectFit="cover"
+                        priority={itemIndex === 0}
+                      />
+                    </div>
                   </CategoryItemWrapper>
                 </CategoryLink>
               )}

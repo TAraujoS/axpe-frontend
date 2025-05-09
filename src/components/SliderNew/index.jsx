@@ -63,6 +63,7 @@ function SliderNew({
   };
 
   useEffect(() => {
+    const timer = setTimeout(() => {
     if (ref.current && ref.current.innerSlider) {
       const $list = ref.current.innerSlider.list;
 
@@ -100,7 +101,10 @@ function SliderNew({
       }
 
       afterChange();
-    }
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

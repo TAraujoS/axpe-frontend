@@ -2,6 +2,8 @@ import React, { Fragment, useCallback, useState, useEffect, useRef } from 'react
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import Api from 'services';
 
 // actions
@@ -15,7 +17,6 @@ import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
 // components
 import BuildingsPanel from 'components/BuildingsPanel';
 import BlockHighlighted from 'components/BlockHighlighted';
-import SliderNew from 'components/SliderNew';
 import GalleryCarousel from 'components/GalleryCarousel';
 import Tag from 'components/Tag';
 import NewsletterFooter from 'components/NewsletterFooter';
@@ -28,12 +29,15 @@ import {
   Hero,
   HeroItem,
   HeroLink,
-  HeroImage,
   HeroItemWrapper,
   HeroItemInfo,
 } from 'pages/Home/styles';
 import CategorySection from '../src/components/CategorySection';
-import { PLaceholderImageDesk, PLaceholderImageMob } from '../src/pages/Home/styles';
+import { PlaceholderImageDesk, PlaceholderImageMob } from '../src/pages/Home/styles';
+
+const SliderNew = dynamic(() => import('components/SliderNew'), {
+  loading: () => <></>,
+});
 
 function Home({ hero, components }) {
   const dispatch = useDispatch();
@@ -178,8 +182,23 @@ function Home({ hero, components }) {
 
     return (
       <HeroItemWrapper hasContent={hasContent}>
-        <HeroImage className="hero-image" mq="mobile" src={item.images.mobile} alt={item.title} width={375} height={375} loading='eager' priority={itemIndex === 0}/>
-        <HeroImage className="hero-image" mq="desktop" src={item.images.desktop} alt={item.title} width={1280} height={720} loading='eager' priority={itemIndex === 0}/>
+        <div className="hero-image mobile">
+          <Image
+            src={item.images.mobile}
+            alt={item.title}
+            layout='fill'
+            priority={itemIndex === 0}
+          />
+        </div>
+        <div className="hero-image desktop">
+          <Image
+            src={item.images.desktop}
+            alt={item.title}
+            layout='fill'
+            priority={itemIndex === 0}
+            sizes="(max-width: 768px) 100vw, 1280px"
+          />
+        </div>
         {hasContent && (
           <HeroItemInfo className="hero-info">
             {item.label && item.label == 'isExclusive' ? (
@@ -247,22 +266,27 @@ function Home({ hero, components }) {
         <Hero ref={sliderRef}>
           {!showSlider ? (
             <>
-              <PLaceholderImageDesk
-                src="/homedesk-placeholder.png"
-                alt="Imagem inicial do banner desktop"
-                width={1280}
-                height={720}
-                loading='eager'
-                fetchpriority="high"
-              />
-              <PLaceholderImageMob
-                src="/homemob-placeholder.png"
-                alt="Imagem inicial do banner mobile"
-                width={375}
-                height={375}
-                loading='eager'
-                fetchpriority="high"
-              />
+              <PlaceholderImageDesk>
+                <Image
+                  src="/static/homedesk-placeholder.png"
+                  alt="Imagem inicial do banner desktop"
+                  width={1280}
+                  height={720}
+                  priority
+                  placeholder="empty"
+                />
+              </PlaceholderImageDesk>
+
+              <PlaceholderImageMob>
+                <Image
+                  src="/static/homemob-placeholder.png"
+                  alt="Imagem inicial do banner mobile"
+                  width={375}
+                  height={375}
+                  priority
+                  placeholder="empty"
+                />
+              </PlaceholderImageMob>
             </>
           ) : (
             <SliderNew

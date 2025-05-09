@@ -182,15 +182,40 @@ export const HeroImage = styled.img`
     display: none !important; 
   `}
 `;
+
 export const HeroItemWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
 
   ${media.greaterThan('medium')`
     max-height: 580px;
   `}
+
+  .hero-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &.mobile {
+      ${media.greaterThan('medium')`
+        display: none !important;
+      `}
+    }
+
+    &.desktop {
+      ${media.lessThan('medium')`
+        display: none !important;
+      `}
+    }
+  }
+
+  .hero-image.desktop img,
+  .hero-image.mobile img {
+    object-fit: cover !important;
+  }
 
   ${props => props.hasContent && css`
     &:before {
@@ -281,22 +306,20 @@ export const HeroItemInfo = styled.div`
   }
 `;
 
-export const PLaceholderImageDesk = styled.img`
+export const PlaceholderImageDesk = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   max-height: 720px;
-  object-fit: cover;
 
   ${media.lessThan('medium')`
     display: none;
   `}
 `;
 
-export const PLaceholderImageMob = styled.img`
+export const PlaceholderImageMob = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   max-height: 375px;
-  object-fit: cover;
 
   ${media.greaterThan('medium')`
     display: none;
