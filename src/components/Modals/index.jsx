@@ -2,7 +2,7 @@ import React from 'react';
 import SVG from 'react-inlinesvg';
 
 // assets
-import ArrowSVG from 'assets/icons/arrow';
+import ArrowSVG from 'assets/icons/arrow.svg';
 
 // styles
 import { Container, Wrapper, ButtonBack, ButtonClose } from './styles';

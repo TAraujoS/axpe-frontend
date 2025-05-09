@@ -8,8 +8,8 @@ import GalleryFull from './GalleryFull';
 import DotsPagination from 'components/DotsPagination';
 
 // assets
-import I360 from 'assets/icons/360';
-import PlayIcon from 'assets/icons/play-button';
+import I360 from 'assets/icons/360.svg';
+import PlayIcon from 'assets/icons/play-button.svg';
 // styles
 import {
   Container,

@@ -7,7 +7,7 @@ import Inactive from 'components/Inactive';
 import SliderNew from 'components/SliderNew';
 
 // helpers
-import { Link } from 'helpers/routes';
+import Link from 'next/link';
 import { formatCurrency, formatCurrencyToText } from 'helpers/utils';
 
 // actions
@@ -260,7 +260,7 @@ function BuildingList({
                   <SliderItem
                     key={`item-gallery-${reference}-${galleryItemIndex}`}
                   >
-                    <Link route={`/${item.slug}`} passHref>
+                    <Link href={`/${item.slug}`} passHref>
                       <LinkTag
                         className={gtmObj ? gtmObj.className : ''}
                         data-showcase={gtmObj ? gtmObj.showcase : ''}
@@ -281,7 +281,7 @@ function BuildingList({
         </SliderNew>
       </SliderContainer>
       <Infos releaseDelivery={infos.releaseDelivery}>
-        <Link route={`/${item.slug}`} passHref>
+        <Link href={`/${item.slug}`} passHref>
           <LinkTag
             className={gtmObj ? gtmObj.className : ''}
             data-showcase={gtmObj ? gtmObj.showcase : ''}
@@ -310,7 +310,7 @@ function BuildingList({
         </Link>
 
         <ValuesFavGroup>
-          <Link route={`/${item.slug}`} passHref>
+          <Link href={`/${item.slug}`} passHref>
             <LinkTag
               className={gtmObj ? gtmObj.className : ''}
               data-showcase={gtmObj ? gtmObj.showcase : ''}
@@ -358,7 +358,7 @@ function BuildingList({
             </LinkTag>
           </Link>
         </ValuesFavGroup>
-        <Link route={`/${item.slug}`} passHref>
+        <Link href={`/${item.slug}`} passHref>
           <LinkTag
             className={gtmObj ? gtmObj.className : ''}
             data-showcase={gtmObj ? gtmObj.showcase : ''}

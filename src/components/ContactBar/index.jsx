@@ -14,8 +14,8 @@ import { setMain } from 'store/modules/main/actions';
 import { getParamsFromObject } from 'helpers/utils';
 
 // assets
-import ChatIconSVG from 'assets/icons/chat';
-import WhatsappWhiteIconSVG from 'assets/icons/whatsapp-white-icon'
+import ChatIconSVG from 'assets/icons/chat.svg';
+import WhatsappWhiteIconSVG from 'assets/icons/whatsapp-white-icon.svg'
 
 // styles
 import {

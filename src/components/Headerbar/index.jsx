@@ -14,8 +14,8 @@ import Share from 'components/Share';
 import useScrollPosition from 'helpers/scrollPosition';
 
 // assets
-import ArrowIconSVG from 'assets/icons/arrow';
-import ShareIconSVG from 'assets/icons/share';
+import ArrowIconSVG from 'assets/icons/arrow.svg';
+import ShareIconSVG from 'assets/icons/share.svg';
 
 // styles
 import {

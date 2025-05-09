@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import BackgroundDesktop from 'public/static/bg-newsletter-bottom-desktop.png';
-import BackgroundMobile from 'public/static/bg-newsletter-bottom-mobile.svg';
 
 export const NewsletterContainer = styled.div`
   display: flex;
@@ -74,10 +72,10 @@ export const Background = styled.div`
   background-repeat: no-repeat;
   background-position: right center;
   background-size: contain;
-  background-image: url(${BackgroundMobile});
+  background-image: url('/static/bg-newsletter-bottom-mobile.svg');
 
   ${media.greaterThan('large')`
     background-repeat: repeat;
-    background-image: url(${BackgroundDesktop});
+    background-image: url('/static/bg-newsletter-bottom-desktop.png');
   `}
 `;
