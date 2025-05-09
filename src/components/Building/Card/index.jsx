@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { formatCurrency } from 'helpers/utils';
 
 // assets
-import EmojiIconSVG from 'assets/icons/emoji';
+import EmojiIconSVG from 'assets/icons/emoji.svg';
 
 // styles
 import {

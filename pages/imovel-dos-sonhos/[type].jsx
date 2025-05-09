@@ -17,7 +17,7 @@ import Button from 'components/Button';
 import FormElements from 'components/FormElements';
 
 // assets
-import ArrowIconSVG from 'assets/icons/arrow';
+import ArrowIconSVG from 'assets/icons/arrow.svg';
 
 // styles
 import {

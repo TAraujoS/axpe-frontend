@@ -4,8 +4,8 @@ import mapOptions from './mapOptions';
 import { getBoundsFromLatLng } from '../../../helpers/maps';
 
 // assets
-import PinDesktopIconSVG from 'assets/icons/pin-desktop';
-import PinWhiteIconSVG from 'assets/icons/pin-white';
+import PinDesktopIconSVG from 'assets/icons/pin-desktop.svg';
+import PinWhiteIconSVG from 'assets/icons/pin-white.svg';
 
 // styles
 import { Container, Mapa, Pin, Text } from './styles';

@@ -18,8 +18,8 @@ import RangeSlider from 'components/Search/FormElements/RangeSlider';
 import CustomSelect from '../CustomSelect';
 
 // assets
-import ArrowIconSVG from 'assets/icons/arrow';
-import SearchIconSVG from 'assets/icons/search';
+import ArrowIconSVG from 'assets/icons/arrow.svg';
+import SearchIconSVG from 'assets/icons/search.svg';
 
 // styles
 import {

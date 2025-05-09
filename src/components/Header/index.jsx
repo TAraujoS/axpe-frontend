@@ -11,8 +11,8 @@ import Link from 'next/link';
 import useScrollPosition from 'helpers/scrollPosition';
 
 // assets
-import InstagramIconSVG from 'assets/icons/instagram';
-import WhatsappIconSVG from 'assets/icons/whatsapp';
+import InstagramIconSVG from 'assets/icons/instagram.svg';
+import WhatsappIconSVG from 'assets/icons/whatsapp.svg';
 import SearchIconSVG from 'assets/icons/search.svg';
 
 // styles

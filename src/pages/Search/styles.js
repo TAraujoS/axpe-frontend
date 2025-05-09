@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
 // assets
-import ArrowIconSVG from 'assets/icons/arrow';
+import ArrowIconSVG from 'assets/icons/arrow.svg';
 
 export const Container = styled.section`
   background: ${({ theme }) => theme.colors.greyLight3};
