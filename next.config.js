@@ -5,9 +5,8 @@ const withPWA = require('next-pwa');
 const envConfig = require(`./config/${process.env.NODE_ENV}.json`);
 
 module.exports = withPWA({
-  webpack5: true,
   images: {
-    domains: [ 'https://axpe.com.br', 'https://adminaxpe.wicomm.com.br/' ],
+    domains: [ 'axpe.com.br', 'adminaxpe.wicomm.com.br' ],
   },
   async headers() {
     return [
