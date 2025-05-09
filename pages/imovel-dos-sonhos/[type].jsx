@@ -7,7 +7,7 @@ import Api from 'services';
 import * as Yup from 'yup';
 
 // helpers
-import { Link } from 'helpers/routes';
+import Link from 'next/link';
 import SeoData from 'helpers/seo';
 import CookieUtmParams from 'helpers/cookieUtmParams';
 import { encrypt } from 'helpers/encryption';
@@ -498,7 +498,7 @@ function DreamBuildingSingle({ type }) {
         <Wrapper>
           {breadcrumb.length > 0 && (
             <Breadcrumb>
-              <Link route="/imovel-dos-sonhos" passHref>
+              <Link href="/imovel-dos-sonhos" passHref>
                 {breadcrumb[0] === 'sp' ? 'São Paulo' : breadcrumb[0]}
               </Link>
               {breadcrumb[1] ? (

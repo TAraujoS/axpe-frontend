@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+
 import Head from 'next/head';
 import GTM from 'helpers/gtm';
 import Api from 'services';
@@ -28,13 +28,17 @@ import {
   SimilarBuildingsHeader,
   SimilarBuildingsList,
 } from 'pages/Building/styles';
+import { useDispatch } from 'react-redux';
 
-function Building({ property, meta }) {
+function Building(props) {
+  const { property, meta } = props;
   const dispatch = useDispatch();
   const [ similarBuildings, setSimilarBuildings ] = useState([]);
-  const [ data, setData ] = useState([]);
+  const [ data, setData ] = useState(null);
 
   useEffect(() => {
+    if (!property) return;
+
     const productSeals = [];
 
     if (property.label) {
@@ -86,7 +90,7 @@ function Building({ property, meta }) {
     };
   }, []);
 
-  if (!data || Object.keys(data).length === 0) return null;
+  if (!data) return null;
 
   return (
     <>
@@ -164,14 +168,11 @@ function Building({ property, meta }) {
   );
 }
 
-Building.getInitialProps = async ({ query }) => {
-  const slug = query.slug ? query.slug.split('-') : false;
-  let reference = null;
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
 
-  if (slug) {
-    reference = slug[slug.length - 1];
-  }
-
+  const slugParts = slug ? slug.split('-') : [];
+  const reference = slugParts[slugParts.length - 1];
   const response = await Api.Building.getPage(reference);
   const buildingCategory = response.building.category || '';
 
@@ -226,16 +227,18 @@ Building.getInitialProps = async ({ query }) => {
   const pageBanner = `${
     response.building.gallery ? response.building.gallery[0].src : ''
   }`;
-
+  
   return {
-    reference: reference,
-    property: response.building,
-    meta: {
-      title: pageTitle,
-      description: pageDesc,
-      image: pageBanner,
+    props: {
+      reference,
+      property: response.building,
+      meta: {
+        title: pageTitle,
+        description: pageDesc,
+        image: pageBanner,
+      },
     },
   };
-};
+}
 
 export default Building;
