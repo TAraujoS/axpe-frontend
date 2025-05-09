@@ -248,7 +248,7 @@ export const PriceGroup = styled.div`
     padding: 20px;
     max-width: 291px;
     max-height: 326px;
-    justify-content: start;
+    justify-content: ${({ type }) => (type === 'pronto' ? 'start' : 'space-around')};
     margin: 16px 16px 0 0;
   `}
 `;
@@ -266,9 +266,12 @@ display: none;
     display: flex;
   `}
 `
+
 export const PriceRelease = styled.div`
-  height: 26px;
-  flex-basis: 100% !important;
+  flex-basis: auto;
+  min-height: 26px;
+  margin: 0; 
+  padding: 0;
 
   p {
     font-size: 22px;

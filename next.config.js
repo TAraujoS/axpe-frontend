@@ -7,7 +7,7 @@ const envConfig = require(`./config/${process.env.NODE_ENV}.json`);
 module.exports = withPWA(
   {
     images: {
-      domains: [ 'axpe.com.br', 'adminaxpe.wicomm.com.br' ],
+      domains: [ 'images.axpe.com.br', 'axpe.com.br', 'adminaxpe.wicomm.com.br' ],
       formats: [ 'image/avif', 'image/webp' ],
     },
     compiler: {

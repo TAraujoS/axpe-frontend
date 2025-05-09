@@ -16,7 +16,7 @@ import Tag from 'components/Tag';
 
 export const Release = ({ release, type, currency }) =>
   !!release && (
-    <PriceRelease>
+    <PriceRelease type={type}>
       <p>
         {type === 'pronto' ? 'Venda' : 'A partir de'}{' '}
         {currency
