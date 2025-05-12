@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 // components
@@ -14,10 +15,10 @@ import PlayIcon from 'assets/icons/play-button.svg';
 import {
   Container,
   Tour360,
-  Image,
   PlayButton,
   SliderButton,
   Button360,
+  ImageWrapper,
 } from './styles';
 
 
@@ -97,7 +98,16 @@ function Gallery({
               <PlayButton class="play-button" src={PlayIcon} alt="Assistir vídeo" />
             )}
 
-            <Image src={item.src} alt="Vídeo imóvel" />
+            <ImageWrapper>
+              <Image
+                src={item.src}
+                alt="Imagens imóvel"
+                layout="fill"
+                className="next-image"
+                priority={index === 0}
+                sizes="(max-width: 768px) 100vw, 780px"
+              />
+            </ImageWrapper>
           </SliderButton>
             ))}
       </Slider>

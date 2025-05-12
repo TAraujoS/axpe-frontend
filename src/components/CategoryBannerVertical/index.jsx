@@ -96,7 +96,7 @@ function CategoryBannerVertical({ categoryItems }) {
               (item.link.target === 'blank' ||
                 item.link.target === 'self') && (
                 <CategoryLink
-                  href={item.link.url}
+                  href={`/busca?source=${item.link.url}`}
                   target={`_${item.link.target}`}
                 >
                   <CategoryItemWrapper>

@@ -247,14 +247,14 @@ export const PriceGroup = styled.div`
   ${media.greaterThan('medium')`
     padding: 20px;
     max-width: 291px;
-    max-height: 326px;
-    justify-content: ${({ type }) => (type === 'pronto' ? 'start' : 'space-around')};
+    max-height: ${({ type }) => (type === 'lancamento' ? '275px': '326px')};
+    justify-content: ${({ type }) => (type === 'lancamento' ? 'start' : 'space-around')};
     margin: 16px 16px 0 0;
   `}
 `;
 
 export const PriceGroupMobile = styled(PriceGroup)`
-display: flex;
+  display: flex;
   ${media.greaterThan('medium')`
     display: none;
   `}
@@ -279,8 +279,10 @@ export const PriceRelease = styled.div`
   }
 
   ${media.greaterThan('medium')`
-    padding-top: 22px;
-    padding-bottom: 29px;
+    ${({ type }) => (type === 'pronto' && `
+      padding-top: 22px;
+      padding-bottom: 29px;
+    `)}
 
     p {
       font-size: 24px;

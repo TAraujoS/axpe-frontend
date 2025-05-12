@@ -27,7 +27,7 @@ export const NewsletterTextDesktop = styled.div`
   p {
     font-size: 14px;
     font-weight: ${({ theme }) => theme.fontsWeight.medium};
-    width: 60%;
+    width: 70%;
     margin-top: 6px;
   }
 

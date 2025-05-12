@@ -51,7 +51,7 @@ function Home({ hero, components }) {
   const [ showSlider, setShowSlider ] = useState(false);
   const sliderRef = useRef(null);
 
-  const heroSettings = {
+  const heroSettings = (totalItems) => ({
     dots: true,
     infinite: true,
     fade: true,
@@ -63,10 +63,10 @@ function Home({ hero, components }) {
     slidesToScroll: 1,
     customPaging: i => (
       <span>
-        { (i + 1)  + ' / ' + Object.keys(heroItems).length }
+        { (i + 1) + ' / ' + totalItems }
       </span>
     ),
-  };
+  });
 
   useEffect(() => {
     if (!sliderRef.current) return;
@@ -130,11 +130,11 @@ function Home({ hero, components }) {
               type="full"
               arrowsColor="white"
               hasVerticalBar={true}
-              arrowsClassName="holos-home-hero-arrow"
-              settings={heroSettings}
+              arrowsClassName="holos-home-exclusivity-arrow"
+              settings={heroSettings(component.items.length)}
             >
               {component.items.map((item, itemIndex) => (
-                <HeroItem key={`hero-item-${itemIndex}`}>
+                <HeroItem key={`exclusivity-item-${itemIndex}`}>
                   {item.link &&
                     item.link.url &&
                     (item.link.target === 'blank' ||
@@ -294,7 +294,7 @@ function Home({ hero, components }) {
               arrowsColor="white"
               hasVerticalBar={true}
               arrowsClassName="holos-home-hero-arrow"
-              settings={heroSettings}
+              settings={heroSettings(heroItems.length)}
             >
               {randomizeHeroItems().map((item, itemIndex) => (
                 <HeroItem key={`hero-item-${itemIndex}`}>

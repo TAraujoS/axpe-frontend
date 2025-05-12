@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image';
 
 // components
 import * as Caracteristics from 'pages/Building/Datasheet/caracteristics';
@@ -29,6 +30,7 @@ import {
   Price,
   Description,
   ScheduleButton,
+  ImageWrapper,
 } from './styles';
 
 function BuildingList({
@@ -267,11 +269,16 @@ function BuildingList({
                         data-product-id={item.reference}
                         data-position={positionIndex}
                       >
-                        <img
-                          src={galleryItem.src}
-                          alt={`Axpe ${category} - ${reference}`}
-                          loading='lazy'
-                        />
+                        <ImageWrapper useBtSchedule={useBtSchedule}>
+                          <Image
+                            src={galleryItem.src}
+                            alt={`Axpe ${category} - ${reference}`}
+                            layout="fill"
+                            className="next-image"
+                            sizes="(max-width: 768px) 100vw, 60vw"
+                            loading="lazy"
+                          />
+                        </ImageWrapper>
                       </LinkTag>
                     </Link>
                   </SliderItem>

@@ -59,22 +59,26 @@ export const Container = styled.div`
 
 export const SliderContainer = styled.div`
   height: 244px;
-
-  iframe,
-  img {
-    height: 244px;
-    object-fit: cover;
-  }
+  position: relative;
 
   ${media.greaterThan('medium')`
     width: 60%;
     height: ${props => props.useBtSchedule ? '386px' : '365px'};
-
-    iframe, img {
-      width: 100%;
-      height: ${props => props.useBtSchedule ? '386px' : '365px'};
-    }
   `}
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 244px;
+
+  @media (min-width: 768px) {
+    height: ${props => props.useBtSchedule ? '386px' : '365px'};
+  }
+
+  .next-image {
+    object-fit: cover;
+  }
 `;
 
 export const SliderItem = styled.article`
