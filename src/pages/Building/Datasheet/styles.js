@@ -123,7 +123,7 @@ export const InfoContent = styled.div`
   align-items: center;
 `;
 
-export const Type = styled.p`
+export const Type = styled.h2`
   font: 16px 'Raleway';
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
   text-transform: uppercase;
