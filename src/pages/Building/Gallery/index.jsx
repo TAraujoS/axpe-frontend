@@ -104,7 +104,7 @@ function Gallery({
                 alt="Imagens imóvel"
                 layout="fill"
                 className="next-image"
-                priority={index === 0}
+                priority
                 sizes="(max-width: 768px) 100vw, 780px"
               />
             </ImageWrapper>

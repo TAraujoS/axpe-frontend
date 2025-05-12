@@ -364,7 +364,7 @@ export const PriceExpenses = styled.div`
       margin-top: 12px;
     }
 
-    div {
+    dl {
       display: flex;
       justify-content: space-between;
       margin-top: 10px;
