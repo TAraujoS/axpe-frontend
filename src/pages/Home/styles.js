@@ -154,6 +154,10 @@ export const Hero =  styled.div.attrs(() => ({
 
 export const HeroItem = styled.article`
   height: 550px;
+
+  ${media.lessThan('medium')`
+    height: 650px;
+  `}
 `;
 
 export const HeroLink = styled.a`

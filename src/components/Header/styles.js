@@ -82,7 +82,7 @@ export const Wrapper = styled.div`
     justify-content: start;
     align-items: flex-start;
     height: auto;
-    padding: 10vh 30px 0;
+    padding: 0 30px;
   `}
 
   ${css`
@@ -263,17 +263,17 @@ export const Box = styled.div`
 export const NavMain = styled.nav`
   margin-bottom: 35px;
 
-  ${media.greaterThan('large')`
+  /* ${media.greaterThan('large')`
     margin-bottom: 30vh;
   `}
 
   ${media.greaterThan('huge')`
     margin-bottom: 40vh;
-  `}
+  `} */
   ul {
     display: flex;
     flex-direction: column;
-    gap: 20px
+    /* gap: 20px */
   }
 
   li {
@@ -317,7 +317,7 @@ export const NavMainButtonSearch = styled.button`
   }
 
   span {
-    font-weight: ${({ theme }) => theme.fontsWeight.regular};
+    font-weight: ${({ theme }) => theme.fontsWeight.medium};
     text-decoration: none;
   }
 
@@ -392,15 +392,17 @@ export const NavMainButton = styled.a`
 export const NavMainButtonText = styled.span`
   display: block;
   width: 100%;
+  padding-left: 50px;
   text-transform: uppercase;
   text-align: left;
   font: 18px 'Raleway';
-  font-weight: ${({ theme }) => theme.fontsWeight.regular};
+  font-weight: ${({ theme }) => theme.fontsWeight.medium};
   color: ${({ theme }) => theme.colors.green};
   transition: all 300ms ease;
 
   ${media.greaterThan('large')`
     font-size: 14px;
+    padding-left: 40px;
     line-height: 20px;
   `}
 `;
@@ -562,17 +564,22 @@ export const WhatsappButton = styled.a`
     margin-right: 6px;
 
     ${media.greaterThan('large')`
-      width: 24px;
-      min-width: 24px;
-      height: 25px;
+      width: 16px;
+      min-width: 16px;
+      height: 17px;
     `}
   }
+`;
+
+export const Whatsapp = styled.div`
+  margin-bottom: 30px;
 `;
 
 export const Socials = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 24px;
   margin-bottom: 14px;
 `;
 
@@ -649,15 +656,17 @@ export const NewsletterButton = styled.button`
   display: block;
   width: 100%;
   text-align: left;
-  font: 18px 'Raleway';
+  font: 14px 'Raleway';
   color: ${({ theme }) => theme.colors.green};
   padding-left: 0px;
+  text-transform: uppercase;
+  font-weight: ${({ theme }) => theme.fontsWeight.medium};
 
-  ${media.greaterThan('large')`
-    font-size: 13px;
-    line-height: 18px;
-  `}
-
+  :hover{
+    text-decoration: none;
+    font-weight: ${({ theme }) => theme.fontsWeight.bold};
+  }
+  
   strong {
     display: block;
     font-weight: ${({ theme }) => theme.fontsWeight.semiBold};

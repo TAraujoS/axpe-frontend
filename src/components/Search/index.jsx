@@ -124,7 +124,7 @@ function Search() {
         values.reference &&
         values.reference.length > 0
       ) {
-        data['reference'] = values.reference;
+        data['reference'] = `AX${values.reference.replace(/^AX/i, '')}`;
       } else {
         Object.keys(values).forEach((key) => {
           if (key == 'source' && values[key].value) {
@@ -183,17 +183,17 @@ function Search() {
     },
   });
 
-  const handleInputReferenceFocusIn = useCallback(() => {
-    if (!formik.values.reference || formik.values.reference === 'AX') {
-      formik.setFieldValue('reference', 'AX');
-    }
-  }, [ formik.values.reference ]);
+  // const handleInputReferenceFocusIn = useCallback(() => {
+  //   if (!formik.values.reference || formik.values.reference === 'AX') {
+  //     formik.setFieldValue('reference', 'AX');
+  //   }
+  // }, [ formik.values.reference ]);
 
-  const handleInputReferenceFocusOut = useCallback(() => {
-    if (formik.values.reference === 'AX') {
-      formik.setFieldValue('reference', '');
-    }
-  }, [ formik.values.reference ]);
+  // const handleInputReferenceFocusOut = useCallback(() => {
+  //   if (formik.values.reference === 'AX') {
+  //     formik.setFieldValue('reference', '');
+  //   }
+  // }, [ formik.values.reference ]);
 
   function closeSearch() {
     dispatch(setMain({ searchFormActive: false }));
@@ -811,9 +811,9 @@ function Search() {
                     onChange={formik.handleChange}
                     onBlur={(e) => {
                       formik.handleChange(e);
-                      handleInputReferenceFocusOut();
+                      // handleInputReferenceFocusOut();
                     }}
-                    onFocus={handleInputReferenceFocusIn}
+                    // onFocus={handleInputReferenceFocusIn}
                     value={formik.values.reference}
                     className="holos-search-field"
                     data-label="Buscar por referência"

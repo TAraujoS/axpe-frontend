@@ -37,7 +37,9 @@ export const Slide = styled.div`
   width: 100%;
   display: flex !important;
   flex-direction: column;
-    
+  max-width: 1280px;
+  margin: 0 auto;
+  
   ${media.greaterThan('medium')`
     flex-direction: row !important;
     align-items: center;

@@ -10,7 +10,6 @@ import Api from 'services';
 import { setMain } from 'store/modules/main/actions';
 
 // helpers
-import { shuffle } from 'helpers/utils';
 import SeoData from 'helpers/seo';
 import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
 
@@ -67,6 +66,10 @@ function Home({ hero, components }) {
       </span>
     ),
   });
+
+  useEffect(() => {
+    setHeroItems(hero);
+  }, [ hero ]);
 
   useEffect(() => {
     if (!sliderRef.current) return;
@@ -168,14 +171,6 @@ function Home({ hero, components }) {
       );
     }
   }, []);
-
-  const randomizeHeroItems = useCallback(() => {
-    if (Object.keys(heroItems).length === 0) {
-      setHeroItems(shuffle(hero));
-    }
-
-    return heroItems;
-  });
 
   const renderHeroItem = (item, itemIndex) => {
     const hasContent = item.title || item.content ? true : false;
@@ -296,7 +291,7 @@ function Home({ hero, components }) {
               arrowsClassName="holos-home-hero-arrow"
               settings={heroSettings(heroItems.length)}
             >
-              {randomizeHeroItems().map((item, itemIndex) => (
+              {heroItems.map((item, itemIndex) => (
                 <HeroItem key={`hero-item-${itemIndex}`}>
                   {item.link &&
                     item.link.url &&
