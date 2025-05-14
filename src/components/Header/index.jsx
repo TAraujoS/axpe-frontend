@@ -164,7 +164,7 @@ function Header() {
                       onClick={cancelToggle}
                     >
                       <SVG src={HomeIconSVG} uniquifyIDs={true} aria-hidden="true"/>
-                      <NavMainButtonText>Cadastrar imóvel</NavMainButtonText>
+                      <NavMainButtonText>Vender imóvel</NavMainButtonText>
                     </NavMainButton>
                   </Link>
                 </li>

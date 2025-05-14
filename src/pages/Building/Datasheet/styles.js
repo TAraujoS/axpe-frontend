@@ -123,7 +123,7 @@ export const InfoContent = styled.div`
   align-items: center;
 `;
 
-export const Type = styled.h2`
+export const Type = styled.p`
   font: 16px 'Raleway';
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
   text-transform: uppercase;
@@ -158,8 +158,13 @@ export const Neighborhood = styled.h1`
   font-size: 28px;
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
   text-transform: capitalize;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+`;
 
+export const BuildingTitle = styled.h2`
+  font-size: 16px;
+  font-weight: ${({ theme }) => theme.fontsWeight.bold};
+  margin-bottom: 5px;
 `;
 
 export const CategoryRelease = styled.p`
@@ -247,7 +252,7 @@ export const PriceGroup = styled.div`
   ${media.greaterThan('medium')`
     padding: 20px;
     max-width: 291px;
-    max-height: ${({ type }) => (type === 'lancamento' ? '275px': '326px')};
+    max-height: 275px;
     justify-content: ${({ type }) => (type === 'lancamento' ? 'start' : 'space-around')};
     margin: 16px 16px 0 0;
   `}

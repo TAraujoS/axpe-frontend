@@ -126,6 +126,9 @@ export const FormGroupLang = styled(FormGroupBasics)`
 
 export const ButtonSubmit = styled(Button)`
   width: 100%;
+  font-family: 'Raleway', sans-serif;
+  font-weight: ${({ theme }) => theme.fontsWeight.regular};
+  font-size: 20px;
 
   ${media.greaterThan('medium')`
     width: 100%;

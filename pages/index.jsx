@@ -19,7 +19,7 @@ import BlockHighlighted from 'components/BlockHighlighted';
 import GalleryCarousel from 'components/GalleryCarousel';
 import Tag from 'components/Tag';
 import NewsletterFooter from 'components/NewsletterFooter';
-import CategoryBannerVertical from 'components/CategoryBannerVertical';
+// import CategoryBannerVertical from 'components/CategoryBannerVertical';
 
 // styles
 import {
@@ -122,10 +122,10 @@ function Home({ hero, components }) {
             </Banner>
           </>
         );
-      case 'category':
-        return (
-          <CategoryBannerVertical categoryItems={component.items}/>
-        );
+      // case 'category':
+      //   return (
+      //     <CategoryBannerVertical categoryItems={component.items}/>
+      //   );
       case 'exclusivity':
         return (
           <Hero>

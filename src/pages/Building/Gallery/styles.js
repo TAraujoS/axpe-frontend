@@ -34,7 +34,7 @@ export const ImageWrapper = styled.div`
   border: 2.5px solid ${({ theme }) => theme.colors.white};
   border-top: none;
   border-bottom: none;
-  height: 376px;
+  height: 470px;
 
   @media (min-width: 768px) {
     height: 525px;

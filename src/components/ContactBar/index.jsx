@@ -300,7 +300,7 @@ function ContactBar() {
 
     setIsBuilding(
       router.route === '/imovel' || (contactBarActive && contactBarForced)
-        ? false // Modal fale com corretor se torna o mesmo da home (v0)
+        ? true
         : false
     );
   }, [ router.route, contactBarActive, currentBuilding ]);
@@ -407,7 +407,7 @@ function ContactBar() {
 
       {contactBarActive && (
         <Container onClick={clickContainer} data-type='container'>
-          <Wrapper isHome={true}>
+          <Wrapper isHome={router.route === '/'}>
             {isBuilding && iframeUrl ? (
               <Iframe
                 ref={refIframe}

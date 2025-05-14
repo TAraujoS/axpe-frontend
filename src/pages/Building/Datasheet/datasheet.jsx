@@ -17,44 +17,34 @@ import {
     Delivery,
     Location,
     InfoContent,
-    ButtonVisit,
     ButtonMoreInfo,
     MainContainer,
     PriceGroupDesktop,
     PriceGroupMobile,
     CharacteristicsGrid,
-    CharacteristicItem
+    CharacteristicItem,
+    BuildingTitle
 } from './styles';
 
 import ILocation from 'assets/icons/location.svg';
 import ICheck from 'assets/icons/checked-grey.svg';
 
 // Componentns
-import VisitModal from './VisitModal';
 import { MoreInformationModal } from '../../../components/Modals/MoreInformation';
-
-import { useVisitModalContext } from './context';
 
 export default function Datasheet({ property }) {
     const [ modalMoreInfoIsVisibility, setModalMoreInfoIsVisibility ] = useState(false);
-    const { type, infos, category, address, label, values, source, vista } = property;
-    const { setModalVisitOn } = useVisitModalContext();
+    const { type, infos, category, address, label, values, source, vista, title } = property;
     const { searchFunnel } = useSelector(state => state.main);
     const hasTitle = infos.titleSite || infos.internalDescription;
 
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        `${address.local}, ${address.state}, ${address.country} ${address.zipcode}`
+        `${address.local}, ${address.state}, ${address.country}`
     )}`;
-
-
-    const openVisitModal = (e) => {
-        e.preventDefault();
-        setModalVisitOn(true);
-    }
 
     const toggleModalMoreInfo  = (e) => {
         e.preventDefault();
-        setModalMoreInfoIsVisibility(prevState => !prevState);
+        setModalMoreInfoIsVisibility(false);
     }
 
     return (
@@ -64,6 +54,8 @@ export default function Datasheet({ property }) {
                 <DatasheetContent>
                     <BlockOne type={property.type}>
                         <Neighborhood>{address.local}</Neighborhood>
+
+                        <BuildingTitle>{title}</BuildingTitle>
 
                         {type === 'lancamento' && (
                             <CategoryRelease>{category}</CategoryRelease>
@@ -141,8 +133,8 @@ export default function Datasheet({ property }) {
                             currency={values.currency}
                         />
 
-                        <ButtonVisit onClick={openVisitModal}>Agendar visita</ButtonVisit>
-                        <ButtonMoreInfo onClick={toggleModalMoreInfo}>Mais informações</ButtonMoreInfo>
+                        {/* <ButtonVisit onClick={openVisitModal}>Agendar visita</ButtonVisit> */}
+                        <ButtonMoreInfo onClick={toggleModalMoreInfo}>Fale com um corretor</ButtonMoreInfo>
                     </PriceGroupMobile>
 
                     <BlockThree type={property.type}>
@@ -195,23 +187,24 @@ export default function Datasheet({ property }) {
 
                     {hasTitle && (
                         <BlockTwo>
-                            {/* <Content>{infos.titleSite}</Content>
-                            <Content>{infos.shortDescription}</Content> */}
                             <Content>{infos.internalDescription}</Content>
                         </BlockTwo>
                     )}
 
-                    {vista.length > 0 && (
+                    {vista && (
                         <BlockTwo>
                             <CharacteristicsGrid>
-                                {Object.entries(vista?.Caracteristicas || vista?.InfraEstrutura || {})
-                                .filter(([ _, value ]) => value === 'Sim')
-                                .map(([ label ]) => (
-                                    <CharacteristicItem key={label}>
-                                        <img src={ICheck} alt="ícone de Check" />
-                                        <p>{label}</p>
-                                    </CharacteristicItem>
-                                ))}
+                                {[
+                                    ...Object.entries(vista.Caracteristicas || {}),
+                                    ...Object.entries(vista.InfraEstrutura || {})
+                                ]
+                                    .filter(([ _, value ]) => value === 'Sim')
+                                    .map(([ label ]) => (
+                                        <CharacteristicItem key={label}>
+                                            <img src={ICheck} alt="ícone de Check" />
+                                            <p>{label}</p>
+                                        </CharacteristicItem>
+                                    ))}
                             </CharacteristicsGrid>
                         </BlockTwo>
                     )}
@@ -257,8 +250,8 @@ export default function Datasheet({ property }) {
                         currency={values.currency}
                     />
 
-                    <ButtonVisit onClick={openVisitModal}>Agendar visita</ButtonVisit>
-                    <ButtonMoreInfo onClick={toggleModalMoreInfo}>Mais informações</ButtonMoreInfo>
+                    {/* <ButtonVisit onClick={openVisitModal}>Agendar visita</ButtonVisit> */}
+                    <ButtonMoreInfo onClick={toggleModalMoreInfo}>Fale com um corretor</ButtonMoreInfo>
                 </PriceGroupDesktop>
 
             </MainContainer>
@@ -273,10 +266,6 @@ export default function Datasheet({ property }) {
                     </p>
                 </Delivery>
             )}
-
-
-            {/* <RenderVisitModal /> */}
-            <VisitModal property={property} />
 
             {modalMoreInfoIsVisibility && (
                 <MoreInformationModal

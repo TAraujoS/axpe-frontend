@@ -72,6 +72,7 @@ function Search() {
     { label: 'Praia', value: 'praia' },
     { label: 'Campo', value: 'campo' },
     { label: 'Exterior', value: 'internacional' },
+    { label: 'Montanha', value: 'montanha' },
   ];
 
   const getFinalities = useCallback(
@@ -79,12 +80,12 @@ function Search() {
       {
         label: 'Comprar',
         value: 'venda',
-        sources: [ 'sao-paulo', 'praia', 'campo', 'internacional' ],
+        sources: [ 'sao-paulo', 'praia', 'campo', 'internacional', 'montanha' ],
       },
       {
         label: 'Alugar',
         value: 'aluguel',
-        sources: [ 'sao-paulo', 'praia', 'campo' ],
+        sources: [ 'sao-paulo', 'praia', 'campo', 'montanha' ],
       },
       {
         label: 'Temporada',
@@ -182,18 +183,6 @@ function Search() {
       router.push(`/busca${params}`);
     },
   });
-
-  // const handleInputReferenceFocusIn = useCallback(() => {
-  //   if (!formik.values.reference || formik.values.reference === 'AX') {
-  //     formik.setFieldValue('reference', 'AX');
-  //   }
-  // }, [ formik.values.reference ]);
-
-  // const handleInputReferenceFocusOut = useCallback(() => {
-  //   if (formik.values.reference === 'AX') {
-  //     formik.setFieldValue('reference', '');
-  //   }
-  // }, [ formik.values.reference ]);
 
   function closeSearch() {
     dispatch(setMain({ searchFormActive: false }));
