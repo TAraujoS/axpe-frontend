@@ -138,7 +138,6 @@ function Home({ hero, components }) {
                     width={1280}
                     height={720}
                     priority
-                    placeholder="empty"
                   />
                 </PlaceholderImageDesk>
 
@@ -149,7 +148,6 @@ function Home({ hero, components }) {
                     width={375}
                     height={375}
                     priority
-                    placeholder="empty"
                   />
                 </PlaceholderImageMob>
               </>
@@ -216,7 +214,7 @@ function Home({ hero, components }) {
             src={item.images.mobile}
             alt={item.title}
             layout='fill'
-            priority={itemIndex === 0}
+            priority={true}
           />
         </div>
         <div className="hero-image desktop">
@@ -224,7 +222,7 @@ function Home({ hero, components }) {
             src={item.images.desktop}
             alt={item.title}
             layout='fill'
-            priority={itemIndex === 0}
+            priority={true}
             sizes="(max-width: 768px) 100vw, 1280px"
           />
         </div>

@@ -54,7 +54,7 @@ export const Hero =  styled.div.attrs(() => ({
   ${media.lessThan('medium')`
     height: 650px;
   `}
-  
+
   .slick-slider:before{
     content: inherit;
   }
@@ -215,6 +215,8 @@ export const HeroItemWrapper = styled.div`
     }
 
     &.desktop {
+      aspect-ratio: 16 / 9;
+      height: auto;
       ${media.lessThan('medium')`
         display: none !important;
       `}

@@ -363,21 +363,21 @@ function Search() {
       }
 
       // set price start minimum to 10k
-      if (
-        formik.values.finality === 'aluguel' &&
-        response.prices &&
-        response.prices.length
-      ) {
-        response.prices[0] = 10000;
-      }
+      // if (
+      //   formik.values.finality === 'aluguel' &&
+      //   response.prices &&
+      //   response.prices.length
+      // ) {
+      //   response.prices[0] = 10000;
+      // }
 
-      if (
-        formik.values.finality === 'venda' &&
-        response.prices &&
-        response.prices.length
-      ) {
-        response.prices[0] = 2000000;
-      }
+      // if (
+      //   formik.values.finality === 'venda' &&
+      //   response.prices &&
+      //   response.prices.length
+      // ) {
+      //   response.prices[0] = 200000;
+      // }
 
       // set area end maximum to 2k
       if (response.area && response.area.length) {
