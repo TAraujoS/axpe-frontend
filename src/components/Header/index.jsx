@@ -183,18 +183,18 @@ function Header() {
               </ul>
             </NavMain>
 
-            <Whatsapp>
-              <WhatsappButton
-                className="holos-menu-item"
-                href="https://wa.me/551130743600"
-                target="_blank"
-              >
-                <SVG src={WhatsappIconSVG} uniquifyIDs={true} />
-                Entre em contato pelo Whatsapp
-              </WhatsappButton>
-            </Whatsapp>
-            
             <NavBottomContainer>
+              <Whatsapp>
+                <WhatsappButton
+                  className="holos-menu-item"
+                  href="https://wa.me/551130743600"
+                  target="_blank"
+                >
+                  <SVG src={WhatsappIconSVG} uniquifyIDs={true} />
+                  Entre em contato pelo Whatsapp
+                </WhatsappButton>
+              </Whatsapp>
+
               <NavSecondary>
                 <ul>
                   <li>

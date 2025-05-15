@@ -55,12 +55,22 @@ function Building(props) {
 
     async function loadSimilarBuildings() {
       const similar = await Api.Building.getSimilar(property, 3);
-      const buildings =
-        similar &&
-        similar.data &&
-        similar.data.length > 0 &&
-        similar.data.filter((x) => x.reference !== property.reference);
+      let buildings = similar?.data?.filter((x) => x.reference !== property.reference) || [];
 
+      if (buildings.length === 0) {
+        const fallbackParams = {
+          ...property,
+          values: {
+            ...property.values,
+            sell: '',
+            release: '',
+          }
+        };
+    
+        const fallback = await Api.Building.getSimilar(fallbackParams, 3);
+        buildings = fallback?.data?.filter((x) => x.reference !== property.reference) || [];
+      }
+    
       setSimilarBuildings(buildings);
     }
 

@@ -158,13 +158,13 @@ export const Neighborhood = styled.h1`
   font-size: 28px;
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
   text-transform: capitalize;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `;
 
 export const BuildingTitle = styled.h2`
   font-size: 16px;
-  font-weight: ${({ theme }) => theme.fontsWeight.bold};
-  margin-bottom: 5px;
+  font-weight: ${({ theme }) => theme.fontsWeight.semiBold};
+  margin-bottom: 12px;
 `;
 
 export const CategoryRelease = styled.p`

@@ -19,6 +19,7 @@ import BlockHighlighted from 'components/BlockHighlighted';
 import GalleryCarousel from 'components/GalleryCarousel';
 import Tag from 'components/Tag';
 import NewsletterFooter from 'components/NewsletterFooter';
+import CategorySection from 'components/CategorySection';
 // import CategoryBannerVertical from 'components/CategoryBannerVertical';
 
 // styles
@@ -31,11 +32,10 @@ import {
   HeroItemWrapper,
   HeroItemInfo,
 } from 'pages/Home/styles';
-import CategorySection from '../src/components/CategorySection';
 import { PlaceholderImageDesk, PlaceholderImageMob } from '../src/pages/Home/styles';
 
 const SliderNew = dynamic(() => import('components/SliderNew'), {
-  loading: () => <></>,
+  loading: () => <div>Loading...</div>,
 });
 
 function Home({ hero, components }) {
@@ -171,6 +171,14 @@ function Home({ hero, components }) {
       );
     }
   }, []);
+  
+  const randomizeHeroItems = useCallback(() => {
+    if (Object.keys(heroItems).length === 0) {
+      setHeroItems(shuffle(hero));
+    }
+
+    return heroItems;
+  });
 
   const renderHeroItem = (item, itemIndex) => {
     const hasContent = item.title || item.content ? true : false;
@@ -291,7 +299,7 @@ function Home({ hero, components }) {
               arrowsClassName="holos-home-hero-arrow"
               settings={heroSettings(heroItems.length)}
             >
-              {heroItems.map((item, itemIndex) => (
+              {randomizeHeroItems().map((item, itemIndex) => (
                 <HeroItem key={`hero-item-${itemIndex}`}>
                   {item.link &&
                     item.link.url &&

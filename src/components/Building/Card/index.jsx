@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import Image from 'next/image';
 import SVG from 'react-inlinesvg';
 
 // helpers
@@ -14,7 +15,6 @@ import {
   LinkTag,
   Wrapper,
   Gallery,
-  Image,
   Column,
   Text,
   Inactive,
@@ -74,9 +74,27 @@ function BuildingCard({
             <GallerySlider layout={layout}>
               {itemData.gallery.map((image, index) => (
                 <React.Fragment key={index}>
-                  <Image mq="mobile" src={image.src} alt={`Slide ${index + 1}`} />
-                  <Image mq="desktop" src={image.src} alt={`Slide ${index + 1}`} />
-                </React.Fragment>
+                <div className="image-mobile">
+                  <Image
+                    src={image.src}
+                    alt={`Slide ${index + 1}`}
+                    width={750}
+                    height={500}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+                <div className="image-desktop">
+                  <Image
+                    src={image.src}
+                    alt={`Slide ${index + 1}`}
+                    width={1280}
+                    height={720}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+              </React.Fragment>
               ))}
             </GallerySlider>
           );
@@ -93,8 +111,29 @@ function BuildingCard({
                   </p>
                 </Inactive>
               )}
-              {urlImageDesktop && <Image mq="desktop" src={urlImageDesktop} />}
-              {urlImageMobile && <Image mq="mobile" src={urlImageMobile} />}
+
+              {urlImageMobile && (
+                <div className="image-mobile">
+                  <Image
+                    src={urlImageMobile}
+                    alt="Imagem do imóvel mobile"
+                    layout= 'fill'
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    loading='lazy'
+                  />
+                </div>
+              )}
+              {urlImageDesktop && (
+                <div className="image-desktop">
+                  <Image
+                    src={urlImageDesktop}
+                    alt="Imagem do imóvel desktop"
+                    layout= 'fill'
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    loading='lazy'
+                  />
+                </div>
+              )}
             </Gallery>
           );
         } else {

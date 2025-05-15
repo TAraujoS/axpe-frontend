@@ -411,7 +411,11 @@ export const NavBottomContainer = styled.div`
   width: 140px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 10vh;
+
+  ${media.greaterThan('large')`
+    margin-bottom: 20px;
+  `}
 `;
 
 export const NavSecondary = styled.nav`
@@ -545,7 +549,7 @@ export const NavLangsButton = styled.a`
 export const WhatsappButton = styled.a`
   display: flex;
   align-items: center;
-  width: 190px;
+  width: 195px;
   font: 19px 'Raleway';
   color: ${({ theme }) => theme.colors.green2};
   font-weight: ${({ theme }) => theme.fontsWeight.semiBold};

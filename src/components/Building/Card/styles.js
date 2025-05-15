@@ -61,6 +61,20 @@ export const Wrapper = styled.div`
 export const GallerySlider = styled(Slider)`
   position: relative;
 
+  .image-mobile {
+    display: block;
+    ${media.greaterThan('medium')`
+      display: none;
+    `}
+  }
+
+  .image-desktop {
+    display: none;
+    ${media.greaterThan('medium')`
+      display: block;
+    `}
+  }
+
   .slick-slide > div {
     margin-left: 0px;
     padding-right: 0px;
@@ -96,6 +110,26 @@ export const Gallery = styled.div`
   height: 250px;
   border-radius: 8px;
   
+  .image-mobile,
+  .image-desktop {
+    position: relative;
+    width: 100%;
+    height: 250px; 
+  }
+
+  .image-mobile {
+    display: block;
+    ${media.greaterThan('medium')`
+      display: none;
+    `}
+  }
+
+  .image-desktop {
+    display: none;
+    ${media.greaterThan('medium')`
+      display: block;
+    `}
+  }
   &:before {
     content: '';
     display: none;
@@ -110,30 +144,13 @@ export const Gallery = styled.div`
     ${({ theme }) => theme.hide};
   }
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-50%);
-  }
-
-  ${media.greaterThan('medium')`
-
-    ${props => props.layout === 'horizontal' && css`
-      width: 65%;
-      height: 260px;
-
-      img {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: auto;
-        transform: translateY(-50%);
-      }
-    `}
+${media.greaterThan('medium')`
+    ${({ layout }) =>
+      layout === 'horizontal' &&
+      css`
+        width: 65%;
+        height: 260px;
+      `}
   `}
 
   ${media.greaterThan('large')`

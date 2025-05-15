@@ -16,15 +16,6 @@ const CategorySection = ({ items }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    // responsive: [
-    //   {
-    //     breakpoint: 1440,
-    //     settings: {
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //     }
-    //   }
-    // ]
   };
 
   return (

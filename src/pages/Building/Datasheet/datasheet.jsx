@@ -39,7 +39,7 @@ export default function Datasheet({ property }) {
     const hasTitle = infos.titleSite || infos.internalDescription;
 
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        `${address.local}, ${address.state}, ${address.country}`
+        `${address.local}, ${address.state}, ${address.country} ${address.zipcode}, 15z`
     )}`;
 
     const toggleModalMoreInfo  = (e) => {
@@ -60,6 +60,7 @@ export default function Datasheet({ property }) {
                         {type === 'lancamento' && (
                             <CategoryRelease>{category}</CategoryRelease>
                         )}
+                        
                         {type !== 'lancamento' && <hr />}
 
                         <GroupInfo>
