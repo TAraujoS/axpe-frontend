@@ -129,30 +129,56 @@ function Home({ hero, components }) {
       case 'exclusivity':
         return (
           <Hero>
-            <SliderNew
-              type="full"
-              arrowsColor="white"
-              hasVerticalBar={true}
-              arrowsClassName="holos-home-exclusivity-arrow"
-              settings={heroSettings(component.items.length)}
-            >
-              {component.items.map((item, itemIndex) => (
-                <HeroItem key={`exclusivity-item-${itemIndex}`}>
-                  {item.link &&
-                    item.link.url &&
-                    (item.link.target === 'blank' ||
-                      item.link.target === 'self') && (
-                      <HeroLink
-                        href={item.link.url}
-                        target={`_${item.link.target}`}
-                      >
-                        {renderHeroItem(item, itemIndex)}
-                      </HeroLink>
-                    )}
-                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-                </HeroItem>
-              ))}
-            </SliderNew>
+            {!component.items.length ? (
+              <>
+                <PlaceholderImageDesk>
+                  <Image
+                    src="/static/homedesk-placeholder.png"
+                    alt="Imagem inicial do banner desktop"
+                    width={1280}
+                    height={720}
+                    priority
+                    placeholder="empty"
+                  />
+                </PlaceholderImageDesk>
+
+                <PlaceholderImageMob>
+                  <Image
+                    src="/static/homemob-placeholder.png"
+                    alt="Imagem inicial do banner mobile"
+                    width={375}
+                    height={375}
+                    priority
+                    placeholder="empty"
+                  />
+                </PlaceholderImageMob>
+              </>
+            ) : (
+              <SliderNew
+                type="full"
+                arrowsColor="white"
+                hasVerticalBar={true}
+                arrowsClassName="holos-home-exclusivity-arrow"
+                settings={heroSettings(component.items.length)}
+              >
+                {component.items.map((item, itemIndex) => (
+                  <HeroItem key={`exclusivity-item-${itemIndex}`}>
+                    {item.link &&
+                      item.link.url &&
+                      (item.link.target === 'blank' ||
+                        item.link.target === 'self') && (
+                        <HeroLink
+                          href={item.link.url}
+                          target={`_${item.link.target}`}
+                        >
+                          {renderHeroItem(item, itemIndex)}
+                        </HeroLink>
+                      )}
+                    {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                  </HeroItem>
+                ))}
+              </SliderNew>
+            )}
           </Hero>
         );
         // case 'buildingsSquare':
