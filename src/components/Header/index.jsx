@@ -12,12 +12,10 @@ import useScrollPosition from 'helpers/scrollPosition';
 
 // assets
 import InstagramIconSVG from 'assets/icons/instagram.svg';
-import WhatsappIconSVG from 'assets/icons/whatsapp-rounded.svg';
+import WhatsappIconSVG from 'assets/icons/whatsapp.svg';
 import SearchIconSVG from 'assets/icons/search.svg';
 import HomeIconSVG from 'assets/icons/home.svg';
 import CloudIconSVG from 'assets/icons/cloud.svg';
-import FacebookIconSVG from 'assets/icons/facebook.svg';
-import LinkedinIconSVG from 'assets/icons/linkedin.svg';
 
 // styles
 import {
@@ -40,8 +38,6 @@ import {
   NewsletterButton,
   NavBottomContainer,
   ZohoFixWhatsModal,
-  Whatsapp,
-  WhatsappButton,
 } from './styles';
 
 function Header() {
@@ -184,17 +180,6 @@ function Header() {
             </NavMain>
 
             <NavBottomContainer>
-              <Whatsapp>
-                <WhatsappButton
-                  className="holos-menu-item"
-                  href="https://wa.me/551130743600"
-                  target="_blank"
-                >
-                  <SVG src={WhatsappIconSVG} uniquifyIDs={true} />
-                  Entre em contato pelo Whatsapp
-                </WhatsappButton>
-              </Whatsapp>
-
               <NavSecondary>
                 <ul>
                   <li>
@@ -210,6 +195,27 @@ function Header() {
                 </ul>
               </NavSecondary>
 
+              <Socials>
+                <SocialButton
+                  className="holos-menu-item"
+                  href="https://wa.me/551130743600"
+                  target="_blank"
+                  aria-label="WhatsApp Axpe Imóveis"
+                >
+                  <SVG src={WhatsappIconSVG} uniquifyIDs={true} aria-hidden="true"/>
+                </SocialButton>
+
+                <SocialButton
+                  href="https://instagram.com/axpe_imoveis"
+                  target="_blank"
+                  className="holos-footer-social-link"
+                  data-label="Instagram"
+                  aria-label="Instagram Axpe Imóveis"
+                >
+                  <SVG src={InstagramIconSVG} uniquifyIDs={true} aria-hidden="true"/>
+                </SocialButton>
+              </Socials>
+
               <Newsletter>
                 <NewsletterButton
                   className="holos-menu-item"
@@ -222,40 +228,13 @@ function Header() {
               </Newsletter>
 
               <Link href="/trabalhe-conosco" passHref>
-                <NavSecondaryButton
+                <NewsletterButton
                   className="holos-menu-item"
                   onClick={cancelToggle}
                 >
-                  Trabalhe com a gente
-                </NavSecondaryButton>
+                  Trabalhe conosco
+                </NewsletterButton>
               </Link>
-
-              <Socials>
-                <SocialButton
-                  href="https://www.facebook.com/pages/Axpe-Im%C3%B3veis-Especiais-Unicamente/100515957997"
-                  target="_blank"
-                  className="holos-footer-social-link"
-                  data-label="Facebook"
-                >
-                  <SVG src={FacebookIconSVG} uniquifyIDs={true} />
-                </SocialButton>
-                <SocialButton
-                  href="https://instagram.com/axpe_imoveis"
-                  target="_blank"
-                  className="holos-footer-social-link"
-                  data-label="Instagram"
-                >
-                  <SVG src={InstagramIconSVG} uniquifyIDs={true} />
-                </SocialButton>
-                <SocialButton
-                  href="https://br.linkedin.com/company/axpe-im-veis"
-                  target="_blank"
-                  className="holos-footer-social-link"
-                  data-label="Linkedin"
-                >
-                  <SVG src={LinkedinIconSVG} uniquifyIDs={true} />
-                </SocialButton>
-              </Socials>
             </NavBottomContainer>
           </Box>
         </Wrapper>

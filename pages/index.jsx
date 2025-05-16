@@ -10,17 +10,16 @@ import Api from 'services';
 import { setMain } from 'store/modules/main/actions';
 
 // helpers
+import { shuffle } from 'helpers/utils';
 import SeoData from 'helpers/seo';
 import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
 
 // components
 import BuildingsPanel from 'components/BuildingsPanel';
 import BlockHighlighted from 'components/BlockHighlighted';
-import GalleryCarousel from 'components/GalleryCarousel';
 import Tag from 'components/Tag';
 import NewsletterFooter from 'components/NewsletterFooter';
-import CategorySection from 'components/CategorySection';
-// import CategoryBannerVertical from 'components/CategoryBannerVertical';
+import CategoryBannerVertical from 'components/CategoryBannerVertical';
 
 // styles
 import {
@@ -32,10 +31,11 @@ import {
   HeroItemWrapper,
   HeroItemInfo,
 } from 'pages/Home/styles';
+import CategorySection from '../src/components/CategorySection';
 import { PlaceholderImageDesk, PlaceholderImageMob } from '../src/pages/Home/styles';
 
 const SliderNew = dynamic(() => import('components/SliderNew'), {
-  loading: () => <div>Loading...</div>,
+  loading: () => <></>,
 });
 
 function Home({ hero, components }) {
@@ -68,10 +68,6 @@ function Home({ hero, components }) {
   });
 
   useEffect(() => {
-    setHeroItems(hero);
-  }, [ hero ]);
-
-  useEffect(() => {
     if (!sliderRef.current) return;
   
     const observer = new IntersectionObserver(
@@ -98,6 +94,7 @@ function Home({ hero, components }) {
   }, []);
 
   const renderComponents = useCallback((type, component) => {
+    // console.log(type, component)
     switch (type) {
       case 'banner':
         return (
@@ -122,45 +119,82 @@ function Home({ hero, components }) {
             </Banner>
           </>
         );
-      // case 'category':
-      //   return (
-      //     <CategoryBannerVertical categoryItems={component.items}/>
-      //   );
+      case 'category':
+        return (
+          <CategoryBannerVertical categoryItems={component.items}/>
+        );
       case 'exclusivity':
         return (
           <Hero>
-            {!component.items.length ? (
-              <>
-                <PlaceholderImageDesk>
-                  <Image
-                    src="/static/homedesk-placeholder.png"
-                    alt="Imagem inicial do banner desktop"
-                    width={1280}
-                    height={720}
-                    priority
-                  />
-                </PlaceholderImageDesk>
-
-                <PlaceholderImageMob>
-                  <Image
-                    src="/static/homemob-placeholder.png"
-                    alt="Imagem inicial do banner mobile"
-                    width={375}
-                    height={375}
-                    priority
-                  />
-                </PlaceholderImageMob>
-              </>
-            ) : (
+            <SliderNew
+              type="full"
+              arrowsColor="white"
+              arrowsClassName="holos-home-exclusivity-arrow"
+              settings={heroSettings(component.items.length)}
+            >
+              {component.items.map((item, itemIndex) => (
+                <HeroItem key={`exclusivity-item-${itemIndex}`}>
+                  {item.link &&
+                    item.link.url &&
+                    (item.link.target === 'blank' ||
+                      item.link.target === 'self') && (
+                      <HeroLink
+                        href={item.link.url}
+                        target={`_${item.link.target}`}
+                      >
+                        {renderHeroItem(item, itemIndex)}
+                      </HeroLink>
+                    )}
+                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                </HeroItem>
+              ))}
+            </SliderNew>
+          </Hero>
+        );
+        // case 'buildingsSquare':
+      case 'buildingsGrid':
+       return (
+         <CategorySection items={component.items} />
+       );
+      case 'gallery':
+        return (
+          <Hero>
+            <SliderNew
+              type="full"
+              arrowsColor="white"
+              arrowsClassName="holos-home-gallery-arrow"
+              settings={heroSettings(component.items.length)}
+            >
+              {component.items.map((item, itemIndex) => (
+                <HeroItem key={`gallery-item-${itemIndex}`}>
+                  {item.link &&
+                    item.link.url &&
+                    (item.link.target === 'blank' ||
+                      item.link.target === 'self') && (
+                      <HeroLink
+                        href={item.link.url}
+                        target={`_${item.link.target}`}
+                      >
+                        {renderHeroItem(item, itemIndex)}
+                      </HeroLink>
+                    )}
+                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                </HeroItem>
+              ))}
+            </SliderNew>
+          </Hero>
+        );
+        case 'highlights':
+          return (
+            <Hero>
               <SliderNew
                 type="full"
                 arrowsColor="white"
-                hasVerticalBar={true}
-                arrowsClassName="holos-home-exclusivity-arrow"
+                arrowsClassName="holos-home-highlights-arrow"
                 settings={heroSettings(component.items.length)}
               >
                 {component.items.map((item, itemIndex) => (
-                  <HeroItem key={`exclusivity-item-${itemIndex}`}>
+                  <HeroItem key={`highlights-item-${itemIndex}`}>
                     {item.link &&
                       item.link.url &&
                       (item.link.target === 'blank' ||
@@ -176,16 +210,8 @@ function Home({ hero, components }) {
                   </HeroItem>
                 ))}
               </SliderNew>
-            )}
-          </Hero>
-        );
-        // case 'buildingsSquare':
-        case 'buildingsGrid':
-         return (
-           <CategorySection items={component.items} />
-         );
-      case 'gallery':
-        return <GalleryCarousel {...component} />;
+            </Hero>
+          );
       case 'contact':
         return (
         <>
@@ -195,7 +221,7 @@ function Home({ hero, components }) {
       );
     }
   }, []);
-  
+
   const randomizeHeroItems = useCallback(() => {
     if (Object.keys(heroItems).length === 0) {
       setHeroItems(shuffle(hero));
@@ -205,8 +231,10 @@ function Home({ hero, components }) {
   });
 
   const renderHeroItem = (item, itemIndex) => {
-    const hasContent = item.title || item.content ? true : false;
-
+    const hasContent = item.title || item.content || item.text ? true : false;
+    const itemLink = item.link ? item.link : item.link.url
+    const itemContent = item.content ? item.content : item.text
+    
     return (
       <HeroItemWrapper hasContent={hasContent}>
         <div className="hero-image mobile">
@@ -214,7 +242,7 @@ function Home({ hero, components }) {
             src={item.images.mobile}
             alt={item.title}
             layout='fill'
-            priority={true}
+            priority={itemIndex === 0}
           />
         </div>
         <div className="hero-image desktop">
@@ -222,7 +250,7 @@ function Home({ hero, components }) {
             src={item.images.desktop}
             alt={item.title}
             layout='fill'
-            priority={true}
+            priority={itemIndex === 0}
             sizes="(max-width: 768px) 100vw, 1280px"
           />
         </div>
@@ -240,8 +268,8 @@ function Home({ hero, components }) {
                 {item.title}
               </h2>
             )}
-            {item.content && <p>{item.content}</p>}
-            {item.link.url && <span>Saiba mais</span>}
+            {itemContent && <p>{itemContent}</p>}
+            {itemLink && <span>Saiba mais</span>}
           </HeroItemInfo>
         )}
       </HeroItemWrapper>
@@ -319,7 +347,6 @@ function Home({ hero, components }) {
             <SliderNew
               type="full"
               arrowsColor="white"
-              hasVerticalBar={true}
               arrowsClassName="holos-home-hero-arrow"
               settings={heroSettings(heroItems.length)}
             >

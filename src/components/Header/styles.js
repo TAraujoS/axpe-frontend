@@ -82,7 +82,7 @@ export const Wrapper = styled.div`
     justify-content: start;
     align-items: flex-start;
     height: auto;
-    padding: 0 30px;
+    padding: 10vh 30px 0;
   `}
 
   ${css`
@@ -263,17 +263,18 @@ export const Box = styled.div`
 export const NavMain = styled.nav`
   margin-bottom: 35px;
 
-  /* ${media.greaterThan('large')`
+  ${media.greaterThan('large')`
     margin-bottom: 30vh;
   `}
 
   ${media.greaterThan('huge')`
-    margin-bottom: 40vh;
-  `} */
+    margin-bottom: 35vh;
+  `}
+
   ul {
     display: flex;
     flex-direction: column;
-    /* gap: 20px */
+    gap: 5px
   }
 
   li {
@@ -392,7 +393,7 @@ export const NavMainButton = styled.a`
 export const NavMainButtonText = styled.span`
   display: block;
   width: 100%;
-  padding-left: 50px;
+  padding-left: 35px;
   text-transform: uppercase;
   text-align: left;
   font: 18px 'Raleway';
@@ -402,7 +403,6 @@ export const NavMainButtonText = styled.span`
 
   ${media.greaterThan('large')`
     font-size: 14px;
-    padding-left: 40px;
     line-height: 20px;
   `}
 `;
@@ -583,7 +583,6 @@ export const Socials = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 24px;
   margin-bottom: 14px;
 `;
 
@@ -663,7 +662,6 @@ export const NewsletterButton = styled.button`
   font: 14px 'Raleway';
   color: ${({ theme }) => theme.colors.green};
   padding-left: 0px;
-  text-transform: uppercase;
   font-weight: ${({ theme }) => theme.fontsWeight.medium};
 
   :hover{
@@ -671,6 +669,11 @@ export const NewsletterButton = styled.button`
     font-weight: ${({ theme }) => theme.fontsWeight.bold};
   }
   
+  ${media.greaterThan('large')`
+    font-size: 13px;
+    line-height: 18px;
+  `}
+
   strong {
     display: block;
     font-weight: ${({ theme }) => theme.fontsWeight.semiBold};

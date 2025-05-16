@@ -126,11 +126,7 @@ const ContainerNormal = css`
 
 const ContainerFull = css`
   .slick-arrow {
-    bottom: 30px;
-
-    ${media.greaterThan('large')`
-      bottom: 60px;
-    `}
+    bottom: 40%;
 
     &.slick-prev {
       left: auto;
