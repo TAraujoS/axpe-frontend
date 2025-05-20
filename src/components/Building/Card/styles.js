@@ -75,6 +75,18 @@ export const Wrapper = styled.div`
 export const GallerySlider = styled(Slider)`
   position: relative;
 
+  .image-mobile,
+  .image-desktop {
+    position: relative;
+    width: 100%;
+    height: 250px; 
+    
+    img {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
   .image-mobile {
     display: block;
     ${media.greaterThan('medium')`
@@ -121,14 +133,19 @@ export const Gallery = styled.div`
   position: relative;
   width: 100%;
   overflow: hidden;
-  height: 250px;
+  height: 350px;
   border-radius: 8px;
   
   .image-mobile,
   .image-desktop {
     position: relative;
     width: 100%;
-    height: 250px; 
+    height: 350px; 
+
+    img {
+      object-fit: cover !important;
+      object-position: left center !important;
+    }
   }
 
   .image-mobile {
@@ -158,7 +175,7 @@ export const Gallery = styled.div`
     ${({ theme }) => theme.hide};
   }
 
-${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     ${({ layout }) =>
       layout === 'horizontal' &&
       css`

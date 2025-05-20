@@ -172,7 +172,7 @@ function Building(props) {
             <SimilarBuildingsList>
               {similarBuildings.map((building, buildingIndex) => (
                 <BuildingList
-                  layout="vertical"
+                  layout="horizontal"
                   item={building}
                   page="building"
                   positionIndex={buildingIndex + 1}

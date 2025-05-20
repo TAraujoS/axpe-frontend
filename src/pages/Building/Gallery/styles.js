@@ -41,9 +41,9 @@ export const ImageWrapper = styled.div`
   }
 
   .next-image {
-    object-fit: cover;
     width: 100%;
     height: 100%;
+    ${props => props.isVertical ? 'object-fit: contain;' : 'object-fit: cover;'}
   }
 `;
 

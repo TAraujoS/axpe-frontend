@@ -75,27 +75,23 @@ function BuildingCard({
             <GallerySlider layout={layout}>
               {itemData.gallery.map((image, index) => (
                 <React.Fragment key={index}>
-                <div className="image-mobile">
-                  <Image
-                    src={image.src}
-                    alt={`Slide ${index + 1}`}
-                    width={750}
-                    height={500}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    style={{ width: '100%', height: 'auto' }}
-                  />
-                </div>
-                <div className="image-desktop">
-                  <Image
-                    src={image.src}
-                    alt={`Slide ${index + 1}`}
-                    width={1280}
-                    height={720}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    style={{ width: '100%', height: 'auto' }}
-                  />
-                </div>
-              </React.Fragment>
+                  <div className="image-mobile">
+                    <Image
+                      src={image.src}
+                      alt={`Slide ${index + 1}`}
+                      layout= 'fill'
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="image-desktop">
+                    <Image
+                      src={image.src}
+                      alt={`Slide ${index + 1}`}
+                       layout= 'fill'
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                </React.Fragment>
               ))}
             </GallerySlider>
           );

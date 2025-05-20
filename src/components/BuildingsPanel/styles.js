@@ -9,10 +9,10 @@ export const Container = styled.section`
 
 export const Wrapper = styled.div`
   width: 100%;
-  margin: 0 auto;
   max-width: 1500px;
   padding: 40px 12px;
   margin-right: 16px;
+  place-self: center;
   
   ${props => props.type === 'building' && css`
     max-width: 994px;

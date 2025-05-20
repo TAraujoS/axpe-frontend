@@ -409,10 +409,10 @@ function Search({ total, totalPages, data, banner, locals }) {
                   >
                     <DisplayOrder>
                       <button onClick={() => setIsOrderListActive(!isOrderListActive)}>
-                        <img src={isOrderListActive ? IOrderRowOn : IOrderRowOff} alt="Botão de ordenar lista" loading='lazy'/>
+                        <img src={isOrderListActive ? IOrderBlockOff : IOrderBlockOn} alt="Botão de ordenar bloco" loading='lazy'/>
                       </button>
                       <button onClick={() => setIsOrderListActive(!isOrderListActive)}>
-                        <img src={isOrderListActive ? IOrderBlockOff : IOrderBlockOn} alt="Botão de ordenar bloco" loading='lazy'/>
+                        <img src={isOrderListActive ? IOrderRowOn : IOrderRowOff} alt="Botão de ordenar lista" loading='lazy'/>
                       </button>
                     </DisplayOrder>
 

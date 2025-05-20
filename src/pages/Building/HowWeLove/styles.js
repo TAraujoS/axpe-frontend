@@ -56,9 +56,9 @@ export const Article = styled.article`
 
   ${media.greaterThan('medium')`
     width: 96%;
-    max-width: 1020px;
+    max-width: 1060px;
     padding: 16px 20px;
-    margin: 0 auto 10px;
+    margin: 0 auto 12px;
   `}
 
   .building-lovely-item {
