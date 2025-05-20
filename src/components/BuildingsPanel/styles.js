@@ -4,13 +4,14 @@ import media from 'styled-media-query';
 export const Container = styled.section`
   width: 100%;
   position: relative;
+  padding-left: 4px;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   max-width: 1500px;
-  padding: 40px 15px;
+  padding: 40px 12px;
   margin-right: 16px;
   
   ${props => props.type === 'building' && css`

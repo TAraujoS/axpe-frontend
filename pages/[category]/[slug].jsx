@@ -29,6 +29,7 @@ import {
   SimilarBuildingsList,
 } from 'pages/Building/styles';
 import { useDispatch } from 'react-redux';
+import { Delivery } from '../../src/pages/Building/Datasheet/styles';
 
 function Building(props) {
   const { property, meta } = props;
@@ -136,6 +137,21 @@ function Building(props) {
 
         <DataSheet property={data} />
 
+        {data.components.find(c => c.module?.slug === 'porque-adoramos') && (
+          <HowWeLove reasons={data.components.find(c => c.module?.slug === 'porque-adoramos').data} />
+        )}
+        
+        {property.type === 'lancamento' && property.infos.releaseDelivery && (
+          <Delivery>
+              <p>
+                  {property.infos.releaseStatus === 'Pronto'
+                      ? 'Entregue em '
+                      : 'Previsão de entrega em '}
+                  <span>{property.infos.releaseDelivery}</span>
+              </p>
+          </Delivery>
+        )}
+
         <Alert>
           <p>
             As informações acima, incluindo preço, áreas e valores, podem não
@@ -148,10 +164,6 @@ function Building(props) {
           </p>
         </Alert>
 
-        {data.components.find(c => c.module?.slug === 'porque-adoramos') && (
-          <HowWeLove reasons={data.components.find(c => c.module?.slug === 'porque-adoramos').data} />
-        )}
-
         {similarBuildings && similarBuildings.length > 0 && (
           <SimilarBuildings>
             <SimilarBuildingsHeader>
@@ -160,7 +172,7 @@ function Building(props) {
             <SimilarBuildingsList>
               {similarBuildings.map((building, buildingIndex) => (
                 <BuildingList
-                  layout="horizontal"
+                  layout="vertical"
                   item={building}
                   page="building"
                   positionIndex={buildingIndex + 1}

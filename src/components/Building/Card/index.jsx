@@ -27,6 +27,7 @@ function BuildingCard({
   positionIndex = 1,
   item,
   showGallery = false,
+  categorySection = false
 }) {
   const [ gtmObj, setGtmObj ] = useState(null);
   const itemData =
@@ -201,7 +202,7 @@ function BuildingCard({
   }, [ gtmShowcase ]);
 
   return (
-    <Container layout={layout}>
+    <Container layout={layout} categorySection={categorySection}>
       {status !== 'inactive' ? (
         <Link href={`/${itemData.slug}`} passHref>
           <LinkTag

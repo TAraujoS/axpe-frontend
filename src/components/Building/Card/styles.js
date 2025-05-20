@@ -4,9 +4,9 @@ import Slider from 'components/Slider';
 
 export const Container = styled.article`
   margin-bottom: 10px;
-
   ${media.greaterThan('medium')`
     max-width: 450px;
+
     ${props => props.layout === 'horizontal' && css`
       padding: 15px 10px;
     `}
@@ -14,6 +14,10 @@ export const Container = styled.article`
     ${props => props.layout === 'vertical' && css`
       padding-top: 5px;
       padding-bottom: 5px;
+    `}
+
+    ${props => props.categorySection && css`
+      margin-right: 20px;
     `}
   `}
 
@@ -29,6 +33,16 @@ export const LinkTag = styled.a`
   overflow: hidden;
   color: ${({ theme }) => theme.colors.greenDark};
 
+  ${props => props.categorySection  && css`
+    ${media.greaterThan('medium')`
+      margin-left: 20px;
+    `}
+    &:last-child {
+      ${media.greaterThan('medium')`
+        padding-right: 22px;
+      `}
+    }
+  `}
   :hover {
     text-decoration: none;
   }

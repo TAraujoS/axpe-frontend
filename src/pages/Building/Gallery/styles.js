@@ -7,11 +7,11 @@ import GalleryHeaderbar from './GalleryHeaderbar';
 export const Container = styled.div`
   margin: auto;
   position: relative;
-  max-width: 974px;
+  max-width: 1160px;
 
   & > .slick-slider .slick-slide {
-    width: calc(100vw - 500px);
-    max-width: 780px;
+    width: calc(100vw - 400px);
+    max-width: 1040px;
   }
 `;
 

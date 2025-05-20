@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMain } from 'store/modules/main/actions';
+
 import Tag from 'components/Tag';
 import * as Caracteristics from 'pages/Building/Datasheet/caracteristics';
 
@@ -14,7 +16,6 @@ import {
     BlockTwo,
     Content,
     BlockThree,
-    Delivery,
     Location,
     InfoContent,
     ButtonMoreInfo,
@@ -29,11 +30,8 @@ import {
 import ILocation from 'assets/icons/location.svg';
 import ICheck from 'assets/icons/checked-grey.svg';
 
-// Componentns
-import { MoreInformationModal } from '../../../components/Modals/MoreInformation';
-
 export default function Datasheet({ property }) {
-    const [ modalMoreInfoIsVisibility, setModalMoreInfoIsVisibility ] = useState(false);
+    const dispatch = useDispatch();
     const { type, infos, category, address, label, values, source, vista, title } = property;
     const { searchFunnel } = useSelector(state => state.main);
     const hasTitle = infos.titleSite || infos.internalDescription;
@@ -42,14 +40,16 @@ export default function Datasheet({ property }) {
         `${address.local}, ${address.state}, ${address.country} ${address.zipcode}, 15z`
     )}`;
 
-    const toggleModalMoreInfo  = (e) => {
-        e.preventDefault();
-        setModalMoreInfoIsVisibility(false);
-    }
-
+    const toggleModalMoreInfo = () => {
+      dispatch(
+        setMain({
+          contactBarActive: true,
+          contactBarForced: true,
+        })
+      );
+    };
     return (
         <>
-
             <MainContainer>
                 <DatasheetContent>
                     <BlockOne type={property.type}>
@@ -192,7 +192,7 @@ export default function Datasheet({ property }) {
                         </BlockTwo>
                     )}
 
-                    {vista && (
+                    {vista && vista.length > 0 && (
                         <BlockTwo>
                             <CharacteristicsGrid>
                                 {[
@@ -251,29 +251,10 @@ export default function Datasheet({ property }) {
                         currency={values.currency}
                     />
 
-                    {/* <ButtonVisit onClick={openVisitModal}>Agendar visita</ButtonVisit> */}
                     <ButtonMoreInfo onClick={toggleModalMoreInfo}>Fale com um corretor</ButtonMoreInfo>
                 </PriceGroupDesktop>
 
             </MainContainer>
-
-            {type === 'lancamento' && infos.releaseDelivery && (
-                <Delivery>
-                    <p>
-                        {infos.releaseStatus === 'Pronto'
-                            ? 'Entregue em '
-                            : 'Previsão de entrega em '}
-                        <span>{infos.releaseDelivery}</span>
-                    </p>
-                </Delivery>
-            )}
-
-            {modalMoreInfoIsVisibility && (
-                <MoreInformationModal
-                    toggleModalMoreInfo={toggleModalMoreInfo}
-                    address={address}
-                />
-            )}
         </>
     );
 }

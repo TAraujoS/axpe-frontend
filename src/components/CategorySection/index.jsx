@@ -49,6 +49,7 @@ const CategorySection = ({ items }) => {
                 gtmShowcase={''}
                 positionIndex={index + 1}
                 showGallery={true}
+                categorySection={true}
               />
             </CardWrapper>
           </Slide>

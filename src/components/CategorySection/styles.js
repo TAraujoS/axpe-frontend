@@ -15,18 +15,19 @@ export const Container = styled(Slick)`
   position: relative;
   width: 100%;
 
+
   .slick-slide {
     > div {
-      margin-left: 10px;
+      /* margin-left: 10px; */
       ${media.greaterThan('medium')`
-        margin-left: 20px;
+        /* margin-left: 20px; */
       `}
  
       &:last-child {
-        padding-right: 5px;
+        /* padding-right: 5px; */
 
       ${media.greaterThan('medium')`
-        padding-right: 10px;
+        /* padding-right: 10px; */
       `}
       }
     }
@@ -39,7 +40,8 @@ export const Slide = styled.div`
   flex-direction: column;
   max-width: 1280px;
   margin: 0 auto;
-  
+  padding-left: 4px;
+
   ${media.greaterThan('medium')`
     flex-direction: row !important;
     align-items: center;

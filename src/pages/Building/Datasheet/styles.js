@@ -38,7 +38,7 @@ export const Block = styled.div`
   ${media.greaterThan('medium')`
     padding: 16px 20px;
     width: 100%;
-    `}
+  `}
 `;
 
 export const BlockOne = styled(Block)`
@@ -252,7 +252,7 @@ export const PriceGroup = styled.div`
   ${media.greaterThan('medium')`
     padding: 20px;
     max-width: 291px;
-    max-height: 275px;
+    max-height: ${({ type }) => (type === 'lancamento' ? '210px' : '275px;')}; 
     justify-content: ${({ type }) => (type === 'lancamento' ? 'start' : 'space-around')};
     margin: 16px 16px 0 0;
   `}
