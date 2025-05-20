@@ -507,6 +507,7 @@ function Search({ total, totalPages, data, banner, locals }) {
                           positionIndex={buildingIndex + 1}
                           key={`building-searchitem-${building.reference}-${buildingIndex}`}
                           showGallery={true}
+                          searchPage={true}
                         />
                       )}
                       {banner && buildingIndex == 2 && total >= 5 && (

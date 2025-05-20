@@ -38,7 +38,7 @@ export const Container = styled.div`
     props.page === 'search' && media.greaterThan('medium')`
     width: 100%;
     height: ${props =>
-      props.useBtSchedule ? (props.hasDeleted ? '45px' : '386px') : '365px'};
+      props.useBtSchedule ? (props.hasDeleted ? '45px' : '386px') : '385px'};
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
@@ -337,6 +337,7 @@ export const Price = styled.p`
   ${props =>
     props.page === 'search' && media.greaterThan('medium')`
     font-size: 16px;
+    min-height: 0px;
   `};
 `;
 

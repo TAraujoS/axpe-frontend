@@ -27,7 +27,8 @@ function BuildingCard({
   positionIndex = 1,
   item,
   showGallery = false,
-  categorySection = false
+  categorySection = false,
+  searchPage = false
 }) {
   const [ gtmObj, setGtmObj ] = useState(null);
   const itemData =
@@ -81,6 +82,7 @@ function BuildingCard({
                       alt={`Slide ${index + 1}`}
                       layout= 'fill'
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      loading='lazy'
                     />
                   </div>
                   <div className="image-desktop">
@@ -89,6 +91,7 @@ function BuildingCard({
                       alt={`Slide ${index + 1}`}
                        layout= 'fill'
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      loading='lazy'
                     />
                   </div>
                 </React.Fragment>
@@ -137,6 +140,7 @@ function BuildingCard({
           return null;
         }
       }, [ showGallery, layout, itemData, status ]);
+
   const renderHTML = useCallback(() => {
     return (
       <Wrapper layout={layout}>
@@ -198,7 +202,7 @@ function BuildingCard({
   }, [ gtmShowcase ]);
 
   return (
-    <Container layout={layout} categorySection={categorySection}>
+    <Container layout={layout} categorySection={categorySection} searchPage={searchPage}>
       {status !== 'inactive' ? (
         <Link href={`/${itemData.slug}`} passHref>
           <LinkTag

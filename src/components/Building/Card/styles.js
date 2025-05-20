@@ -3,9 +3,19 @@ import media from 'styled-media-query';
 import Slider from 'components/Slider';
 
 export const Container = styled.article`
+  margin: 0 auto;
   margin-bottom: 10px;
+
+  ${props => props.searchPage && css`
+    padding: 0 10px;
+  `}
+    
   ${media.greaterThan('medium')`
     max-width: 450px;
+
+  ${props => props.searchPage && css`
+    padding: 0;
+  `}
 
     ${props => props.layout === 'horizontal' && css`
       padding: 15px 10px;
@@ -43,6 +53,7 @@ export const LinkTag = styled.a`
       `}
     }
   `}
+
   :hover {
     text-decoration: none;
   }
@@ -63,7 +74,9 @@ export const LinkTag = styled.a`
 export const Wrapper = styled.div`
   position: relative;
   background: ${({ theme }) => theme.colors.white};
-  
+  width: 100%;
+  height: 100%;
+
   ${media.greaterThan('medium')`
     ${props => props.layout === 'horizontal' && css`
       display: flex;
@@ -74,6 +87,14 @@ export const Wrapper = styled.div`
 
 export const GallerySlider = styled(Slider)`
   position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 250px;
+  max-width: 345px;
+
+  ${media.greaterThan('medium')`
+    max-width: 480px;
+  `}
 
   .image-mobile,
   .image-desktop {
@@ -161,6 +182,7 @@ export const Gallery = styled.div`
       display: block;
     `}
   }
+
   &:before {
     content: '';
     display: none;

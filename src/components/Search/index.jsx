@@ -50,6 +50,7 @@ import {
   FormTabSliderTitle,
   FormTabListContainer,
   FormTabListItemContainer,
+  FormTabListItemTitle,
 } from './styles';
 
 function Search() {
