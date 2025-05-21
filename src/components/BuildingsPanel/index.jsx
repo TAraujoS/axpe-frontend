@@ -32,22 +32,15 @@ function BuildingsPanel({
       infinite: true,
       lazyLoad: true,
       speed: 800,
-      slidesToShow: 4,
+      slidesToShow: 3,
       slidesToScroll: 1,
       arrows: true,
       responsive: [
         {
-          breakpoint: 1500,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-          }
-        },
-        {
           breakpoint: 1023,
           settings: {
             slidesToShow: 2,
-            slidesToScroll: 2,
+            slidesToScroll: 1,
           }
         },
         {

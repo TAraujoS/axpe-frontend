@@ -142,7 +142,7 @@ export const GallerySlider = styled(Slider)`
 
   button[class*="ArrowNext"] {
     position: absolute !important;
-    right: 10px;
+    right: 0px;
     top: 50% !important;
     transform: translateY(-50%);
     z-index: 10;

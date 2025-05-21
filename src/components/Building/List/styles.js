@@ -31,7 +31,7 @@ export const Container = styled.div`
   props.page !== 'search' &&
   css`
     width: 100%;
-    max-width: 420px;
+    max-width: 435px;
   `}
 
   ${props =>
@@ -196,6 +196,7 @@ export const Description = styled.p`
   display: block;
   display: -webkit-box;
   max-width: 100%;
+  height: 75px;
   max-height: 85px;
   font: 16px/18px 'Raleway';
   -webkit-line-clamp: 4;
@@ -332,12 +333,10 @@ export const Price = styled.p`
   font: 18px 'Raleway';
   font-weight: ${({ theme }) => theme.fontsWeight.bold};
   line-height: 28px;
-  min-height: 28px;
 
   ${props =>
     props.page === 'search' && media.greaterThan('medium')`
     font-size: 16px;
-    min-height: 0px;
   `};
 `;
 

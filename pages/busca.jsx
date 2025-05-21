@@ -16,7 +16,6 @@ import BlockHighlighted from 'components/BlockHighlighted';
 import BuildingList from 'components/Building/List';
 import NewsletterFooter from 'components/NewsletterFooter';
 import BuildingsPanel from 'components/BuildingsPanel';
-import BuildingCard from 'components/Building/Card';
 import CustomSelect from 'components/CustomSelect';
 
 // helpers
@@ -501,13 +500,11 @@ function Search({ total, totalPages, data, banner, locals }) {
                           key={`building-searchitem-${building.reference}-${buildingIndex}`}
                         />
                       ) : (
-                        <BuildingCard
+                        <BuildingList
+                          layout="horizontal"
                           item={building}
-                          gtmShowcase={''}
                           positionIndex={buildingIndex + 1}
                           key={`building-searchitem-${building.reference}-${buildingIndex}`}
-                          showGallery={true}
-                          searchPage={true}
                         />
                       )}
                       {banner && buildingIndex == 2 && total >= 5 && (
