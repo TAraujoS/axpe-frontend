@@ -143,9 +143,9 @@ export const CharacteristicItem = styled.div`
   }
 
   h3 {
-    color: ${({ theme }) => theme.colors.orange};
-    font: 18px/20px 'Bitter';
-    font-weight: ${({ theme }) => theme.fontsWeight.bold};
+    color: ${({ theme }) => theme.colors.green};
+    font: 16px/18px 'Raleway';
+    font-weight: ${({ theme }) => theme.fontsWeight.semiBold};
     height: 20px;
     margin-left: 10px;
   }
@@ -225,9 +225,9 @@ export const Reasons = styled.div`
 
     h3 {
       margin-bottom: 15px;
-      color: ${({ theme }) => theme.colors.orange};
-      font: 18px/20px 'Bitter';
-      font-weight: ${({ theme }) => theme.fontsWeight.bold};
+      color: ${({ theme }) => theme.colors.green};
+      font: 16px/18px 'Raleway';
+      font-weight: ${({ theme }) => theme.fontsWeight.semiBold};
       height: 40px;
       display: flex;
       align-items: flex-start;
@@ -238,8 +238,8 @@ export const Reasons = styled.div`
     }
 
     p {
-      color: ${({ theme }) => theme.colors.greenDark};
-      font: 16px/19px 'Raleway';
+      color: ${({ theme }) => theme.colors.green};
+      font: 16px/18px 'Raleway';
 
       ${media.greaterThan('medium')`
         /* display: block;
