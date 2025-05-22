@@ -61,6 +61,12 @@ export const Article = styled.article`
     margin: 0 auto 12px;
   `}
 
+  h2 {
+    color: ${({ theme }) => theme.colors.orange};
+    font: 18px 'Raleway';
+    font-weight: ${({ theme }) => theme.fontsWeight.semiBold};
+  }
+
   .building-lovely-item {
     display: flex !important;
     align-items: center;
@@ -83,9 +89,9 @@ export const Article = styled.article`
 
     h3 {
       margin-bottom: 10px;
-      color: ${({ theme }) => theme.colors.orange};
-      font: 18px/20px 'Bitter';
-      font-weight: ${({ theme }) => theme.fontsWeight.bold};
+      color: ${({ theme }) => theme.colors.green};
+      font: 16px/18px 'Raleway';
+      font-weight: ${({ theme }) => theme.fontsWeight.semiBold};
       height: 20px;
       display: flex;
       align-items: flex-start;
@@ -108,8 +114,8 @@ export const Article = styled.article`
     }
 
     p {
-      color: ${({ theme }) => theme.colors.greenDark};
-      font: 16px/19px 'Raleway';
+      color: ${({ theme }) => theme.colors.green};
+      font: 16px/18px 'Raleway';
     }
   }
 `;

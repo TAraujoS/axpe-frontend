@@ -6,7 +6,7 @@ export const NewsletterContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.grey2};
   padding: 60px 20px;
   position: relative;
-  margin-top: 10px;
+  margin-top: 12px;
   min-height: 250px;
   
   ${media.greaterThan('medium')`

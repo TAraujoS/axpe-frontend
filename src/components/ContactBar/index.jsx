@@ -57,7 +57,7 @@ function ContactBar() {
   const [ isBuilding, setIsBuilding ] = useState(false);
   const [ iframeUrl, setIframeUrl ] = useState(null);
   const {
-      handleSubmit,
+      // handleSubmit,
       values,
       isSubmitting,
       touched,
@@ -449,7 +449,6 @@ function ContactBar() {
                     method='POST'
                     accept-charset='UTF-8'
                     enctype='multipart/form-data'
-                    onSubmit={handleSubmit}
                   >
                     <FormGroup>
                       <FormGroupBasics>
@@ -503,7 +502,7 @@ function ContactBar() {
                         type='submit'
                         className='contact-form-submit'
                       >
-                        {isSubmitting ? 'Enviando...' : 'Enviar formulário2'}
+                        {isSubmitting ? 'Enviando...' : 'Enviar formulário'}
                       </ButtonSubmit>
                       <button className='contact-whatsapp-button-green' disabled={isSubmitting} onClick={handleWhatsapp}>
                         Whatsapp  <strong>(11) 3074-3600</strong>
