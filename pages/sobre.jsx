@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Head from 'next/head';
-import ScrollTo, { getElementScrollTop } from 'helpers/scrollTo';
+import { getElementScrollTop } from 'helpers/scrollTo';
 import useScrollPosition from 'helpers/scrollPosition';
 
 // helpers
@@ -13,15 +13,11 @@ import { setMain } from 'store/modules/main/actions';
 // styles
 import {
   Container,
-  // Wrapper,
-  Nav,
   Hero,
-  Title,
   Text,
   Block,
   BlockCol,
   BlockTitle,
-  BlockImage
 } from 'pages/About/styles';
 
 function About() {
@@ -30,22 +26,22 @@ function About() {
   const scrollPosition = useScrollPosition();
   const [ curIndexArea, setCurIndexArea ] = useState();
 
-  const clickNavButton = useCallback(event => {
-    event.preventDefault();
+  // const clickNavButton = useCallback(event => {
+  //   event.preventDefault();
 
-    const area = event.currentTarget.getAttribute('href');
-    const hash = area.replace('/sobre', '');
-    const $target = document.querySelector(hash);
+  //   const area = event.currentTarget.getAttribute('href');
+  //   const hash = area.replace('/sobre', '');
+  //   const $target = document.querySelector(hash);
 
-    if ($target) {
-      if (window.history && window.history.pushState) {
-        history.pushState('', '', `/sobre${hash}`);
-      }
-      ScrollTo($target, window.innerWidth < 1170 ? 45 : 100);
-    }
+  //   if ($target) {
+  //     if (window.history && window.history.pushState) {
+  //       history.pushState('', '', `/sobre${hash}`);
+  //     }
+  //     ScrollTo($target, window.innerWidth < 1170 ? 45 : 100);
+  //   }
 
-    return false;
-  }, []);
+  //   return false;
+  // }, []);
 
   function handleScrollPosition([ curTop, oldTop ]) {
     const topDiff = window.innerWidth < 1170 ? 45 : 100;
@@ -105,7 +101,7 @@ function About() {
         <meta name="description" content={SeoData.description} />
       </Head>
       <Container>
-        <Nav className="about-nav">
+        {/* <Nav className="about-nav">
           <div ref={refEl}>
             <ul>
               <li>
@@ -137,14 +133,19 @@ function About() {
               </li>
             </ul>
           </div>
-        </Nav>
+        </Nav> */}
 
         <Hero id="nosso-jeito">
-          <figure>
+          {/* <figure>
             <h2>Nosso Jeito</h2>
             <img src="/static/about/nosso-jeito.jpg" alt="Nosso jeito" loading='lazy'/>
-          </figure>
+          </figure> */}
+
           <div>
+            <p>Prazer, somos a <strong>Axpe.</strong></p>
+            <span>Uma imobiliária com uma visão diferente do morar</span>
+          </div>
+          {/* <div>
             <Title>
               <strong>Axpe.</strong> Uma imobiliária com uma{' '}
               <strong>visão diferente</strong> do morar.
@@ -160,92 +161,66 @@ function About() {
                 Fique tranquilo, você encontrou.
               </p>
             </Text>
-          </div>
+          </div> */}
         </Hero>
 
         <Block dataTemplate="1">
           <BlockCol dataType="text">
             <BlockTitle>
-              Olhar e ouvidos apurados. <strong>Entender para atender.</strong>
+              Morar é <strong>Encontro</strong>
             </BlockTitle>
             <Text>
               <p>
-                Não basta termos imóveis bacanas no portfólio, nós temos que
-                entender qual é o ideal para você. Para ajudar nessa busca, nada
-                melhor que corretores com o repertório parecido com o seu, com o
-                olhar apurado e sensível às questões humanas.
+              Mais do que vender imóveis, a Axpe significa o ato de morar. Desde 2002, construímos pontes entre pessoas e espaços com intenção, sensibilidade e curadoria. Atuamos em São Paulo, litoral, campo e montanha — e também em Portugal — criando encontros significativos entre estilos de vida e formas de habitar.
               </p>
             </Text>
-          </BlockCol>
-          <BlockCol dataType="image">
-            <BlockImage>
-              <img
-                src="/static/about/01.jpg"
-                alt="Olhar e ouvidos apurados. Entender para atender."
-                loading='lazy'
-              />
-            </BlockImage>
-          </BlockCol>
-        </Block>
-
-        <Block dataTemplate="2">
-          <BlockCol dataType="text">
-            <BlockTitle>
-              Visitar imóveis comuns? <strong>Ninguém merece.</strong>
-            </BlockTitle>
-            <Text>
-              <p>
-                Cedo ou tarde, às vezes bem mais tarde, você vai encontrar o
-                imóvel perfeito. Como você quer que seja esse processo? Demorado
-                e desgastante ou fluído e assertivo? Seu tempo vale muito, por
-                isso nossos corretores analisam bem os imóveis antes de
-                apresentá-los a você.
-              </p>
-            </Text>
-          </BlockCol>
-          <BlockCol dataType="image">
-            <BlockImage>
-              <img
-                src="/static/about/02.jpg"
-                alt="Visitar imóveis comuns? Ninguém merece."
-                loading='lazy'
-              />
-            </BlockImage>
           </BlockCol>
         </Block>
 
         <Block dataTemplate="1">
           <BlockCol dataType="text">
             <BlockTitle>
-              Tecnologia é importante, mas{' '}
-              <strong>não dá conta de tudo.</strong>
+              Imóveis que refletem <strong>quem você é</strong>
             </BlockTitle>
             <Text>
               <p>
-                Você começa filtrando imóveis por um site. Perfeito. Afinal, os
-                algoritmos são ótimos para encontrar os imóveis que preenchem
-                seus critérios. O problema é que ninguém se apaixona por
-                critérios. É aí que entram os nossos corretores, pessoas reais
-                como você, que se conectam ao mais importante: o ser humano por
-                trás da busca.
+                Acreditamos que o imóvel certo muda tudo. Porque morar bem é mais do que localização ou metragem: é encontrar um lugar que conversa com quem você é, com o ritmo da sua vida e com o que importa para você. É por isso que, na Axpe, cada escolha é guiada por escuta, empatia e repertório.
               </p>
             </Text>
           </BlockCol>
-          <BlockCol dataType="image">
-            <BlockImage>
-              <img
-                src="/static/about/03.jpg"
-                alt="Tecnologia é importante, mas não dá conta de tudo."
-              />
-            </BlockImage>
+        </Block>
+
+        <Block dataTemplate="1">
+          <BlockCol dataType="text">
+            <BlockTitle>
+              Nosso <strong>compromisso</strong>
+            </BlockTitle>
+            <Text>
+              <p>
+                Seja você comprador ou proprietário, nosso olhar é imparcial, transparente e sempre guiado pelo que é certo. Cumprimos as regras com clareza e ética. Valorizamos seu tempo, respeitamos seu investimento e atuamos com total responsabilidade sobre o que está em jogo.
+              </p>
+            </Text>
           </BlockCol>
         </Block>
 
-        <Block dataTemplate="2">
+        <Block dataTemplate="1">
           <BlockCol dataType="text">
             <BlockTitle>
-              O que é certo é certo.{' '}
-              <strong>O&nbsp;que é errado é errado.</strong>
+              O que nos
+              <strong> move</strong>
+            </BlockTitle>
+            <Text>
+              <p>
+              O imóvel que é sua alma gêmea está na Axpe. E vice-versa. Nosso trabalho é tornar esse encontro possível, com humanidade, presença e uma linguagem que valoriza o essencial. Atendemos tanto quem está em busca de um novo lugar para viver quanto quem deseja vender um imóvel que fez parte da sua história. Porque quando o lugar certo encontra a pessoa certa, tudo faz sentido.
+              </p>
+            </Text>
+          </BlockCol>
+        </Block>
+
+        <Block dataTemplate="1">
+          <BlockCol dataType="text">
+            <BlockTitle isLast={true}>
+              <strong>Por que </strong>{' '} Axpe?
             </BlockTitle>
             <Text>
               <p>
@@ -257,17 +232,9 @@ function About() {
               </p>
             </Text>
           </BlockCol>
-          <BlockCol dataType="image">
-            <BlockImage>
-              <img
-                src="/static/about/04.jpg"
-                alt="O que é certo é certo. O que é errado é errado."
-              />
-            </BlockImage>
-          </BlockCol>
         </Block>
 
-        <Block dataTemplate="3">
+        {/* <Block dataTemplate="3">
           <BlockCol dataType="text">
             <BlockTitle>
               Escolhemos um lado:{` `}
@@ -316,7 +283,7 @@ function About() {
               />
             </BlockImage>
           </BlockCol>
-        </Block>
+        </Block> */}
 
         {/*
         <Block dataTemplate="2">
@@ -415,7 +382,7 @@ function About() {
         </Block>
         */}
 
-        <Block id="nossa-casa" dataTemplate="5_diff">
+        {/* <Block id="nossa-casa" dataTemplate="5_diff">
           <BlockCol dataType="text">
             <BlockTitle>
               <strong>Nosso escritório é uma delícia.</strong> A vista é linda,
@@ -462,7 +429,7 @@ function About() {
               />
             </BlockImage>
           </BlockCol>
-        </Block>
+        </Block> */}
       </Container>
     </>
   );
