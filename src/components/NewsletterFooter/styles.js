@@ -5,12 +5,13 @@ export const NewsletterContainer = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.green3};
   padding: 20px;
+  padding-top: 30px;
   position: relative;
   margin-top: 12px;
-  min-height: 250px;
+  min-height: 300px;
   
   ${media.greaterThan('medium')`
-    padding: 42px 41px 0px;
+    padding: 42px 41px 0px 100px;
   `}
 `;
 
@@ -33,7 +34,7 @@ export const NewsletterTextDesktop = styled.div`
 
   h4:nth-child(1),
   p:nth-child(2) {
-    display: none;
+    /* display: none; */
     ${media.greaterThan('medium')`
       display: block;
     `}
@@ -49,16 +50,18 @@ export const NewsletterTextDesktop = styled.div`
 
 export const FormContainer = styled.div`
   margin-top: 24px;
+  width: 70%;
 
-  ${media.greaterThan('768px')`
+  ${media.greaterThan('medium')`
     display: block;
+    width: 75%;
   `}
 `;
 
 export const Iframe = styled.iframe`
   display: block;
   width: 100%;
-  min-height: 190px;
+  min-height: 225px;
 
 `;
 
