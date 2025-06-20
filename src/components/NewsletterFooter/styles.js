@@ -3,8 +3,8 @@ import media from 'styled-media-query';
 
 export const NewsletterContainer = styled.div`
   display: flex;
-  background-color: ${({ theme }) => theme.colors.grey2};
-  padding: 60px 20px;
+  background-color: ${({ theme }) => theme.colors.green3};
+  padding: 20px;
   position: relative;
   margin-top: 12px;
   min-height: 250px;
@@ -15,7 +15,7 @@ export const NewsletterContainer = styled.div`
 `;
 
 export const NewsletterTextDesktop = styled.div`
-  color: ${({ theme }) => theme.colors.greenDark};
+  color: ${({ theme }) => theme.colors.white};
   font-family: 'Bitter';
   z-index: 10;
 
@@ -25,7 +25,7 @@ export const NewsletterTextDesktop = styled.div`
   }
 
   p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: ${({ theme }) => theme.fontsWeight.medium};
     width: 70%;
     margin-top: 6px;
@@ -71,10 +71,6 @@ export const Background = styled.div`
   background-repeat: no-repeat;
   background-position: right center;
   background-size: contain;
-  background-image: url('/static/bg-newsletter-bottom-mobile.svg');
+  background-image: url('/static/bg-newsletter-bottom.svg');
 
-  ${media.greaterThan('large')`
-    background-repeat: repeat;
-    background-image: url('/static/bg-newsletter-bottom-desktop.png');
-  `}
 `;
