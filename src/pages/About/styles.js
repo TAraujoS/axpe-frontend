@@ -189,23 +189,6 @@ export const Hero = styled.div`
     }
   }
 
-  /* & > div {
-    padding: 40px 30px;
-
-    ${media.greaterThan('medium')`
-      padding: 60px 10%;
-
-      h3 {
-        width: 60%;
-      }
-
-      div {
-        width: 70%;
-      }
-    `}
-  } */
-
-
     div {
       width: 100%;
       height: 100%;
@@ -220,13 +203,14 @@ export const Hero = styled.div`
       p {
         position: absolute;
         top: 20%;
-        width: 100%;
+        width: 95%;
         font-size: 48px;
         line-height: 100%;
         padding: 16px;
         color: ${({ theme }) => theme.colors.white};
         font-weight: ${({ theme }) => theme.fontsWeight.normal};
-    
+        max-width: 370px;
+
         strong {
           color: ${({ theme }) => theme.colors.orange};
           font-weight: ${({ theme }) => theme.fontsWeight.normal};
@@ -234,6 +218,8 @@ export const Hero = styled.div`
     
         ${media.greaterThan('medium')`
           font-size: 45px;
+          width: 100%;
+          max-width: none;
         `}
 
         ${media.greaterThan('medium')`
@@ -273,6 +259,10 @@ export const Title = styled.h3`
     line-height: 42px;
   `}
 
+  span {
+    white-space: nowrap;
+  }
+  
   strong {
     font-weight: ${({ theme }) => theme.fontsWeight.normal};
     color: ${({ theme }) => theme.colors.orange};
@@ -280,6 +270,10 @@ export const Title = styled.h3`
 `;
 
 export const Text = styled.div`
+  ${media.greaterThan('medium')`
+    min-width: 560px;
+  `}
+    
   p {
     font-size: 18px;
     line-height: 25px;
@@ -298,7 +292,6 @@ export const Block = styled.article`
   ${media.lessThan('767px')`
     display: flex;
     flex-direction: column-reverse;
-    /* padding-top: 116px; */
 
     ${props => props.dataTemplate === '5_full' && css`
         padding-top: 200px;
@@ -593,9 +586,6 @@ export const BlockCol = styled.div`
 `;
 
 export const BlockTitle = styled(Title)`
-  /* position: absolute;
-  top: 0;
-  left: 0; */
   display: flex;
   width: 75%;
   max-width: 250px;
