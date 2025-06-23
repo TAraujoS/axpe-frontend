@@ -171,7 +171,7 @@ function About() {
             </BlockTitle>
             <Text>
               <p>
-              Mais do que vender imóveis, a Axpe significa o ato de morar. Desde 2002, construímos pontes entre pessoas e espaços com intenção, sensibilidade e curadoria. Atuamos em São Paulo, litoral, campo e montanha — e também em Portugal — criando encontros significativos entre estilos de vida e formas de habitar.
+                Mais do que vender imóveis, a Axpe significa o ato de morar. Desde 2002, construímos pontes entre pessoas e espaços com intenção, sensibilidade e curadoria. Atuamos em São Paulo, litoral, campo e montanha — e também em Portugal — criando encontros significativos entre estilos de vida e formas de habitar.
               </p>
             </Text>
           </BlockCol>
@@ -185,6 +185,19 @@ function About() {
             <Text>
               <p>
                 Acreditamos que o imóvel certo muda tudo. Porque morar bem é mais do que localização ou metragem: é encontrar um lugar que conversa com quem você é, com o ritmo da sua vida e com o que importa para você. É por isso que, na Axpe, cada escolha é guiada por escuta, empatia e repertório.
+              </p>
+            </Text>
+          </BlockCol>
+        </Block>
+
+        <Block dataTemplate="1">
+          <BlockCol dataType="text">
+            <BlockTitle>
+              Como fazemos <strong>diferente</strong>
+            </BlockTitle>
+            <Text>
+              <p>
+              Nosso time é formado por experts em curadoria imobiliária, pessoas com visão de mercado, sensibilidade estética e uma habilidade rara: transformar busca em encontro. Combinamos tecnologia com tato, dados com intuição, eficiência com design. Cada detalhe é pensado com rigor, porque o detalhe é tudo.
               </p>
             </Text>
           </BlockCol>
@@ -224,11 +237,7 @@ function About() {
             </BlockTitle>
             <Text>
               <p>
-                Na Axpe, seguimos as regras do mercado, cumprimos todas as leis,
-                e recolhemos todos os impostos. Tintim por tintim. Não abrimos
-                espaço para o jeitinho e não conduzimos negócios informalmente.
-                A Axpe escolheu o lado que ela quer estar - como se diz no
-                dialeto caipira: “fazemos tudo nos conforme”.
+              Axpe é uma pequena aldeia no País Basco, Espanha. É um local especial onde a quietude é quebrada apenas pelo sininho das ovelhas no pasto. Em basco, Axpe (diz-se Aspe) significa “casa ao pé da pedra” em referência à montanha Anboto.
               </p>
             </Text>
           </BlockCol>

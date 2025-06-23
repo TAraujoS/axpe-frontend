@@ -106,7 +106,7 @@ export const Nav = styled.nav`
 
 export const Hero = styled.div`
   margin-bottom: 30px;
-  height: 488px;
+  height: 500px;
   background-color: #E1DFDF;
   width: 100%;
 
@@ -213,7 +213,7 @@ export const Hero = styled.div`
       margin: 0 auto;
       position: relative;
 
-      ${media.greaterThan('768px')`
+      ${media.greaterThan('medium')`
         max-width: 1120px;
       `}
 
@@ -232,11 +232,11 @@ export const Hero = styled.div`
           font-weight: ${({ theme }) => theme.fontsWeight.normal};
         }
     
-        ${media.greaterThan('768px')`
+        ${media.greaterThan('medium')`
           font-size: 45px;
         `}
 
-        ${media.greaterThan('large')`
+        ${media.greaterThan('medium')`
           top: 20%;
           left: 10%;
           width: 60%;
@@ -248,12 +248,12 @@ export const Hero = styled.div`
        span {
         position: absolute;
         top: 70%;
-        right: 10%;
-        width: 80%;
+        padding: 16px;
+        width: 85%;
         font-size: 24px;
         color: #676767;
 
-        ${media.greaterThan('large')`
+        ${media.greaterThan('medium')`
           top: 60%;
           right: 10%;
           width: 35%;
@@ -597,13 +597,18 @@ export const BlockTitle = styled(Title)`
   top: 0;
   left: 0; */
   display: flex;
-  width: 100%;
+  width: 75%;
+  max-width: 250px;
   padding: 30px 30px 10px 00px;
   flex-direction: ${({ isLast }) => (isLast ? 'row' : 'column')};
-  /* min-height: 116px; */
   margin-bottom: 0;
   background: ${({ theme }) => theme.colors.greyLight};
   gap: ${({ isLast }) => (isLast ? ' 8px' : '0px')};
+
+  ${media.greaterThan('767px')`
+    width: 50%;
+    max-width: 500px;
+  `}
 `;
 
 export const BlockImage = styled.figure`

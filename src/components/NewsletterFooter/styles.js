@@ -34,7 +34,6 @@ export const NewsletterTextDesktop = styled.div`
 
   h4:nth-child(1),
   p:nth-child(2) {
-    /* display: none; */
     ${media.greaterThan('medium')`
       display: block;
     `}
