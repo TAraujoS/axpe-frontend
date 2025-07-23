@@ -95,7 +95,7 @@ function Home({ hero, components }) {
 
   const renderComponents = useCallback((type, component) => {
     switch (type) {
-      case 'banner':
+      case 'banner': // INATIVO NO ADMIN
         return (
           <>
             <Banner
