@@ -22,6 +22,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  compress: false,
   async headers() {
     return [
       {
