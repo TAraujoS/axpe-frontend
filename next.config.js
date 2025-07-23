@@ -14,7 +14,8 @@ const nextConfig = {
       'admin.axpe.com.br',
       'images.axpe.com.br',
       'axpe.com.br',
-      'www-hml.axpe.com.br'
+      'www-hml.axpe.com.br',
+      'axpe-frontend.vercel.app',
     ],
     formats: [ 'image/avif', 'image/webp' ],
   },
