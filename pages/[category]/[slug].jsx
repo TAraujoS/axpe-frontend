@@ -105,8 +105,28 @@ function Building(props) {
     };
   }, []);
 
-  if (!data) return null;
-
+  if (property === null) {
+    return (
+      <Container>
+        <Head>
+          <title>Imóvel não encontrado</title>
+        </Head>
+        <div style={{ padding: '2rem', textAlign: 'center', height: '100vh', alignContent: 'center' }}>
+          <h1>Imóvel não encontrado</h1>
+          <p>Esse imóvel não existe ou foi removido do nosso sistema.</p>
+        </div>
+      </Container>
+    );
+  }
+  
+  if (!data) {
+    return (
+      <Container>
+        <p style={{ padding: '2rem', textAlign: 'center' }}>Carregando dados do imóvel...</p>
+      </Container>
+    );
+  }
+  
   return (
     <>
       <Head>
@@ -202,6 +222,22 @@ export async function getServerSideProps({ params }) {
   const slugParts = slug ? slug.split('-') : [];
   const reference = slugParts[slugParts.length - 1];
   const response = await Api.Building.getPage(reference);
+
+  if (!response || !response.building) {
+    return {
+      props: {
+        reference,
+        property: null,
+        meta: {
+          title: 'Imóvel não encontrado',
+          description: SeoData.description,
+          image: '',
+        },
+      },
+    };
+  }
+
+
   const buildingCategory = response.building.category || '';
 
   const buildingLocationTitle = response.building.address
@@ -245,7 +281,7 @@ export async function getServerSideProps({ params }) {
   const metaTitle = response.building.infos.metaTitle;
   const metaDescription = response.building.infos.metaDescription;
 
-  const pageTitle = metaTitle || `${buildingLocationTitle} com ${buildingArea}m² e ${buildingBedrooms} dormitórios ${SeoData.shortTitle}`;
+  const pageTitle = metaTitle || buildingLocationTitle || `${response.building.address.state} ${response.building.reference}` || SeoData.title;
   const pageDesc = metaDescription || `${pageDescPrefix} ${buildingCategory.toLowerCase()} ${buildingLocation} com ${buildingArea}m², ${buildingBedrooms} com dormitórios. O local ideal para quem é apaixonado por arquitetura e design!`;
   const pageBanner = `${
     response.building.gallery ? response.building.gallery[0].src : ''

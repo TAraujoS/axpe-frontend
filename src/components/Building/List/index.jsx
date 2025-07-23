@@ -277,6 +277,7 @@ function BuildingList({
                             className="next-image"
                             sizes="(max-width: 768px) 100vw, 60vw"
                             loading="lazy"
+                            unoptimized
                           />
                         </ImageWrapper>
                       </LinkTag>
@@ -347,7 +348,7 @@ function BuildingList({
                 ) : !!values.sell && values.valueOnlyConsults ? (
                   <Price page={page}>Valores sob consulta</Price>
                 ) : null}
-                {/* {!!values.rent &&
+                {!!values.rent &&
                 !values.valueOnlyConsults &&
                 (!searchFunnel ||
                   !searchFunnel.finality ||
@@ -360,7 +361,7 @@ function BuildingList({
                   </Price>
                 ) : !!values.rent && values.valueOnlyConsults ? (
                   <Price page={page}>Valores sob consulta</Price>
-                ) : <Price page={page}></Price>} */}
+                ) : <Price page={page}></Price>}
               </div>
             </LinkTag>
           </Link>

@@ -297,8 +297,11 @@ function Home({ hero, components }) {
         listBuildingsSeen.data[0],
         10
       );
-
-      setBuildingsSeen(listBuildingsSeen.data);
+      const filteredList = listBuildingsSeen.data.filter(
+        (item, index, self) =>
+          index === self.findIndex(b => b.reference === item.reference)
+      );
+      setBuildingsSeen(filteredList);
 
       if (listForYou && listForYou.total) {
         setBuildingsForYou(listForYou.data);
@@ -332,6 +335,7 @@ function Home({ hero, components }) {
                   height={720}
                   priority
                   placeholder="empty"
+    
                 />
               </PlaceholderImageDesk>
 
@@ -343,6 +347,7 @@ function Home({ hero, components }) {
                   height={375}
                   priority
                   placeholder="empty"
+    
                 />
               </PlaceholderImageMob>
             </>

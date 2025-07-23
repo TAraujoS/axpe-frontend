@@ -83,15 +83,17 @@ function BuildingCard({
                       layout= 'fill'
                       sizes="(max-width: 768px) 100vw, 50vw"
                       loading='lazy'
+
                     />
                   </div>
                   <div className="image-desktop">
                     <Image
                       src={image.src}
                       alt={`Slide ${index + 1}`}
-                       layout= 'fill'
+                      layout= 'fill'
                       sizes="(max-width: 768px) 100vw, 50vw"
                       loading='lazy'
+
                     />
                   </div>
                 </React.Fragment>

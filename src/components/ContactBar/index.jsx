@@ -170,7 +170,7 @@ function ContactBar() {
   ];
 
   const handleWhatsapp = () => {
-    const url = `https://wa.me/551130743600?text=Olá, vim através do site, gostaria de falar com um corretor, meu nome é ${values.name}, ${values.message}`;
+    const url = `https://wa.me/551130743600?text=Olá, vim através do site, gostaria de falar com um corretor!`;
         
     window.open(url, '_blank');
   }
@@ -286,7 +286,7 @@ function ContactBar() {
           {}
         );
 
-        if (iframeSelected) {
+        if (iframeSelected && iframeSelected.src) {
           if (iframeSelected.src.search('locacao') >= 0) {
             paramsObj.value = currentBuilding.values.rent;
           } else if (iframeSelected.src.search('lancamento') >= 0) {
@@ -294,7 +294,7 @@ function ContactBar() {
           } else {
             paramsObj.value = currentBuilding.values.sell;
           }
-
+        
           params = getParamsFromObject(paramsObj);
           setIframeUrl(
             `${process.env.config.siteUrl}${iframeSelected.src}${params}`
@@ -351,7 +351,7 @@ function ContactBar() {
   
   let message = `Olá, gostaria de saber mais sobre o imóvel {reference}{areaTotal}{areaUseful}{bedrooms}{parking}. `+ pageUrl;
   
-  if(isBuilding) {
+  if(isBuilding && currentBuilding) {
     message = message.replace('{reference}', currentBuilding.reference);
     message = message.replace('{areaTotal}', currentBuilding.infos.areaTotal ? ', com ' + currentBuilding.infos.areaTotal +' m²': '');
     message = message.replace('{areaUseful}', currentBuilding.infos.areaUsefulStart ? ', com ' +  currentBuilding.infos.areaUsefulStart + ' m²' : '');

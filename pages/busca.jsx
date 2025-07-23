@@ -111,7 +111,7 @@ function Search({ total, totalPages, data, banner, locals }) {
   const [ dataLoaded, setDataLoaded ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ suggestions, setSuggestions ] = useState(null);
-  const [ isOrderListActive, setIsOrderListActive ] = useState(false);
+  const [ isOrderListActive, setIsOrderListActive ] = useState(true);
 
   const setDataInitialGTM = useCallback(() => {
     GTM.dataLayerPush({
@@ -386,8 +386,8 @@ function Search({ total, totalPages, data, banner, locals }) {
   return (
     <>
       <Head>
-        <title>{`Busca ${source} - Os Melhores imoveis para você!`}</title>
-        <meta name="description" content={`Confira os melhores imoveis em ${source} e encontre o apartamento ideal!`}/>
+        <title>{`Busca ${source ? source : reference} - Os Melhores imoveis para você!`}</title>
+        <meta name="description" content={`Confira os melhores imoveis ${source ? 'em' + source :''} e encontre o apartamento ideal!`}/>
         <meta name="robots" content="noindex,follow" />
         <link rel="canonical" href={canonicalPath} />
       </Head>
@@ -504,7 +504,7 @@ function Search({ total, totalPages, data, banner, locals }) {
               <Buildings>
                 {total ? (
                   buildings.map((building, buildingIndex) => (
-                    <>
+                    <React.Fragment key={`building-searchitem-${building.reference}-${buildingIndex}`}>
                       {isOrderListActive ? (
                         <BuildingList
                           item={building}
@@ -566,10 +566,10 @@ function Search({ total, totalPages, data, banner, locals }) {
                           )}
                         </SearchBanner>
                       )}
-                    </>
+                    </React.Fragment>
                   ))
                 ) : (
-                  <BuildingsNotFound>
+                  <BuildingsNotFound key="building-searchnotfound">
                     <h6>
                       Não encontramos o imóvel que você procura <span>:(</span>
                     </h6>

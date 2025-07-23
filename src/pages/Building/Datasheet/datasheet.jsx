@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMain } from 'store/modules/main/actions';
+import SVG from 'react-inlinesvg';
 
 import Tag from 'components/Tag';
 import * as Caracteristics from 'pages/Building/Datasheet/caracteristics';
@@ -14,7 +15,7 @@ import {
     Neighborhood,
     GroupTags,
     BlockTwo,
-    Content,
+    // Content,
     BlockThree,
     Location,
     InfoContent,
@@ -24,21 +25,36 @@ import {
     PriceGroupMobile,
     CharacteristicsGrid,
     CharacteristicItem,
-    BuildingTitle
+    BuildingTitle,
+    Ref
 } from './styles';
-
+import { ButtonIcon } from '../../../components/Headerbar/styles';
+import Share from 'components/Share';
 import ILocation from 'assets/icons/location.svg';
 import ICheck from 'assets/icons/checked-grey.svg';
+import ShareIconSVG from 'assets/icons/share.svg';
+import { useRouter } from 'next/router';
 
 export default function Datasheet({ property }) {
     const dispatch = useDispatch();
-    const { type, infos, category, address, label, values, source, vista, title } = property;
+    const router = useRouter();
+    const { type, infos, category, address, label, values, source, vista, title, reference } = property;
     const { searchFunnel } = useSelector(state => state.main);
-    const hasTitle = infos.titleSite || infos.internalDescription;
+    const [ shareActive, setShareActive ] = useState(false);
+
+    const toggleShare = useCallback(() => {
+        setShareActive(!shareActive);
+      }, [ shareActive ]);
+    
+    const shareOnClose = useCallback(() => {
+      setShareActive(!shareActive);
+    }, [ shareActive ]);
+    
+    // const hasTitle = infos.titleSite || infos.internalDescription;
 
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        `${address.local}, ${address.state}, ${address.country} ${address.zipcode}, 15z`
-    )}`;
+        `${address.local}, ${address.state}, ${address.country}`
+      )}`;
 
     const toggleModalMoreInfo = () => {
       dispatch(
@@ -48,13 +64,26 @@ export default function Datasheet({ property }) {
         })
       );
     };
+
+    const totalValidVistaFields = [
+        ...Object.entries(vista.Caracteristicas || {}),
+        ...Object.entries(vista.InfraEstrutura || {})
+      ].reduce((count, [ _, value ]) => {
+        if (value === 'Sim' || (!isNaN(value) && Number(value) > 0)) {
+          return count + 1;
+        }
+        return count;
+      }, 0);
+      
+    const hasAtLeastThreeVistaInfos = totalValidVistaFields >= 3;
+
     return (
         <>
             <MainContainer>
                 <DatasheetContent>
                     <BlockOne type={property.type}>
-                        <Neighborhood>{address.local}</Neighborhood>
-
+                        <Neighborhood>{address.local ?? address.state}<Ref> Ref {reference}</Ref></Neighborhood>
+                        
                         <BuildingTitle>{title}</BuildingTitle>
 
                         {type === 'lancamento' && (
@@ -91,6 +120,16 @@ export default function Datasheet({ property }) {
                                     <img src={ILocation} alt="ícone de localização" />
                                     <p>Ver localização</p>
                                 </a>
+                                <ButtonIcon
+                                    type="button"
+                                    onClick={toggleShare}
+                                    className="btn-share holos-search-header-button"
+                                    data-showcase="Busca"
+                                    data-label="Share"
+                                    aria-label='Compartilhar'
+                                >
+                                    <SVG src={ShareIconSVG} uniquifyIDs={true} aria-hidden="true"/>
+                                </ButtonIcon>
                             </Location>
                         </GroupInfo>
                     </BlockOne>
@@ -171,7 +210,17 @@ export default function Datasheet({ property }) {
                             start={infos.bedroomsStart}
                             end={infos.bedroomsEnd}
                         />
-                        <Caracteristics.Parking parking={infos.parking} />
+
+                        <Caracteristics.Parking
+                            parking={
+                                infos.parking && Number(infos.parking) > 0
+                                ? infos.parking
+                                : vista?.Caracteristicas?.['Vagas'] && Number(vista.Caracteristicas['Vagas']) > 0
+                                ? Number(vista.Caracteristicas['Vagas'])
+                                : 0
+                            }
+                        />
+
                         <Caracteristics.ParkingBetween
                             start={infos.parkingStart}
                             end={infos.parkingEnd}
@@ -186,20 +235,20 @@ export default function Datasheet({ property }) {
                             )}
                     </BlockThree>
 
-                    {hasTitle && (
+                    {/* {hasTitle && (
                         <BlockTwo>
                             <Content>{infos.internalDescription}</Content>
                         </BlockTwo>
-                    )}
+                    )} */}
 
-                    {vista && vista.length > 0 && (
+                    {hasAtLeastThreeVistaInfos && (
                         <BlockTwo>
                             <CharacteristicsGrid>
                                 {[
                                     ...Object.entries(vista.Caracteristicas || {}),
                                     ...Object.entries(vista.InfraEstrutura || {})
                                 ]
-                                    .filter(([ _, value ]) => value === 'Sim')
+                                    .filter(([ _, value ]) => value === 'Sim' || (!isNaN(value) && Number(value) > 0))
                                     .map(([ label ]) => (
                                         <CharacteristicItem key={label}>
                                             <img src={ICheck} alt="ícone de Check" />
@@ -253,7 +302,12 @@ export default function Datasheet({ property }) {
 
                     <ButtonMoreInfo onClick={toggleModalMoreInfo}>Fale com um corretor</ButtonMoreInfo>
                 </PriceGroupDesktop>
-
+                <Share
+                    active={shareActive}
+                    path={router.asPath}
+                    title={`Axpe - Resultado de Busca`}
+                    onClose={shareOnClose}
+                />
             </MainContainer>
         </>
     );

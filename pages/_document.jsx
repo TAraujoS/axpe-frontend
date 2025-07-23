@@ -50,6 +50,12 @@ export default class MyDocument extends Document {
           <meta name="application-name" content="Axpe" />
           <link rel="manifest" href="/manifest.json" />
 
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -134,9 +140,29 @@ export default class MyDocument extends Document {
             }}
           />
 
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-PH2WRPFM');`,
+            }}
+          />
+
           <HeaderStyles />
         </Head>
         <body>
+        <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-PH2WRPFM"
+              height="0"
+              width="0"
+              title='Google Tag Manager'
+              style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
+          </noscript>
+
           <BodyScriptsStart />
           <Main />
           <BodyScriptsEnd />
