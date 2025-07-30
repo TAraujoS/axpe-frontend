@@ -32,6 +32,7 @@ import {
   HeroItemInfo,
 } from 'pages/Home/styles';
 import CategorySection from '../src/components/CategorySection';
+import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 import { PlaceholderImageDesk, PlaceholderImageMob } from '../src/pages/Home/styles';
 
 const SliderNew = dynamic(() => import('components/SliderNew'), {
@@ -235,23 +236,13 @@ function Home({ hero, components }) {
     
     return (
       <HeroItemWrapper hasContent={hasContent}>
-        <div className="hero-image mobile">
-          <Image
-            src={item.images.mobile}
-            alt={item.title}
-            layout='fill'
-            priority={itemIndex === 0}
-          />
-        </div>
-        <div className="hero-image desktop">
-          <Image
-            src={item.images.desktop}
-            alt={item.title}
-            layout='fill'
-            priority={itemIndex === 0}
-            sizes="(max-width: 768px) 100vw, 1280px"
-          />
-        </div>
+        <ResponsiveHeroImage
+          mobileSrc={item.images.mobile}
+          desktopSrc={item.images.desktop}
+          alt={item.title}
+          priority={itemIndex === 0}
+          itemIndex={itemIndex}
+        />
         {hasContent && (
           <HeroItemInfo className="hero-info">
             {item.label && item.label == 'isExclusive' ? (
