@@ -74,7 +74,11 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA({
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(withPWA({
   ...nextConfig,
   pwa: {
     dest: 'public',
@@ -82,4 +86,4 @@ module.exports = withPWA({
     runtimeCaching,
     buildExcludes: [ /middleware-manifest\.json$/ ],
   },
-});
+}));
