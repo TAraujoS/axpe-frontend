@@ -70,6 +70,10 @@ export const Hero =  styled.div.attrs(() => ({
     content: inherit;
   }
 
+  .slick-list {
+    overflow: hidden;
+  }
+
   .slick-prev{
     right: inherit!important;
     left: 20px!important;
