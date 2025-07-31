@@ -1,8 +1,7 @@
-import React, { Fragment, useCallback, useState, useEffect, useRef } from 'react';
+import React, { Fragment, useCallback, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Api from 'services';
 
@@ -20,6 +19,7 @@ import BlockHighlighted from 'components/BlockHighlighted';
 import Tag from 'components/Tag';
 import NewsletterFooter from 'components/NewsletterFooter';
 import CategoryBannerVertical from 'components/CategoryBannerVertical';
+import LazyLoad from 'components/LazyLoad';
 
 // styles
 import {
@@ -33,7 +33,6 @@ import {
 } from 'pages/Home/styles';
 import CategorySection from '../src/components/CategorySection';
 import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
-import { PlaceholderImageDesk, PlaceholderImageMob } from '../src/pages/Home/styles';
 
 const SliderNew = dynamic(() => import('components/SliderNew'), {
   loading: () => <></>,
@@ -48,8 +47,6 @@ function Home({ hero, components }) {
   const [ buildingsSeen, setBuildingsSeen ] = useState([]);
   const [ buildingsForYou, setBuildingsForYou ] = useState([]);
   const [ heroItems, setHeroItems ] = useState([]);
-  const [ showSlider, setShowSlider ] = useState(false);
-  const sliderRef = useRef(null);
 
   const heroSettings = (totalItems) => ({
     dots: true,
@@ -67,32 +64,6 @@ function Home({ hero, components }) {
       </span>
     ),
   });
-
-  useEffect(() => {
-    if (!sliderRef.current) return;
-  
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setShowSlider(true);
-            observer.disconnect();
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.25
-      }
-    );
-  
-    observer.observe(sliderRef.current);
-  
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
 
   const renderComponents = useCallback((type, component) => {
     switch (type) {
@@ -125,16 +96,17 @@ function Home({ hero, components }) {
         );
       case 'exclusivity':
         return (
-          <Hero>
-            <SliderNew
-              type="full"
-              arrowsColor="white"
-              arrowsClassName="holos-home-exclusivity-arrow"
-              settings={heroSettings(component.items.length)}
-            >
-              {component.items.map((item, itemIndex) => (
-                <HeroItem key={`exclusivity-item-${itemIndex}`}>
-                  {item.link &&
+          <LazyLoad>
+            <Hero>
+              <SliderNew
+                type="full"
+                arrowsColor="white"
+                arrowsClassName="holos-home-exclusivity-arrow"
+                settings={heroSettings(component.items.length)}
+              >
+                {component.items.map((item, itemIndex) => (
+                  <HeroItem key={`exclusivity-item-${itemIndex}`}>
+                    {item.link &&
                     item.link.url &&
                     (item.link.target === 'blank' ||
                       item.link.target === 'self') && (
@@ -145,11 +117,12 @@ function Home({ hero, components }) {
                         {renderHeroItem(item, itemIndex)}
                       </HeroLink>
                     )}
-                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-                </HeroItem>
-              ))}
-            </SliderNew>
-          </Hero>
+                    {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                  </HeroItem>
+                ))}
+              </SliderNew>
+            </Hero>
+          </LazyLoad>
         );
         // case 'buildingsSquare':
       case 'buildingsGrid':
@@ -158,16 +131,17 @@ function Home({ hero, components }) {
        );
       case 'gallery':
         return (
-          <Hero>
-            <SliderNew
-              type="full"
-              arrowsColor="white"
-              arrowsClassName="holos-home-gallery-arrow"
-              settings={heroSettings(component.items.length)}
-            >
-              {component.items.map((item, itemIndex) => (
-                <HeroItem key={`gallery-item-${itemIndex}`}>
-                  {item.link &&
+          <LazyLoad>
+            <Hero>
+              <SliderNew
+                type="full"
+                arrowsColor="white"
+                arrowsClassName="holos-home-gallery-arrow"
+                settings={heroSettings(component.items.length)}
+              >
+                {component.items.map((item, itemIndex) => (
+                  <HeroItem key={`gallery-item-${itemIndex}`}>
+                    {item.link &&
                     (item.link_type === 'blank' ||
                       item.link_type === 'self') && (
                       <HeroLink
@@ -177,24 +151,26 @@ function Home({ hero, components }) {
                         {renderHeroItem(item, itemIndex)}
                       </HeroLink>
                     )}
-                  {!item.link ? renderHeroItem(item, itemIndex) : null}
-                </HeroItem>
-              ))}
-            </SliderNew>
-          </Hero>
+                    {!item.link ? renderHeroItem(item, itemIndex) : null}
+                  </HeroItem>
+                ))}
+              </SliderNew>
+            </Hero>
+          </LazyLoad>
         );
         case 'highlights':
           return (
-            <Hero>
-              <SliderNew
-                type="full"
-                arrowsColor="white"
-                arrowsClassName="holos-home-highlights-arrow"
-                settings={heroSettings(component.items.length)}
-              >
-                {component.items.map((item, itemIndex) => (
-                  <HeroItem key={`highlights-item-${itemIndex}`}>
-                    {item.link &&
+            <LazyLoad>
+              <Hero>
+                <SliderNew
+                  type="full"
+                  arrowsColor="white"
+                  arrowsClassName="holos-home-highlights-arrow"
+                  settings={heroSettings(component.items.length)}
+                >
+                  {component.items.map((item, itemIndex) => (
+                    <HeroItem key={`highlights-item-${itemIndex}`}>
+                      {item.link &&
                       item.link.url &&
                       (item.link.target === 'blank' ||
                         item.link.target === 'self') && (
@@ -205,11 +181,12 @@ function Home({ hero, components }) {
                           {renderHeroItem(item, itemIndex)}
                         </HeroLink>
                       )}
-                    {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-                  </HeroItem>
-                ))}
-              </SliderNew>
-            </Hero>
+                      {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                    </HeroItem>
+                  ))}
+                </SliderNew>
+              </Hero>
+            </LazyLoad>
           );
       case 'contact':
         return (
@@ -315,58 +292,30 @@ function Home({ hero, components }) {
         <h1 className="sr-only">
           Axpe | Imóveis especiais São Paulo
         </h1>
-        <Hero ref={sliderRef}>
-          {!showSlider ? (
-            <>
-              <PlaceholderImageDesk>
-                <Image
-                  src="/static/homedesk-placeholder.png"
-                  alt="Imagem inicial do banner desktop"
-                  width={1280}
-                  height={720}
-                  priority
-                  placeholder="empty"
-    
-                />
-              </PlaceholderImageDesk>
-
-              <PlaceholderImageMob>
-                <Image
-                  src="/static/homemob-placeholder.png"
-                  alt="Imagem inicial do banner mobile"
-                  width={375}
-                  height={375}
-                  priority
-                  placeholder="empty"
-    
-                />
-              </PlaceholderImageMob>
-            </>
-          ) : (
-            <SliderNew
-              type="full"
-              arrowsColor="white"
-              arrowsClassName="holos-home-hero-arrow"
-              settings={heroSettings(heroItems.length)}
-            >
-              {randomizeHeroItems().map((item, itemIndex) => (
-                <HeroItem key={`hero-item-${itemIndex}`}>
-                  {item.link &&
-                    item.link.url &&
-                    (item.link.target === 'blank' ||
-                      item.link.target === 'self') && (
-                      <HeroLink
-                        href={item.link.url}
-                        target={`_${item.link.target}`}
-                      >
-                        {renderHeroItem(item, itemIndex)}
-                      </HeroLink>
-                    )}
-                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-                </HeroItem>
-              ))}
-            </SliderNew>
-          )}
+        <Hero>
+          <SliderNew
+            type="full"
+            arrowsColor="white"
+            arrowsClassName="holos-home-hero-arrow"
+            settings={heroSettings(heroItems.length)}
+          >
+            {randomizeHeroItems().map((item, itemIndex) => (
+              <HeroItem key={`hero-item-${itemIndex}`}>
+                {item.link &&
+                  item.link.url &&
+                  (item.link.target === 'blank' ||
+                    item.link.target === 'self') && (
+                    <HeroLink
+                      href={item.link.url}
+                      target={`_${item.link.target}`}
+                    >
+                      {renderHeroItem(item, itemIndex)}
+                    </HeroLink>
+                  )}
+                {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+              </HeroItem>
+            ))}
+          </SliderNew>
         </Hero>
 
         {components &&
