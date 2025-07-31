@@ -59,12 +59,11 @@ export const Hero =  styled.div.attrs(() => ({
 }))`
   margin-bottom: 10px;
   position: relative;
-  height: 100%;
-  height: 550px;
+  width: 100%;
   min-height: 550px;
 
   ${media.lessThan('medium')`
-    height: 650px;
+    min-height: 650px;
   `}
 
   .slick-slider:before{
