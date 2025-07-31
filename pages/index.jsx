@@ -2,8 +2,8 @@ import React, { Fragment, useCallback, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import Api from 'services';
+import SliderNew from 'components/SliderNew';
 
 // actions
 import { setMain } from 'store/modules/main/actions';
@@ -34,11 +34,7 @@ import {
 import CategorySection from '../src/components/CategorySection';
 import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
-const SliderNew = dynamic(() => import('components/SliderNew'), {
-  loading: () => <></>,
-});
-
-function Home({ hero, components }) {
+function Home({ heroItems, components }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -46,7 +42,6 @@ function Home({ hero, components }) {
   } = router;
   const [ buildingsSeen, setBuildingsSeen ] = useState([]);
   const [ buildingsForYou, setBuildingsForYou ] = useState([]);
-  const [ heroItems, setHeroItems ] = useState([]);
 
   const heroSettings = (totalItems) => ({
     dots: true,
@@ -198,14 +193,6 @@ function Home({ hero, components }) {
     }
   }, []);
 
-  const randomizeHeroItems = useCallback(() => {
-    if (Object.keys(heroItems).length === 0) {
-      setHeroItems(shuffle(hero));
-    }
-
-    return heroItems;
-  });
-
   const renderHeroItem = (item, itemIndex) => {
     const hasContent = item.title || item.content || item.text ? true : false;
     const itemLink = item.link ? item.link : item.link.url
@@ -299,7 +286,7 @@ function Home({ hero, components }) {
             arrowsClassName="holos-home-hero-arrow"
             settings={heroSettings(heroItems.length)}
           >
-            {randomizeHeroItems().map((item, itemIndex) => (
+            {heroItems.map((item, itemIndex) => (
               <HeroItem key={`hero-item-${itemIndex}`}>
                 {item.link &&
                   item.link.url &&
@@ -358,7 +345,8 @@ function Home({ hero, components }) {
 Home.getInitialProps = async () => {
   const response = await Api.Home.getPage();
   const components = response.components;
-  return { hero: response.hero, components };
+  const heroItems = shuffle(response.hero);
+  return { heroItems, components };
 };
 
 export default Home;
