@@ -10,6 +10,7 @@ const envConfig = JSON.parse(fs.readFileSync(`./config/${nodeEnv}.json`, 'utf-8'
 
 const nextConfig = {
   images: {
+    unoptimized: true,
     domains: [
       'admin.axpe.com.br',
       'images.axpe.com.br',

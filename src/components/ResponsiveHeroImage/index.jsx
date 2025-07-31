@@ -26,6 +26,7 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
             priority={priority}
             sizes="(max-width: 375px) 375px, (max-width: 640px) 640px, (max-width: 750px) 750px, (max-width: 828px) 828px, (max-width: 1080px) 1080px, (max-width: 1200px) 1200px, 1920px"
             objectFit="cover"
+            quality={65}
           />
         </div>
         <div className="hero-image desktop">
@@ -36,6 +37,7 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
             priority={priority}
             sizes="(max-width: 768px) 100vw, 1280px"
             objectFit="cover"
+            quality={65}
           />
         </div>
       </>
@@ -53,6 +55,7 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
           priority={priority}
           sizes="(max-width: 375px) 375px, (max-width: 640px) 640px, (max-width: 750px) 750px, (max-width: 828px) 828px, (max-width: 1080px) 1080px, (max-width: 1200px) 1200px, 1920px"
           objectFit="cover"
+          quality={65}
         />
       </div>
     );
@@ -68,6 +71,7 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
           priority={priority}
           sizes="(max-width: 768px) 100vw, 1280px"
           objectFit="cover"
+          quality={65}
         />
       </div>
     );
@@ -83,6 +87,7 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
         priority={priority}
         sizes="(max-width: 375px) 375px, (max-width: 640px) 640px, (max-width: 750px) 750px, (max-width: 828px) 828px, (max-width: 1080px) 1080px, (max-width: 1200px) 1200px, 1920px"
         objectFit="cover"
+        quality={65}
       />
     </div>
   );

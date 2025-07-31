@@ -35,6 +35,8 @@ import CategorySection from '../src/components/CategorySection';
 import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
+  // eslint-disable-next-line no-console
+  console.log('HomePage Version: 1.1 - LCP Fix');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
