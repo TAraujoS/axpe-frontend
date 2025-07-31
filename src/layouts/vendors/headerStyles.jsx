@@ -21,7 +21,7 @@ function HeaderStyles() {
         }}
       />
 
-      <Script
+      {/* <Script
         id="hotjar-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -36,15 +36,15 @@ function HeaderStyles() {
           })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
         `,
         }}
-      />
+      /> */}
 
-      <Script
+      {/* <Script
         src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
         strategy="afterInteractive"
-      />
-      <Script id="onesignal-init" strategy="afterInteractive">
+      /> */}
+      {/* <Script id="onesignal-init" strategy="afterInteractive">
         {`window.OneSignal = window.OneSignal || [];`}
-      </Script>
+      </Script> */}
       {/* <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=geometry`}></script> */}
     </>
   )

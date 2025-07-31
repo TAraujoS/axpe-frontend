@@ -1,10 +1,10 @@
 import React from 'react';
-import Script from 'next/script';
+// import Script from 'next/script';
 
 function BodyScripts() {
   return (
     <>
-      <Script
+      {/* <Script
         id="google-platform"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -20,8 +20,8 @@ function BodyScripts() {
           }(document, 'script', 'google-jsapi'));
         `,
         }}
-      />
-      <Script
+      /> */}
+      {/* <Script
         id="facebook-sdk"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -46,8 +46,8 @@ function BodyScripts() {
           }(document, 'script', 'facebook-jssdk'));
         `,
         }}
-      />
-      <Script
+      /> */}
+      {/* <Script
         id="zoho-marketing"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -55,8 +55,8 @@ function BodyScripts() {
           var w=window;var p = w.location.protocol;if(p.indexOf("http") < 0){p = "http"+":";}var d = document;var f = d.getElementsByTagName('script')[0],s = d.createElement('script');s.type = 'text/javascript'; s.async = false; if (s.readyState){s.onreadystatechange = function(){if (s.readyState=="loaded"||s.readyState == "complete"){s.onreadystatechange = null;try{loadwaprops("27218d28c96aa859ea49011ad5ef59a6c","2a3c48c179e1acc2b3d2af3e628508ae6","2e7e5598790972a27af6c098dedb76fa772f384f8d12b7f6c","2df7b610b70ebb93534744ad4cd5086a4","0.0");}catch(e){}}};}else {s.onload = function(){try{loadwaprops("27218d28c96aa859ea49011ad5ef59a6c","2a3c48c179e1acc2b3d2af3e628508ae6","2e7e5598790972a27af6c098dedb76fa772f384f8d12b7f6c","2df7b610b70ebb93534744ad4cd5086a4","0.0");}catch(e){}};};s.src =p+"//marketinghub.zoho.com/hub/js/WebsiteAutomation.js";f.parentNode.insertBefore(s, f);
         `,
         }}
-      />
-      <Script
+      /> */}
+      {/* <Script
         id="zoho-salesiq"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -64,8 +64,8 @@ function BodyScripts() {
           var $zoho= $zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"d7451b41949fea5af35a3975d980f7ce764b727d5cf769b6ecc8ae2fcedfb40b1a2010ab7b6727677d37b27582c0e9c4", values:{},ready:function(){$zoho.salesiq.floatbutton.visible("hide");}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);
         `,
         }}
-      />
-      <Script
+      /> */}
+      {/* <Script
         id="zoho-utm"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -221,12 +221,12 @@ function BodyScripts() {
           };
         `,
         }}
-      />
-      <Script
+      /> */}
+      {/* <Script
         id="cloudfront-loader"
         strategy="afterInteractive"
         src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/89391abb-8927-4477-85f4-0f3b30e8185c-loader.js"
-      />
+      /> */}
     </>
   );
 }
