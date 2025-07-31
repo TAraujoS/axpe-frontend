@@ -96,7 +96,7 @@ function Home({ hero, components }) {
         );
       case 'exclusivity':
         return (
-          <LazyLoad>
+          <LazyLoad placeholderHeight={{ mobile: '650px', desktop: '550px' }}>
             <Hero>
               <SliderNew
                 type="full"
@@ -131,7 +131,7 @@ function Home({ hero, components }) {
        );
       case 'gallery':
         return (
-          <LazyLoad>
+          <LazyLoad placeholderHeight={{ mobile: '650px', desktop: '550px' }}>
             <Hero>
               <SliderNew
                 type="full"
@@ -160,7 +160,7 @@ function Home({ hero, components }) {
         );
         case 'highlights':
           return (
-            <LazyLoad>
+            <LazyLoad placeholderHeight={{ mobile: '650px', desktop: '550px' }}>
               <Hero>
                 <SliderNew
                   type="full"
