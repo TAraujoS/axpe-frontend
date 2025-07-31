@@ -36,7 +36,7 @@ import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 1.2 - Dynamic Imports');
+  console.log('HomePage Version: 1.3 - Dynamic Imports');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
