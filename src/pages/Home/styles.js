@@ -70,8 +70,22 @@ export const Hero =  styled.div.attrs(() => ({
     content: inherit;
   }
 
+  .slick-slider {
+    overflow: hidden;
+  }
+
   .slick-list {
     overflow: hidden;
+  }
+
+  .slick-track {
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  .slick-slide {
+    width: 100% !important;
+    flex-shrink: 0;
   }
 
   .slick-prev{
