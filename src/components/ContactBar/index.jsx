@@ -46,6 +46,7 @@ const registrySchema = Yup.object().shape({
 const formSuccessPageUrl = `${process.env.config.siteUrl}/forms/imovel/sucesso.html`;
 
 function ContactBar() {
+  const [ isMounted, setIsMounted ] = useState(false);
   const router = useRouter();
   const refForm = useRef(null);
   const dispatch = useDispatch();
@@ -79,6 +80,10 @@ function ContactBar() {
         setSubmitting(false);
       },
     });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const iframes = [
     {
@@ -357,6 +362,10 @@ function ContactBar() {
     message = message.replace('{areaUseful}', currentBuilding.infos.areaUsefulStart ? ', com ' +  currentBuilding.infos.areaUsefulStart + ' m²' : '');
     message = message.replace('{bedrooms}', currentBuilding.infos.bedrooms ? ', ' + currentBuilding.infos.bedrooms + (parseInt(currentBuilding.infos.bedrooms) > 1 ? ' quartos' : ' quarto') : '');
     message = message.replace('{parking}', currentBuilding.infos.parking ? ' e ' + currentBuilding.infos.parking + (parseInt(currentBuilding.infos.parking) > 1 ? ' vagas' : ' vaga') : '');
+  }
+
+  if (!isMounted) {
+    return null;
   }
 
   return (
