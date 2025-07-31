@@ -4,15 +4,6 @@ import Script from 'next/script';
 function BodyScripts() {
   return (
     <>
-      <noscript>
-        <iframe
-          title="google-tag-manager"
-          src="https://www.googletagmanager.com/ns.html?id=GTM-PH2WRPFM"
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        ></iframe>
-      </noscript>
       <Script
         id="cookieyes"
         strategy="afterInteractive"
@@ -23,3 +14,4 @@ function BodyScripts() {
 }
 
 export default BodyScripts;
+  

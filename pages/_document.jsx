@@ -1,11 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import Script from 'next/script';
 import { ServerStyleSheet } from 'styled-components';
-
-// layouts
-import HeaderStyles from 'layouts/vendors/headerStyles';
-import BodyScriptsStart from 'layouts/vendors/bodyScriptsStart';
-import BodyScriptsEnd from 'layouts/vendors/bodyScriptsEnd';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -141,17 +135,6 @@ export default class MyDocument extends Document {
             }}
           />
 
-          <Script id="google-tag-manager" strategy="afterInteractive">
-            {`
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-PH2WRPFM');
-            `}
-          </Script>
-
-          <HeaderStyles />
         </Head>
         <body>
         <noscript>
@@ -164,9 +147,7 @@ export default class MyDocument extends Document {
             ></iframe>
           </noscript>
 
-          <BodyScriptsStart />
           <Main />
-          <BodyScriptsEnd />
           <NextScript />
         </body>
       </Html>

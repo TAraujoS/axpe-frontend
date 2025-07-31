@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react'
 
+import BodyScriptsEnd from 'layouts/vendors/bodyScriptsEnd';
+import BodyScriptsStart from 'layouts/vendors/bodyScriptsStart';
+import HeaderStyles from 'layouts/vendors/headerStyles';
+
 // helpers
 import CookieUtmParams from 'helpers/cookieUtmParams';
 
@@ -31,7 +35,10 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0"
         />
       </Head>
+      <HeaderStyles />
+      <BodyScriptsStart />
       <Component {...pageProps} />
+      <BodyScriptsEnd />
     </Main>
   );
 }

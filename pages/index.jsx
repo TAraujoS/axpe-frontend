@@ -36,7 +36,7 @@ import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 1.4 - Layout shift fix');
+  console.log('HomePage Version: 1.5 - Script fix');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
