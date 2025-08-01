@@ -115,7 +115,6 @@ export const Hero =  styled.div.attrs(() => ({
     display: flex !important;
     align-items: center;
     pointer-events: none;
-    moz-pointer-events: none;
   }
 
   .slick-dots li{

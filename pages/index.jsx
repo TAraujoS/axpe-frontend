@@ -36,7 +36,13 @@ import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 1.9 - Responsive Hero Image');
+  console.log('HomePage Version: 2.0 - Responsive Hero Image');
+  
+  // Preload das imagens críticas (primeira imagem do hero)
+  const preloadImages = heroItems && heroItems.length > 0 ? [
+    heroItems[0].images.mobile,
+    heroItems[0].images.desktop
+  ] : [];
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -276,6 +282,21 @@ function Home({ heroItems, components }) {
         <meta name="description" content={SeoData.description} />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://www.axpe.com.br/" />
+        
+        {/* Preconnect para o servidor de imagens */}
+        <link rel="preconnect" href="https://admin.axpe.com.br" />
+        <link rel="dns-prefetch" href="https://admin.axpe.com.br" />
+        
+        {/* Preload das imagens críticas */}
+        {preloadImages.map((imageUrl, index) => (
+          <link
+            key={`preload-${index}`}
+            rel="preload"
+            as="image"
+            href={imageUrl}
+            type="image/png"
+          />
+        ))}
       </Head>
       <Container>
         <h1 className="sr-only">
