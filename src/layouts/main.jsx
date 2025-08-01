@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { useRouter } from 'next/router';
@@ -37,13 +37,14 @@ function Main({ children }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    // scroll issue related here https://github.com/zeit/next.js/issues/3303
-    const cachedPageHeight = [];
-    const html = document.querySelector('html');
-
-    Router.events.on('routeChangeStart', (a) => {
-      cachedPageHeight.push(document.documentElement.offsetHeight);
+  // Otimizado para evitar forced reflows
+  const handleRouteChangeStart = useCallback((a) => {
+    // Usar requestAnimationFrame para evitar forced reflows
+    requestAnimationFrame(() => {
+      const cachedPageHeight = document.documentElement.offsetHeight;
+      window.cachedPageHeight = window.cachedPageHeight || [];
+      window.cachedPageHeight.push(cachedPageHeight);
+      
       dispatch(
         setMain({
           searchFormActive: false,
@@ -52,19 +53,39 @@ function Main({ children }) {
       );
       dispatch(setLoading({ active: true }));
     });
+  }, [dispatch]);
 
-    Router.events.on('routeChangeComplete', () => {
-      html.style.height = 'initial';
+  const handleRouteChangeComplete = useCallback(() => {
+    requestAnimationFrame(() => {
+      const html = document.querySelector('html');
+      if (html) {
+        html.style.height = 'initial';
+      }
+      
       dispatch(setLoading({ active: false }));
+      
       if (location && location.pathname.search('busca') < 0) {
         window.scrollTo(0, 0);
       }
     });
+  }, [dispatch]);
 
-    Router.beforePopState(() => {
-      html.style.height = `${cachedPageHeight.pop()}px`;
-      return true;
+  const handleBeforePopState = useCallback(() => {
+    requestAnimationFrame(() => {
+      const html = document.querySelector('html');
+      if (html && window.cachedPageHeight && window.cachedPageHeight.length > 0) {
+        const height = window.cachedPageHeight.pop();
+        html.style.height = `${height}px`;
+      }
     });
+    return true;
+  }, []);
+
+  useEffect(() => {
+    // scroll issue related here https://github.com/zeit/next.js/issues/3303
+    Router.events.on('routeChangeStart', handleRouteChangeStart);
+    Router.events.on('routeChangeComplete', handleRouteChangeComplete);
+    Router.beforePopState(handleBeforePopState);
 
     // window.addEventListener('beforeinstallprompt', (e) => {
     //   e.preventDefault();
@@ -72,7 +93,12 @@ function Main({ children }) {
     // });
 
     dispatch(setLoading({ active: false }));
-  }, []);
+
+    return () => {
+      Router.events.off('routeChangeStart', handleRouteChangeStart);
+      Router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [handleRouteChangeStart, handleRouteChangeComplete, handleBeforePopState, dispatch]);
 
   return (
     <ThemeProvider theme={ThemeStyle}>
@@ -98,13 +124,14 @@ function Main({ children }) {
         <PrivacyPolicy
           onDemand
           active={
-            router.query.modal &&
-            router.query.modal === 'politica-de-privacidade'
+            router.query.modal === 'privacy-policy'
           }
         />
         <TermsOfUse
           onDemand
-          active={router.query.modal && router.query.modal === 'termos-de-uso'}
+          active={
+            router.query.modal === 'terms-of-use'
+          }
         />
         <div
           className="onesignal-customlink-container"

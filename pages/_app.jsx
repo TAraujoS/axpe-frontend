@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 
 import BodyScriptsEnd from 'layouts/vendors/bodyScriptsEnd';
 import BodyScriptsStart from 'layouts/vendors/bodyScriptsStart';
@@ -21,11 +21,19 @@ import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
 
-  useEffect(() => {
+  // Otimizado para evitar reflows desnecessários
+  const initializeApp = useCallback(() => {
     if (typeof window !== 'undefined') {
-      CookieUtmParams.set(window.location.search);
+      // Usar requestAnimationFrame para evitar forced reflows
+      requestAnimationFrame(() => {
+        CookieUtmParams.set(window.location.search);
+      });
     }
   }, []);
+
+  useEffect(() => {
+    initializeApp();
+  }, [initializeApp]);
 
   return (
     <Main>

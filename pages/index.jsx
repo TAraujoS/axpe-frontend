@@ -36,7 +36,7 @@ import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 2.1 - pre connect');
+  console.log('HomePage Version: 12 - force reflow');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
