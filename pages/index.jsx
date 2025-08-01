@@ -2,8 +2,8 @@ import React, { Fragment, useCallback, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Api from 'services';
-import SliderNew from 'components/SliderNew';
 
 // actions
 import { setMain } from 'store/modules/main/actions';
@@ -13,13 +13,51 @@ import { shuffle } from 'helpers/utils';
 import SeoData from 'helpers/seo';
 import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
 
-// components
-import BuildingsPanel from 'components/BuildingsPanel';
-import BlockHighlighted from 'components/BlockHighlighted';
-import Tag from 'components/Tag';
-import NewsletterFooter from 'components/NewsletterFooter';
-import CategoryBannerVertical from 'components/CategoryBannerVertical';
-import LazyLoad from 'components/LazyLoad';
+// Dynamic imports para componentes pesados
+const SliderNew = dynamic(() => import('components/SliderNew'), {
+  loading: () => null,
+  ssr: true
+});
+
+const BuildingsPanel = dynamic(() => import('components/BuildingsPanel'), {
+  loading: () => null,
+  ssr: false
+});
+
+const BlockHighlighted = dynamic(() => import('components/BlockHighlighted'), {
+  loading: () => null,
+  ssr: false
+});
+
+const Tag = dynamic(() => import('components/Tag'), {
+  loading: () => null,
+  ssr: true
+});
+
+const NewsletterFooter = dynamic(() => import('components/NewsletterFooter'), {
+  loading: () => null,
+  ssr: false
+});
+
+const CategoryBannerVertical = dynamic(() => import('components/CategoryBannerVertical'), {
+  loading: () => null,
+  ssr: true
+});
+
+const LazyLoad = dynamic(() => import('components/LazyLoad'), {
+  loading: () => null,
+  ssr: true
+});
+
+const CategorySection = dynamic(() => import('../src/components/CategorySection'), {
+  loading: () => null,
+  ssr: false
+});
+
+const ResponsiveHeroImage = dynamic(() => import('../src/components/ResponsiveHeroImage'), {
+  loading: () => null,
+  ssr: true
+});
 
 // styles
 import {
@@ -31,12 +69,10 @@ import {
   HeroItemWrapper,
   HeroItemInfo,
 } from 'pages/Home/styles';
-import CategorySection from '../src/components/CategorySection';
-import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 13 - analyze chunks');
+  console.log('HomePage Version: 14 - dynamic imports');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
