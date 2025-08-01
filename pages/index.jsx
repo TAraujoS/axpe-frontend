@@ -36,7 +36,7 @@ import ResponsiveHeroImage from '../src/components/ResponsiveHeroImage';
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 12 - force reflow');
+  console.log('HomePage Version: 13 - analyze chunks');
   const dispatch = useDispatch();
   const router = useRouter();
   const {

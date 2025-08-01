@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export function useMediaQuery(query) {
+  // Memoize the query to avoid unnecessary re-renders
+  const memoizedQuery = useMemo(() => query, [query]);
   const [ matches, setMatches ] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia(query);
+    // Early return if window is not available (SSR)
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const media = window.matchMedia(memoizedQuery);
     
     // Set initial value
     setMatches(media.matches);
@@ -21,7 +28,7 @@ export function useMediaQuery(query) {
       media.addListener(listener);
       return () => media.removeListener(listener);
     }
-  }, [ query ]);
+  }, [ memoizedQuery ]);
 
   return matches;
 }

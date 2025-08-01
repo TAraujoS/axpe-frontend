@@ -9,23 +9,58 @@ import dynamic from 'next/dynamic';
 import { setLoading } from 'store/modules/loading/actions';
 import { setMain } from 'store/modules/main/actions';
 
-// components
+// components - otimizados com dynamic imports
 import Loading from 'components/Loading';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-const Search = dynamic(() => import('components/Search'));
-const NewsletterModal = dynamic(() => import('components/Modals/Newsletter'));
-const NewsletterSuccessModal = dynamic(() => import('components/Modals/NewsletterSuccess'));
-const RegisterSuccessModal = dynamic(() => import('components/Modals/RegisterSuccess'));
-const BuildingContactSuccess = dynamic(() => import('components/Modals/BuildingContactSuccess'));
-const ContactSuccess = dynamic(() => import('components/Modals/ContactSuccess'));
-const WorkWithUsSuccess = dynamic(() => import('components/Modals/WorkWithUsSuccess'));
-const ContactModal = dynamic(() => import('components/Modals/Contact'));
-const ContactBar = dynamic(() => import('components/ContactBar'));
-const TermsOfUse = dynamic(() => import('components/TermsOfUse'));
-const PrivacyPolicy = dynamic(() => import('components/PrivacyPolicy'));
 
-// styles
+// Dynamic imports com loading otimizado
+const Search = dynamic(() => import('components/Search'), {
+  loading: () => null,
+  ssr: false
+});
+const NewsletterModal = dynamic(() => import('components/Modals/Newsletter'), {
+  loading: () => null,
+  ssr: false
+});
+const NewsletterSuccessModal = dynamic(() => import('components/Modals/NewsletterSuccess'), {
+  loading: () => null,
+  ssr: false
+});
+const RegisterSuccessModal = dynamic(() => import('components/Modals/RegisterSuccess'), {
+  loading: () => null,
+  ssr: false
+});
+const BuildingContactSuccess = dynamic(() => import('components/Modals/BuildingContactSuccess'), {
+  loading: () => null,
+  ssr: false
+});
+const ContactSuccess = dynamic(() => import('components/Modals/ContactSuccess'), {
+  loading: () => null,
+  ssr: false
+});
+const WorkWithUsSuccess = dynamic(() => import('components/Modals/WorkWithUsSuccess'), {
+  loading: () => null,
+  ssr: false
+});
+const ContactModal = dynamic(() => import('components/Modals/Contact'), {
+  loading: () => null,
+  ssr: false
+});
+const ContactBar = dynamic(() => import('components/ContactBar'), {
+  loading: () => null,
+  ssr: false
+});
+const TermsOfUse = dynamic(() => import('components/TermsOfUse'), {
+  loading: () => null,
+  ssr: false
+});
+const PrivacyPolicy = dynamic(() => import('components/PrivacyPolicy'), {
+  loading: () => null,
+  ssr: false
+});
+
+// styles - otimizados
 import GlobalStyle from './globalStyle';
 import noUiSliderCSS from './vendors/noUiSlider';
 import simplebarCSS from './vendors/simplebar';
@@ -87,11 +122,6 @@ function Main({ children }) {
     Router.events.on('routeChangeComplete', handleRouteChangeComplete);
     Router.beforePopState(handleBeforePopState);
 
-    // window.addEventListener('beforeinstallprompt', (e) => {
-    //   e.preventDefault();
-    //   console.log('exibir botão para adicionar app na home!')
-    // });
-
     dispatch(setLoading({ active: false }));
 
     return () => {
@@ -133,10 +163,6 @@ function Main({ children }) {
             router.query.modal === 'terms-of-use'
           }
         />
-        <div
-          className="onesignal-customlink-container"
-          style={{ display: 'none' }}
-        ></div>
       </>
     </ThemeProvider>
   );

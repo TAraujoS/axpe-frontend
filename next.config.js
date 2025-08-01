@@ -9,6 +9,10 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 const envConfig = JSON.parse(fs.readFileSync(`./config/${nodeEnv}.json`, 'utf-8'));
 
 const nextConfig = {
+  // Otimizações seguras para reduzir bundle size
+  swcMinify: true,
+  compress: true,
+  
   images: {
     // unoptimized: true,
     domains: [
@@ -23,6 +27,7 @@ const nextConfig = {
   },
   compiler: {
     styledComponents: true,
+    removeConsole: nodeEnv === 'production',
   },
 
   async headers() {
@@ -38,7 +43,30 @@ const nextConfig = {
       },
     ];
   },
-  webpack(config) {
+  webpack(config, { dev, isServer }) {
+    // Otimizações para produção
+    if (!dev && !isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              enforce: true,
+            },
+          },
+        },
+      };
+    }
+
     config.module.rules.push({
       test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/i,
       type: 'asset',
@@ -58,6 +86,7 @@ const nextConfig = {
       })
     );
 
+    // Otimização de tree shaking
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       public: resolve(__dirname, './public'),

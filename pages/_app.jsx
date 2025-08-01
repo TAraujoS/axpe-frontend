@@ -1,7 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
 
-import BodyScriptsEnd from 'layouts/vendors/bodyScriptsEnd';
-import BodyScriptsStart from 'layouts/vendors/bodyScriptsStart';
 import HeaderStyles from 'layouts/vendors/headerStyles';
 
 // helpers
@@ -13,8 +11,7 @@ import Main from 'layouts/main';
 // store
 import { wrapper } from '../src/store';
 
-import 'isomorphic-unfetch';
-import 'promise-polyfill/lib/polyfill';
+// CSS imports - otimizados
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Head from 'next/head';
@@ -44,9 +41,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <HeaderStyles />
-      <BodyScriptsStart />
       <Component {...pageProps} />
-      <BodyScriptsEnd />
     </Main>
   );
 }
