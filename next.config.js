@@ -27,7 +27,7 @@ const nextConfig = {
   },
   compiler: {
     styledComponents: true,
-    removeConsole: nodeEnv === 'production',
+    // removeConsole: nodeEnv === 'production',
   },
 
   async headers() {
