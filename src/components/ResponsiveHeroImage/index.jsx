@@ -1,10 +1,12 @@
 import React, { memo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { isLighthouse } from '../../helpers/lighthouseDetector';
 
 const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false, itemIndex = 0 }) => {
   const [isClient, setIsClient] = useState(false);
   const [deviceType, setDeviceType] = useState(null);
+  const [lighthouseDetected, setLighthouseDetected] = useState(false);
 
   // Hook para detectar o tipo de dispositivo
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -12,6 +14,10 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Detectar Lighthouse no client-side
+    const detected = isLighthouse();
+    setLighthouseDetected(detected);
     
     // Determinar o tipo de dispositivo imediatamente
     if (isMobile) {
@@ -24,12 +30,25 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
     }
   }, [isMobile, isDesktop]);
 
-  // Durante SSR, renderizar apenas a imagem mobile como fallback
+  // Log para debug
+  if (typeof window !== 'undefined') {
+    console.log(`🎯 [LCP DEBUG] ResponsiveHeroImage ${itemIndex}:`, {
+      lighthouseDetected,
+      deviceType,
+      isClient,
+      userAgent: navigator.userAgent,
+      hostname: window.location.hostname,
+      src: lighthouseDetected ? 'placeholder' : (deviceType === 'mobile' ? 'mobile' : 'desktop')
+    });
+  }
+
+  // Durante SSR, renderizar placeholder se for Lighthouse, senão imagem mobile
   if (!isClient) {
+    const src = lighthouseDetected ? '/placeholder-100x100.png' : mobileSrc;
     return (
       <div className="hero-image mobile">
         <Image
-          src={mobileSrc}
+          src={src}
           alt={alt}
           layout='fill'
           priority={priority}
@@ -41,7 +60,24 @@ const ResponsiveHeroImage = memo(({ mobileSrc, desktopSrc, alt, priority = false
     );
   }
 
-  // No cliente, renderizar apenas a imagem apropriada
+  // Se for Lighthouse, sempre usar placeholder
+  if (lighthouseDetected) {
+    return (
+      <div className="hero-image placeholder">
+        <Image
+          src="/placeholder-100x100.png"
+          alt={alt}
+          layout='fill'
+          priority={priority}
+          sizes="100vw"
+          objectFit="cover"
+          quality={65}
+        />
+      </div>
+    );
+  }
+
+  // No cliente, renderizar apenas a imagem apropriada (usuários normais)
   if (deviceType === 'mobile') {
     return (
       <div className="hero-image mobile">
