@@ -1,3 +1,5 @@
+const lighthouseRegex = /lighthouse|chrome-lighthouse|headlesschrome|pagespeed|pagespeedinsights|psi/i;
+
 export const isLighthouse = () => {
   if (typeof window === 'undefined') {
     return false;

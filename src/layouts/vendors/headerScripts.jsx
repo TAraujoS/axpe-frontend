@@ -1,7 +1,7 @@
 import React from 'react';
 import Script from 'next/script';
 
-function HeaderStyles() {
+function HeaderScripts() {
   const { googleClientId } = process.env.config;
 
   return (
@@ -50,4 +50,4 @@ function HeaderStyles() {
   )
 }
 
-export default HeaderStyles;
+export default HeaderScripts;

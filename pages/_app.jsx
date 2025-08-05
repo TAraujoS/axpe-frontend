@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 
-import HeaderStyles from 'layouts/vendors/headerStyles';
+import HeaderScripts from 'layouts/vendors/headerScripts';
 
 // helpers
 import CookieUtmParams from 'helpers/cookieUtmParams';
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0"
         />
       </Head>
-      <HeaderStyles />
+      <HeaderScripts />
       <Component {...pageProps} />
     </Main>
   );
