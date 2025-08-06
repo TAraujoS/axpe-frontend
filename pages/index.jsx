@@ -72,7 +72,7 @@ import {
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 19 - hero items render delay');
+  console.log('HomePage Version: 20 - hero items render delay');
   const dispatch = useDispatch();
   const router = useRouter();
   const {

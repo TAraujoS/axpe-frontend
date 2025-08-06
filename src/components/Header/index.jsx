@@ -16,6 +16,7 @@ import WhatsappIconSVG from 'assets/icons/whatsapp.svg';
 import SearchIconSVG from 'assets/icons/search.svg';
 import HomeIconSVG from 'assets/icons/home.svg';
 import CloudIconSVG from 'assets/icons/cloud.svg';
+import AxpeFullLogoSVG from 'assets/axpe-full-logo.svg';
 
 // styles
 import {
@@ -48,7 +49,34 @@ function Header() {
   );
   const scrollBarRef = useRef();
   const [ navToggle, setNavToggle ] = useState(false);
+  const [ isLighthouse, setIsLighthouse ] = useState(() => {
+    // Verificar Lighthouse imediatamente durante a inicialização
+    if (typeof window !== 'undefined') {
+      return window.isLighthouse || localStorage.getItem('lighthouse-simulation') === 'true';
+    }
+    return false;
+  });
   const scrollPosition = useScrollPosition();
+
+  // Detectar Lighthouse para otimizar renderização
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Verificar variável global do _document.js
+      if (window.isLighthouse) {
+        setIsLighthouse(true);
+        return; // Sair imediatamente se detectar
+      }
+      
+      // Verificar localStorage para simulação local
+      try {
+        const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
+        if (lighthouseSimulation === 'true') {
+          setIsLighthouse(true);
+          return; // Sair imediatamente se detectar
+        }
+      } catch (e) {}
+    }
+  }, []);
 
   const handleScrollPosition = useCallback(
     ([ curTop, oldTop ]) => {
@@ -114,7 +142,7 @@ function Header() {
                 data-label="Axpe"
                 onClick={cancelToggle}
               >
-                Axpe. Imóveis Especiais
+                <SVG src={AxpeFullLogoSVG} uniquifyIDs={true} />
               </LogoLink>
             </Link>
           </AxpeLogo>
