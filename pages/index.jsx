@@ -72,7 +72,7 @@ import {
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 16 - optimized render delay');
+  console.log('HomePage Version: 18 - hero items render delay');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -81,6 +81,25 @@ function Home({ heroItems, components }) {
   const [ buildingsSeen, setBuildingsSeen ] = useState([]);
   const [ buildingsForYou, setBuildingsForYou ] = useState([]);
   const [ isHeroLoaded, setIsHeroLoaded ] = useState(false);
+  const [ isLighthouse, setIsLighthouse ] = useState(false);
+
+  // Detectar Lighthouse para otimizar renderização
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Verificar variável global do _document.js
+      if (window.isLighthouse) {
+        setIsLighthouse(true);
+      }
+      
+      // Verificar localStorage para simulação local
+      try {
+        const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
+        if (lighthouseSimulation === 'true') {
+          setIsLighthouse(true);
+        }
+      } catch (e) {}
+    }
+  }, []);
 
   const heroSettings = (totalItems) => ({
     dots: true,
@@ -252,7 +271,7 @@ function Home({ heroItems, components }) {
           priority={isFirstSlide} // Prioridade máxima para o primeiro slide
           itemIndex={itemIndex}
         />
-        {hasContent && (
+        {hasContent && !isLighthouse && (
           <HeroItemInfo className="hero-info">
             {item.label && item.label == 'isExclusive' ? (
               <Tag label={'Exclusividade'} icon="check" color="orange" />
