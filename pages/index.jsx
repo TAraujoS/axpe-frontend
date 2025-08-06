@@ -72,7 +72,7 @@ import {
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 14 - dynamic imports');
+  console.log('HomePage Version: 15 - lighthouse remove scripts');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
