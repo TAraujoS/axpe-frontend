@@ -3,13 +3,18 @@
 
 console.log('🔧 [LCP DEBUG] Restaurando estado normal...');
 
-// Remover flag de simulação do localStorage
-localStorage.removeItem('lighthouse-simulation');
-
-console.log('✅ [LCP DEBUG] Simulação removida do localStorage');
-console.log('🔄 [LCP DEBUG] Recarregando página...');
-
-// Recarregar a página
-setTimeout(() => {
-  window.location.reload();
-}, 1000); 
+// Usar a função global se disponível
+if (window.lighthouseTest && window.lighthouseTest.remove) {
+  window.lighthouseTest.remove();
+} else {
+  // Fallback manual
+  localStorage.removeItem('lighthouse-simulation');
+  window.isLighthouse = false;
+  
+  console.log('✅ [LCP DEBUG] Simulação removida do localStorage');
+  console.log('🔄 [LCP DEBUG] Recarregando página...');
+  
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
+} 

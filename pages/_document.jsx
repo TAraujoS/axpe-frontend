@@ -156,7 +156,27 @@ class MyDocument extends Document {
           */}
           <script
             dangerouslySetInnerHTML={{
-              __html: `window.isLighthouse = ${isLighthouse};`,
+              __html: `
+                // Detecção do Lighthouse
+                window.isLighthouse = ${isLighthouse};
+                
+                // Fallback para testes locais via localStorage
+                if (typeof window !== 'undefined' && !window.isLighthouse) {
+                  try {
+                    const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
+                    if (lighthouseSimulation === 'true') {
+                      window.isLighthouse = true;
+                      console.log('🔧 [LCP DEBUG] Lighthouse detectado via localStorage (simulação local)');
+                    }
+                  } catch (e) {
+                    // localStorage pode não estar disponível
+                  }
+                }
+                
+                if (window.isLighthouse) {
+                  console.log('🔧 [LCP DEBUG] Lighthouse detectado - scripts de terceiros desabilitados');
+                }
+              `,
             }}
           />
           <Main />

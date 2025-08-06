@@ -9,10 +9,20 @@ const Wrapper = styled.div`
 
 const LazyLoad = ({ children, placeholderHeight }) => {
   const [ isVisible, setIsVisible ] = useState(false);
+  const [ isClient, setIsClient ] = useState(false);
   const placeholderRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const getPlaceholderHeight = () => {
+    // Durante SSR, usar valor padrão para evitar diferenças de hidratação
+    if (!isClient) {
+      return '650px'; // Valor padrão para mobile durante SSR
+    }
+    
     if (typeof placeholderHeight === 'string') {
       return placeholderHeight;
     }
@@ -36,7 +46,7 @@ const LazyLoad = ({ children, placeholderHeight }) => {
         });
       },
       {
-        rootMargin: '100px 0px', // Carrega um pouco antes de aparecer na tela
+        rootMargin: '200px 0px', // Carrega mais cedo (era 100px)
         threshold: 0.01,
       }
     );

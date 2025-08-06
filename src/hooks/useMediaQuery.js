@@ -3,7 +3,16 @@ import { useState, useEffect, useMemo } from 'react';
 export function useMediaQuery(query) {
   // Memoize the query to avoid unnecessary re-renders
   const memoizedQuery = useMemo(() => query, [query]);
-  const [ matches, setMatches ] = useState(false);
+  
+  // Valor padrão para SSR - assume mobile por padrão para melhor performance
+  // Isso garante que o valor inicial seja o mesmo no servidor e no cliente
+  const [ matches, setMatches ] = useState(() => {
+    // Durante SSR, sempre retorna false para evitar diferenças de hidratação
+    if (typeof window === 'undefined') {
+      return false;
+    }
+    return false; // Valor inicial consistente
+  });
 
   useEffect(() => {
     // Early return if window is not available (SSR)

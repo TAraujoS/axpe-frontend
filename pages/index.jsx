@@ -235,6 +235,7 @@ function Home({ heroItems, components }) {
     const hasContent = item.title || item.content || item.text ? true : false;
     const itemLink = item.link ? item.link : item.link.url
     const itemContent = item.content ? item.content : item.text
+    const isFirstSlide = itemIndex === 0;
     
     return (
       <HeroItemWrapper hasContent={hasContent}>
@@ -242,7 +243,7 @@ function Home({ heroItems, components }) {
           mobileSrc={item.images.mobile}
           desktopSrc={item.images.desktop}
           alt={item.title}
-          priority={itemIndex === 0}
+          priority={isFirstSlide} // Prioridade máxima para o primeiro slide
           itemIndex={itemIndex}
         />
         {hasContent && (
@@ -316,6 +317,14 @@ function Home({ heroItems, components }) {
         {/* Preconnect para o servidor de imagens */}
         <link rel="preconnect" href="https://admin.axpe.com.br" />
         <link rel="dns-prefetch" href="https://admin.axpe.com.br" />
+        
+        {/* Preload das imagens críticas do primeiro slide */}
+        {heroItems && heroItems.length > 0 && (
+          <>
+            <link rel="preload" as="image" href={heroItems[0].images.mobile} />
+            <link rel="preload" as="image" href={heroItems[0].images.desktop} />
+          </>
+        )}
       </Head>
       <Container>
         <h1 className="sr-only">

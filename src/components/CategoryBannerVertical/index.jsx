@@ -51,7 +51,7 @@ const SliderVerticalComponent = forwardRef(({
 // Componente otimizado para renderizar apenas a imagem necessária
 const ResponsiveCategoryImage = ({ mobileSrc, desktopSrc, alt, priority = false }) => {
   const [isClient, setIsClient] = useState(false);
-  const [deviceType, setDeviceType] = useState(null);
+  const [deviceType, setDeviceType] = useState('mobile'); // Default para mobile
   
   const isMobile = useMediaQuery('(max-width: 768px)');
   const isDesktop = useMediaQuery('(min-width: 769px)');
@@ -59,16 +59,15 @@ const ResponsiveCategoryImage = ({ mobileSrc, desktopSrc, alt, priority = false 
   useEffect(() => {
     setIsClient(true);
     
+    // Determinar o tipo de dispositivo apenas uma vez
     if (isMobile) {
       setDeviceType('mobile');
     } else if (isDesktop) {
       setDeviceType('desktop');
-    } else {
-      setDeviceType('mobile');
     }
   }, [isMobile, isDesktop]);
 
-  // Durante SSR, renderizar apenas mobile
+  // Durante SSR, renderizar mobile por padrão
   if (!isClient) {
     return (
       <div className="category-image mobile">
@@ -115,7 +114,7 @@ const ResponsiveCategoryImage = ({ mobileSrc, desktopSrc, alt, priority = false 
     );
   }
 
-  // Fallback
+  // Fallback para mobile
   return (
     <div className="category-image mobile">
       <Image
@@ -146,7 +145,7 @@ function CategoryBannerVertical({ categoryItems }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.1 }
     );
 
     observer.observe(containerRef.current);
@@ -196,7 +195,7 @@ function CategoryBannerVertical({ categoryItems }) {
                       mobileSrc={item.images.mobile}
                       desktopSrc={item.images.desktop}
                       alt={item.title}
-                      priority={itemIndex === 0}
+                      priority={itemIndex === 0} // Prioridade máxima para o primeiro item
                     />
                   </CategoryItemWrapper>
                 </CategoryLink>

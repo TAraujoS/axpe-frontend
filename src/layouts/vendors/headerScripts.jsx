@@ -39,13 +39,19 @@ function HeaderScripts() {
       /> */}
 
       {/* <Script
-        src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+        id="onesignal-init"
         strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "YOUR-ONESIGNAL-APP-ID",
+            });
+          });
+        `,
+        }}
       /> */}
-      {/* <Script id="onesignal-init" strategy="afterInteractive">
-        {`window.OneSignal = window.OneSignal || [];`}
-      </Script> */}
-      {/* <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=geometry`}></script> */}
     </>
   )
 }
