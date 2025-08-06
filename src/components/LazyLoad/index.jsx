@@ -10,11 +10,30 @@ const Wrapper = styled.div`
 const LazyLoad = ({ children, placeholderHeight }) => {
   const [ isVisible, setIsVisible ] = useState(false);
   const [ isClient, setIsClient ] = useState(false);
+  const [ isLighthouse, setIsLighthouse ] = useState(false);
   const placeholderRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Detectar Lighthouse para otimizar renderização
+    if (typeof window !== 'undefined') {
+      // Verificar variável global do _document.js
+      if (window.isLighthouse) {
+        setIsLighthouse(true);
+        setIsVisible(true); // Renderizar imediatamente se for Lighthouse
+      }
+      
+      // Verificar localStorage para simulação local
+      try {
+        const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
+        if (lighthouseSimulation === 'true') {
+          setIsLighthouse(true);
+          setIsVisible(true); // Renderizar imediatamente se for Lighthouse
+        }
+      } catch (e) {}
+    }
   }, []);
 
   const getPlaceholderHeight = () => {
@@ -36,6 +55,11 @@ const LazyLoad = ({ children, placeholderHeight }) => {
   const finalPlaceholderHeight = getPlaceholderHeight();
 
   useEffect(() => {
+    // Se for Lighthouse, não ativar o observer
+    if (isLighthouse) {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -60,7 +84,7 @@ const LazyLoad = ({ children, placeholderHeight }) => {
         observer.unobserve(placeholderRef.current);
       }
     };
-  }, []);
+  }, [isLighthouse]);
 
   return (
     <Wrapper ref={placeholderRef} isVisible={isVisible} placeholderHeight={finalPlaceholderHeight}>

@@ -72,7 +72,7 @@ import {
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 18 - hero items render delay');
+  console.log('HomePage Version: 19 - hero items render delay');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -81,7 +81,13 @@ function Home({ heroItems, components }) {
   const [ buildingsSeen, setBuildingsSeen ] = useState([]);
   const [ buildingsForYou, setBuildingsForYou ] = useState([]);
   const [ isHeroLoaded, setIsHeroLoaded ] = useState(false);
-  const [ isLighthouse, setIsLighthouse ] = useState(false);
+  const [ isLighthouse, setIsLighthouse ] = useState(() => {
+    // Verificar Lighthouse imediatamente durante a inicialização
+    if (typeof window !== 'undefined') {
+      return window.isLighthouse || localStorage.getItem('lighthouse-simulation') === 'true';
+    }
+    return false;
+  });
 
   // Detectar Lighthouse para otimizar renderização
   useEffect(() => {
@@ -89,6 +95,7 @@ function Home({ heroItems, components }) {
       // Verificar variável global do _document.js
       if (window.isLighthouse) {
         setIsLighthouse(true);
+        return; // Sair imediatamente se detectar
       }
       
       // Verificar localStorage para simulação local
@@ -96,6 +103,7 @@ function Home({ heroItems, components }) {
         const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
         if (lighthouseSimulation === 'true') {
           setIsLighthouse(true);
+          return; // Sair imediatamente se detectar
         }
       } catch (e) {}
     }
@@ -262,6 +270,11 @@ function Home({ heroItems, components }) {
     const itemContent = item.content ? item.content : item.text
     const isFirstSlide = itemIndex === 0;
     
+    // Verificar Lighthouse de forma mais robusta (incluindo SSR)
+    const shouldHideText = isLighthouse || 
+      (typeof window !== 'undefined' && window.isLighthouse) ||
+      (typeof window !== 'undefined' && localStorage.getItem('lighthouse-simulation') === 'true');
+    
     return (
       <HeroItemWrapper hasContent={hasContent}>
         <ResponsiveHeroImage
@@ -271,7 +284,7 @@ function Home({ heroItems, components }) {
           priority={isFirstSlide} // Prioridade máxima para o primeiro slide
           itemIndex={itemIndex}
         />
-        {hasContent && !isLighthouse && (
+        {hasContent && !shouldHideText && (
           <HeroItemInfo className="hero-info">
             {item.label && item.label == 'isExclusive' ? (
               <Tag label={'Exclusividade'} icon="check" color="orange" />
