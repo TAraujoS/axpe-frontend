@@ -72,7 +72,7 @@ import {
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 15 - lighthouse remove scripts');
+  console.log('HomePage Version: 16 - optimized render delay');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -80,12 +80,13 @@ function Home({ heroItems, components }) {
   } = router;
   const [ buildingsSeen, setBuildingsSeen ] = useState([]);
   const [ buildingsForYou, setBuildingsForYou ] = useState([]);
+  const [ isHeroLoaded, setIsHeroLoaded ] = useState(false);
 
   const heroSettings = (totalItems) => ({
     dots: true,
     infinite: true,
     fade: true,
-    lazyLoad: true,
+    lazyLoad: false, // Desabilitar lazyLoad para o primeiro slide
     speed: 800,
     autoplay: true,
     autoplaySpeed: 5000,
@@ -97,6 +98,11 @@ function Home({ heroItems, components }) {
       </span>
     ),
   });
+
+  // Renderizar o hero imediatamente
+  useEffect(() => {
+    setIsHeroLoaded(true);
+  }, []);
 
   const renderComponents = useCallback((type, component) => {
     switch (type) {
@@ -330,19 +336,22 @@ function Home({ heroItems, components }) {
         <h1 className="sr-only">
           Axpe | Imóveis especiais São Paulo
         </h1>
-        <Hero>
-          <SliderNew
-            type="full"
-            arrowsColor="white"
-            arrowsClassName="holos-home-hero-arrow"
-            settings={heroSettings(heroItems.length)}
-          >
-            {heroItems.map((item, itemIndex) => (
-              <HeroItem key={`hero-item-${itemIndex}`}>
-                {item.link &&
-                  item.link.url &&
-                  (item.link.target === 'blank' ||
-                    item.link.target === 'self') && (
+        
+        {/* Hero renderizado imediatamente */}
+        {isHeroLoaded && (
+          <Hero>
+            <SliderNew
+              type="full"
+              arrowsColor="white"
+              arrowsClassName="holos-home-hero-arrow"
+              settings={heroSettings(heroItems.length)}
+            >
+              {heroItems.map((item, itemIndex) => (
+                <HeroItem key={`hero-item-${itemIndex}`}>
+                  {item.link &&
+                    item.link.url &&
+                    (item.link.target === 'blank' ||
+                      item.link.target === 'self') && (
                     <HeroLink
                       href={item.link.url}
                       target={`_${item.link.target}`}
@@ -350,12 +359,14 @@ function Home({ heroItems, components }) {
                       {renderHeroItem(item, itemIndex)}
                     </HeroLink>
                   )}
-                {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
-              </HeroItem>
-            ))}
-          </SliderNew>
-        </Hero>
+                  {!item.link || !item.link.url ? renderHeroItem(item, itemIndex) : null}
+                </HeroItem>
+              ))}
+            </SliderNew>
+          </Hero>
+        )}
 
+        {/* Componentes carregados de forma otimizada */}
         {components &&
           components.length > 0 &&
           components.map((c, cIndex) => {
@@ -394,10 +405,35 @@ function Home({ heroItems, components }) {
 }
 
 Home.getInitialProps = async () => {
-  const response = await Api.Home.getPage();
-  const components = response.components;
-  const heroItems = shuffle(response.hero);
-  return { heroItems, components };
+  try {
+    // Adicionar timeout para evitar espera muito longa
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 segundos timeout
+    
+    const response = await fetch(`${process.env.config.apiUrl}/home`, {
+      signal: controller.signal,
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const components = data.components;
+    const heroItems = shuffle(data.hero);
+    
+    return { heroItems, components };
+  } catch (error) {
+    console.error('Error loading home page data:', error);
+    
+    // Fallback com dados mínimos para evitar erro
+    return {
+      heroItems: [],
+      components: []
+    };
+  }
 };
 
 export default Home;

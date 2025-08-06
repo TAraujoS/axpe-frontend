@@ -35,7 +35,7 @@ function SliderNew({
 }) {
   const ref = useRef(null);
 
-  // Otimizado para evitar forced reflows
+  // Otimizado para evitar forced reflows - versão simplificada
   const afterChange = useCallback(() => {
     if (!ref.current || !ref.current.innerSlider) return;
     
@@ -47,42 +47,31 @@ function SliderNew({
       const $track = $list.querySelector('.slick-track');
       const $items = $list.querySelectorAll('.slick-slide');
       
-      // Batch DOM operations
-      const operations = [];
-      
+      // Operações DOM simplificadas
       $items.forEach(($item) => {
         const isHidden = $item.getAttribute('aria-hidden') === 'true';
         const focusables = $item.querySelectorAll('a, button, input, textarea, select, [tabindex]');
         
         focusables.forEach((el) => {
-          operations.push(() => {
-            if (isHidden) {
-              el.setAttribute('tabindex', '-1');
-              el.setAttribute('aria-hidden', 'true');
-            } else {
-              el.removeAttribute('tabindex');
-              el.removeAttribute('aria-hidden');
-            }
-          });
-        });
-        
-        operations.push(() => {
-          if ($item.classList.contains('slick-active')) {
-            $item.classList.add('active');
+          if (isHidden) {
+            el.setAttribute('tabindex', '-1');
+            el.setAttribute('aria-hidden', 'true');
           } else {
-            $item.classList.remove('active');
+            el.removeAttribute('tabindex');
+            el.removeAttribute('aria-hidden');
           }
         });
+        
+        if ($item.classList.contains('slick-active')) {
+          $item.classList.add('active');
+        } else {
+          $item.classList.remove('active');
+        }
       });
-      
-      // Executar todas as operações DOM de uma vez
-      operations.forEach(op => op());
       
       // Ajustar altura do track se necessário
       if ($track && $track.style && settings.slidesToShow >= $items.length) {
-        requestAnimationFrame(() => {
-          $track.style.height = '';
-        });
+        $track.style.height = '';
       }
     });
     
@@ -92,6 +81,7 @@ function SliderNew({
   }, [onChange, settings.slidesToShow]);
 
   useEffect(() => {
+    // Reduzir timeout para renderização mais rápida
     const timer = setTimeout(() => {
       if (!ref.current || !ref.current.innerSlider) return;
       
@@ -112,39 +102,30 @@ function SliderNew({
         </svg>
       `;
 
-      // Batch DOM operations para os botões
-      const buttonOperations = [];
-      
+      // Configurar botões de forma otimizada
       if ($buttonPrev && $buttonPrev.tagName === 'BUTTON') {
-        buttonOperations.push(() => {
-          if (arrowsClassName) {
-            $buttonPrev.classList.add(arrowsClassName);
-          }
-          $buttonPrev.setAttribute('data-direction', 'anterior');
-          $buttonPrev.setAttribute('aria-label', 'Slide anterior');
-          $buttonPrev.innerHTML = renderSVG('prev');
-        });
+        if (arrowsClassName) {
+          $buttonPrev.classList.add(arrowsClassName);
+        }
+        $buttonPrev.setAttribute('data-direction', 'anterior');
+        $buttonPrev.setAttribute('aria-label', 'Slide anterior');
+        $buttonPrev.innerHTML = renderSVG('prev');
       }
 
       if ($buttonNext && $buttonNext.tagName === 'BUTTON') {
-        buttonOperations.push(() => {
-          if (arrowsClassName) {
-            $buttonNext.classList.add(arrowsClassName);
-          }
-          $buttonNext.setAttribute('data-direction', 'próximo');
-          $buttonNext.setAttribute('aria-label', 'Próximo slide');
-          $buttonNext.innerHTML = renderSVG('next');
-        });
+        if (arrowsClassName) {
+          $buttonNext.classList.add(arrowsClassName);
+        }
+        $buttonNext.setAttribute('data-direction', 'próximo');
+        $buttonNext.setAttribute('aria-label', 'Próximo slide');
+        $buttonNext.innerHTML = renderSVG('next');
       }
-      
-      // Executar operações dos botões
-      buttonOperations.forEach(op => op());
       
       // Chamar afterChange após as operações DOM
       requestAnimationFrame(() => {
         afterChange();
       });
-    }, 100);
+    }, 100); // Reduzido de timeout para renderização mais rápida
 
     return () => clearTimeout(timer);
   }, [afterChange, arrowsClassName]);
