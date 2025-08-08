@@ -115,23 +115,21 @@ function BuildingCard({
 
               {urlImageMobile && (
                 <div className="image-mobile">
-                  <Image
+                  <OptimizedBuildingImage
                     src={urlImageMobile}
                     alt="Imagem do imóvel mobile"
-                    layout= 'fill'
+                    layout="fill"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    loading='lazy'
                   />
                 </div>
               )}
               {urlImageDesktop && (
                 <div className="image-desktop">
-                  <Image
+                  <OptimizedBuildingImage
                     src={urlImageDesktop}
                     alt="Imagem do imóvel desktop"
-                    layout= 'fill'
+                    layout="fill"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    loading='lazy'
                   />
                 </div>
               )}

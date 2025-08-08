@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import OptimizedBuildingImage from 'components/OptimizedImage';
 import { ImageWrapper } from '../styles';
 
 
@@ -12,13 +13,12 @@ export default function GalleryItem({ item }) {
 
   return (
     <ImageWrapper isVertical={isVertical}>
-      <Image
+      <OptimizedBuildingImage
         src={item.src}
         alt="Imagens imóvel"
         layout="fill"
-        priority
+        priority={true}
         className="next-image"
-        onLoadingComplete={handleImageLoad}
         sizes="(max-width: 768px) 100vw, 780px"
       />
     </ImageWrapper>

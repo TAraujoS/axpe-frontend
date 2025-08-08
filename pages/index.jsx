@@ -72,7 +72,7 @@ import {
 
 function Home({ heroItems, components }) {
   // eslint-disable-next-line no-console
-  console.log('HomePage Version: 21 - search optimization');
+  console.log('HomePage Version: 22 - pdp optimization');
   const dispatch = useDispatch();
   const router = useRouter();
   const {
