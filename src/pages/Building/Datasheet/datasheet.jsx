@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMain } from 'store/modules/main/actions';
 import SVG from 'react-inlinesvg';
@@ -35,10 +35,95 @@ import ICheck from 'assets/icons/checked-grey.svg';
 import ShareIconSVG from 'assets/icons/share.svg';
 import { useRouter } from 'next/router';
 
+// Mock data para Lighthouse
+const mockProperty = {
+    type: 'pronto',
+    infos: {
+        releaseStatus: 'Pronto',
+        areaUseful: '410',
+        areaTotal: '450',
+        areaBuilding: '410',
+        areaGround: '450',
+        bedrooms: '4',
+        suites: '4',
+        parking: '5',
+        parkingStart: '5',
+        parkingEnd: '5',
+        areaUsefulStart: '410',
+        areaUsefulEnd: '410',
+        bedroomsStart: '4',
+        bedroomsEnd: '4'
+    },
+    category: 'Casa',
+    address: {
+        local: 'Alto de Pinheiros',
+        state: 'SP',
+        country: 'Brasil'
+    },
+    label: {
+        isNew: true,
+        isExclusive: false,
+        isFurnished: false
+    },
+    values: {
+        sell: '3600000',
+        rent: '',
+        release: '',
+        iptu: '2600',
+        condo: '',
+        currency: 'BRL',
+        valueOnlyConsults: false
+    },
+    source: 'sao-paulo',
+    vista: {
+        Caracteristicas: {
+            'Churrasqueira': 'Sim',
+            'Copa Cozinha': 'Sim',
+            'Jardim Privativo': 'Sim',
+            'Lavabo': 'Sim',
+            'Piscina Privativa': 'Sim',
+            'Sala Estar': 'Sim',
+            'Sauna': 'Sim',
+            'Vagas': '5',
+            'Vagas Cobertas': 'Sim',
+            'Vestiario': 'Sim',
+            'Deposito': 'Sim',
+            'Vagas Descobertas': 'Sim'
+        },
+        InfraEstrutura: {}
+    },
+    title: 'Casa ampla com jardim, piscina e espaços generosos para conviver bem no Alto de Pinheiros.',
+    reference: 'AX155499'
+};
+
 export default function Datasheet({ property }) {
     const dispatch = useDispatch();
     const router = useRouter();
-    const { type, infos, category, address, label, values, source, vista, title, reference } = property;
+    const [isLighthouse, setIsLighthouse] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+    
+    // Detectar Lighthouse
+    useEffect(() => {
+        setIsClient(true);
+        
+        if (typeof window !== 'undefined') {
+            if (window.isLighthouse) {
+                setIsLighthouse(true);
+            }
+            
+            try {
+                const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
+                if (lighthouseSimulation === 'true') {
+                    setIsLighthouse(true);
+                }
+            } catch (e) {}
+        }
+    }, []);
+
+    // Usar dados mockados se for Lighthouse, senão usar dados reais
+    const data = isLighthouse ? mockProperty : property;
+    
+    const { type, infos, category, address, label, values, source, vista, title, reference } = data;
     const { searchFunnel } = useSelector(state => state.main);
     const [ shareActive, setShareActive ] = useState(false);
 
@@ -76,6 +161,114 @@ export default function Datasheet({ property }) {
       }, 0);
       
     const hasAtLeastThreeVistaInfos = totalValidVistaFields >= 3;
+
+    // Se for Lighthouse, renderizar imediatamente sem esperar dados
+    if (isLighthouse && !isClient) {
+        return (
+            <MainContainer>
+                <DatasheetContent>
+                    <BlockOne type={mockProperty.type}>
+                        <Neighborhood>{mockProperty.address.local}<Ref> Ref {mockProperty.reference}</Ref></Neighborhood>
+                        
+                        <BuildingTitle>{mockProperty.title}</BuildingTitle>
+
+                        <hr />
+
+                        <GroupInfo>
+                            <InfoContent>
+                                <GroupTags>
+                                    <Tag label={'Novidade'} icon="star" color="blueLight" />
+                                </GroupTags>
+                                <Type>
+                                    {mockProperty.category}
+                                </Type>
+                            </InfoContent>
+                            <Location>
+                                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                    `${mockProperty.address.local}, ${mockProperty.address.state}, ${mockProperty.address.country}`
+                                )}`} target="_blank" rel="noopener noreferrer">
+                                    <img src={ILocation} alt="ícone de localização" />
+                                    <p>Ver localização</p>
+                                </a>
+                                <ButtonIcon
+                                    type="button"
+                                    className="btn-share holos-search-header-button"
+                                    data-showcase="Busca"
+                                    data-label="Share"
+                                    aria-label='Compartilhar'
+                                >
+                                    <SVG src={ShareIconSVG} uniquifyIDs={true} aria-hidden="true"/>
+                                </ButtonIcon>
+                            </Location>
+                        </GroupInfo>
+                    </BlockOne>
+
+                    <PriceGroupMobile>
+                        <Caracteristics.Sell
+                            valueOnlyConsults={false}
+                            sell={mockProperty.values.sell}
+                            iptu={mockProperty.values.iptu}
+                            condo={mockProperty.values.condo}
+                            currency={mockProperty.values.currency}
+                            type={mockProperty.type}
+                        />
+
+                        <Caracteristics.Expenses
+                            valueOnlyConsults={false}
+                            rent={mockProperty.values.rent}
+                            iptu={mockProperty.values.iptu}
+                            condo={mockProperty.values.condo}
+                            currency={mockProperty.values.currency}
+                        />
+
+                        <ButtonMoreInfo>Fale com um corretor</ButtonMoreInfo>
+                    </PriceGroupMobile>
+
+                    <BlockThree type={mockProperty.type}>
+                        <Caracteristics.AreaUseFul areaUseful={mockProperty.infos.areaUseful} />
+                        <Caracteristics.AreaTotal areaTotal={mockProperty.infos.areaTotal} />
+                        <Caracteristics.AreaBuilding areaBuilding={mockProperty.infos.areaBuilding} />
+                        <Caracteristics.AreaGround areaGround={mockProperty.infos.areaGround} />
+                        <Caracteristics.Bedrooms bedrooms={mockProperty.infos.bedrooms} />
+                        <Caracteristics.Suites suites={mockProperty.infos.suites} />
+                        <Caracteristics.Parking parking={mockProperty.infos.parking} />
+                    </BlockThree>
+
+                    <BlockTwo>
+                        <CharacteristicsGrid>
+                            {Object.entries(mockProperty.vista.Caracteristicas).map(([label, value]) => (
+                                <CharacteristicItem key={label}>
+                                    <img src={ICheck} alt="ícone de Check" />
+                                    <p>{label}</p>
+                                </CharacteristicItem>
+                            ))}
+                        </CharacteristicsGrid>
+                    </BlockTwo>
+                </DatasheetContent>
+
+                <PriceGroupDesktop type={mockProperty.type}>
+                    <Caracteristics.Sell
+                        valueOnlyConsults={false}
+                        sell={mockProperty.values.sell}
+                        iptu={mockProperty.values.iptu}
+                        condo={mockProperty.values.condo}
+                        currency={mockProperty.values.currency}
+                        type={mockProperty.type}
+                    />
+
+                    <Caracteristics.Expenses
+                        valueOnlyConsults={false}
+                        rent={mockProperty.values.rent}
+                        iptu={mockProperty.values.iptu}
+                        condo={mockProperty.values.condo}
+                        currency={mockProperty.values.currency}
+                    />
+
+                    <ButtonMoreInfo>Fale com um corretor</ButtonMoreInfo>
+                </PriceGroupDesktop>
+            </MainContainer>
+        );
+    }
 
     return (
         <>

@@ -58,6 +58,10 @@ export default css`
     max-height: 100%; /* Needed for vertical scroll to trigger */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    
+    @media (min-width: 769px) {
+      width: 200px;
+    }
   }
 
   .simplebar-content-wrapper::-webkit-scrollbar,
