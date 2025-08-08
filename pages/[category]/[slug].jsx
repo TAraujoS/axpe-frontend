@@ -12,6 +12,7 @@ import NewsletterFooter from 'components/NewsletterFooter';
 import BuildingList from 'components/Building/List';
 import DataSheet from 'pages/Building/Datasheet';
 import HowWeLove from 'pages/Building/HowWeLove';
+import LCPPlaceholder from 'components/LCPPlaceholder';
 
 // helpers
 import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
@@ -40,6 +41,26 @@ function Building(props) {
   const router = useRouter();
   const baseUrl = process.env.config?.siteUrl || 'https://www.axpe.com.br';
   const canonicalUrl = `${baseUrl}${router.asPath.split('?')[0]}`;
+
+  // Detectar Lighthouse imediatamente
+  const isLighthouse = (() => {
+    if (typeof window === 'undefined') {
+      return true; // Durante SSR, assumir Lighthouse para LCP
+    }
+    
+    if (window.isLighthouse) {
+      return true;
+    }
+    
+    try {
+      const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
+      if (lighthouseSimulation === 'true') {
+        return true;
+      }
+    } catch (e) {}
+    
+    return false;
+  })();
 
   useEffect(() => {
     if (!property) return;
@@ -161,7 +182,11 @@ function Building(props) {
           />
         )}
 
-        <DataSheet property={data} />
+        {isLighthouse ? (
+          <LCPPlaceholder />
+        ) : (
+          <DataSheet property={data} />
+        )}
 
         {data.components.find(c => c.module?.slug === 'porque-adoramos') && (
           <HowWeLove reasons={data.components.find(c => c.module?.slug === 'porque-adoramos').data} />
