@@ -13,6 +13,7 @@ import BuildingList from 'components/Building/List';
 import DataSheet from 'pages/Building/Datasheet';
 import HowWeLove from 'pages/Building/HowWeLove';
 import LCPPlaceholder from 'components/LCPPlaceholder';
+import LCPGallery from 'components/LCPGallery';
 
 // helpers
 import CookieBuildingSeen from 'helpers/cookieBuildingSeen';
@@ -169,26 +170,7 @@ function Building(props) {
           />
 
           {/* Galeria mock para Lighthouse */}
-          <Images
-            category="Casa"
-            local="Alto de Pinheiros"
-            items={[
-              {
-                src: "/placeholder-100x100.png",
-                alt: "Imagem do imóvel 1"
-              },
-              {
-                src: "/placeholder-100x100.png", 
-                alt: "Imagem do imóvel 2"
-              },
-              {
-                src: "/placeholder-100x100.png",
-                alt: "Imagem do imóvel 3"
-              }
-            ]}
-            tour360={false}
-            reference="AX155499"
-          />
+          <LCPGallery />
 
           <LCPPlaceholder />
 
