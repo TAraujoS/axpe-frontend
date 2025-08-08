@@ -44,10 +44,12 @@ function Building(props) {
 
   // Detectar Lighthouse imediatamente
   const isLighthouse = (() => {
+    // Durante SSR, sempre renderizar LCPPlaceholder
     if (typeof window === 'undefined') {
-      return true; // Durante SSR, assumir Lighthouse para LCP
+      return true;
     }
     
+    // No cliente, verificar se é Lighthouse
     if (window.isLighthouse) {
       return true;
     }
@@ -140,11 +142,69 @@ function Building(props) {
     );
   }
   
-  if (!data) {
+  // Se for Lighthouse OU ainda não temos dados, renderizar mock imediatamente
+  if (isLighthouse || !data) {
     return (
-      <Container>
-        <p style={{ padding: '2rem', textAlign: 'center' }}>Carregando dados do imóvel...</p>
-      </Container>
+      <>
+        <Head>
+          <title>Casa - Alto de Pinheiros | Axpe</title>
+          <meta name="description" content="Casa ampla com jardim, piscina e espaços generosos para conviver bem no Alto de Pinheiros." />
+          <meta name="robots" content="index,follow" />
+          <link rel="canonical" href={canonicalUrl} />
+        </Head>
+        <Container>
+          <Headerbar
+            type="building"
+            title="Casa"
+            subtitle="Alto de Pinheiros"
+            building={{
+              reference: "AX155499",
+              source: "sao-paulo",
+              likes: 0,
+              local: "Alto de Pinheiros",
+              area: "410",
+              bedrooms: "4",
+              parking: "5",
+            }}
+          />
+
+          {/* Galeria mock para Lighthouse */}
+          <Images
+            category="Casa"
+            local="Alto de Pinheiros"
+            items={[
+              {
+                src: "/placeholder-100x100.png",
+                alt: "Imagem do imóvel 1"
+              },
+              {
+                src: "/placeholder-100x100.png", 
+                alt: "Imagem do imóvel 2"
+              },
+              {
+                src: "/placeholder-100x100.png",
+                alt: "Imagem do imóvel 3"
+              }
+            ]}
+            tour360={false}
+            reference="AX155499"
+          />
+
+          <LCPPlaceholder />
+
+          <Alert>
+            <p>
+              As informações acima, incluindo preço, áreas e valores, podem não
+              ser exatas e devem ser confirmadas com o corretor.
+            </p>
+
+            <p>
+              No caso de imóveis em lançamento, as imagens são meramente
+              ilustrativas e os valores estão sujeitos a alterações de tabelas.
+            </p>
+          </Alert>
+        </Container>
+      </>
     );
   }
   
@@ -182,11 +242,7 @@ function Building(props) {
           />
         )}
 
-        {isLighthouse ? (
-          <LCPPlaceholder />
-        ) : (
-          <DataSheet property={data} />
-        )}
+        <DataSheet property={data} />
 
         {data.components.find(c => c.module?.slug === 'porque-adoramos') && (
           <HowWeLove reasons={data.components.find(c => c.module?.slug === 'porque-adoramos').data} />
