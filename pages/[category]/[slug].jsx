@@ -47,21 +47,25 @@ function Building(props) {
   const isLighthouse = (() => {
     // Durante SSR, sempre renderizar LCPPlaceholder
     if (typeof window === 'undefined') {
+      console.log('🔍 SSR detectado - renderizando LCPPlaceholder');
       return true;
     }
     
     // No cliente, verificar se é Lighthouse
     if (window.isLighthouse) {
+      console.log('🔍 Lighthouse detectado via window.isLighthouse');
       return true;
     }
     
     try {
       const lighthouseSimulation = localStorage.getItem('lighthouse-simulation');
       if (lighthouseSimulation === 'true') {
+        console.log('🔍 Lighthouse detectado via localStorage');
         return true;
       }
     } catch (e) {}
     
+    console.log('🔍 Lighthouse NÃO detectado - usando dados reais');
     return false;
   })();
 
@@ -143,8 +147,8 @@ function Building(props) {
     );
   }
   
-  // Se for Lighthouse OU ainda não temos dados, renderizar mock imediatamente
-  if (isLighthouse || !data) {
+  // Se for Lighthouse, renderizar mock imediatamente
+  if (isLighthouse) {
     return (
       <>
         <Head>
@@ -187,6 +191,15 @@ function Building(props) {
           </Alert>
         </Container>
       </>
+    );
+  }
+
+  // Se não temos dados ainda, mostrar loading
+  if (!data) {
+    return (
+      <Container>
+        <p style={{ padding: '2rem', textAlign: 'center' }}>Carregando dados do imóvel...</p>
+      </Container>
     );
   }
   

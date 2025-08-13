@@ -15,18 +15,18 @@ export const Container = styled.div`
   }
 
   /* Corrigir layout shift do slick-track */
-  .slick-track {
+  /* .slick-track {
     display: flex !important;
     align-items: stretch;
     width: 100% !important;
     min-width: 100% !important;
-  }
+  } */
 
-  .slick-slide {
+  /* .slick-slide {
     width: calc(100vw - 400px) !important;
     max-width: 1040px !important;
     flex-shrink: 0;
-  }
+  } */
 
   /* Evitar layout shift durante carregamento */
   .slick-list {
